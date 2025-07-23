@@ -1,0 +1,172 @@
+/* ========== KONTAKTPERSONEN PAGE STYLES ========== */
+
+/* Hero Section */
+.kontaktpersonen-hero {
+  background: linear-gradient(135deg, #112357 0%, #1a3066 100%);
+  padding: 100px 0;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.kontaktpersonen-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('../../content/images/team-gruppenfoto.jpg') center/cover;
+  opacity: 0.15;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+
+.hero-title {
+  font-size: clamp(3rem, 6vw, 4.5rem);
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  color: white;
+}
+
+.hero-subtitle {
+  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+  color: #ffd401;
+  margin-bottom: 2rem;
+  font-weight: 600;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-description {
+  font-size: 1.2rem;
+  line-height: 1.7;
+  max-width: 900px;
+  margin: 0 auto;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Basis Container und Layout */
+
+/* Team Grid - Sicherstellen dass es sichtbar ist */
+.team-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)) !important;
+  gap: 2rem !important;
+  padding: 2rem 0 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Team Member Cards - Force Visibility */
+.team-member {
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: block !important;
+  transform: none !important;
+}
+
+.member-card {
+  background: white !important;
+  border-radius: 20px !important;
+  padding: 1.5rem !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1) !important;
+  transition: all 0.3s ease !important;
+  height: 520px !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.member-image-wrapper {
+  position: relative !important;
+  width: 100% !important;
+  height: 200px !important;
+  border-radius: 15px !important;
+  overflow: hidden !important;
+  margin-bottom: 1rem !important;
+  flex-shrink: 0 !important;
+}
+
+.member-image {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  display: block !important;
+}
+
+.member-name {
+  font-size: 1.25rem !important;
+  font-weight: 600 !important;
+  color: #333 !important;
+  margin-bottom: 0.5rem !important;
+}
+
+.member-position {
+  color: #666 !important;
+  font-size: 0.9rem !important;
+  margin-bottom: 1rem !important;
+  line-height: 1.4 !important;
+  flex-grow: 1 !important;
+}
+
+.member-location {
+  color: #888 !important;
+  font-size: 0.85rem !important;
+  margin-bottom: 1rem !important;
+  flex-shrink: 0 !important;
+}
+
+.member-actions {
+  display: flex !important;
+  gap: 0.5rem !important;
+  flex-wrap: wrap !important;
+  margin-top: auto !important;
+  flex-shrink: 0 !important;
+}
+
+.member-content {
+  display: flex !important;
+  flex-direction: column !important;
+  flex-grow: 1 !important;
+  height: 100% !important;
+}
+
+.action-btn {
+  padding: 0.5rem 1rem !important;
+  border-radius: 8px !important;
+  text-decoration: none !important;
+  font-size: 0.85rem !important;
+  font-weight: 500 !important;
+  transition: all 0.2s ease !important;
+  display: inline-flex !important;
+  align-items: center !important;
+}
+
+.action-btn.primary {
+  background: #ffd401 !important;
+  color: #333 !important;
+  border: 2px solid #ffd401 !important;
+}
+
+.action-btn.secondary {
+  background: transparent !important;
+  color: #666 !important;
+  border: 2px solid #ddd !important;
+}
+
+/* Force Show Content */
+#team {
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Debug styles */
+.debug-border { 
+  border: 2px solid red !important; 
+} 

@@ -1,0 +1,98 @@
+# Neon Murer - Git Ignore File
+
+# ========== DIRECTUS CMS ==========
+# Docker Volumes (enthalten sensible Daten)
+mysql_data/
+directus_uploads/
+directus_extensions/
+redis_data/
+
+# Environment files
+.env
+.env.local
+.env.production
+.env.staging
+
+# Database backups
+*.sql
+*.dump
+
+# ========== NODE.JS ==========
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+# ========== DEVELOPMENT ==========
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Temporary files
+.tmp/
+temp/
+logs/
+*.log
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# ========== BACKUPS ==========
+backup/
+backups/
+*.backup
+website_backup_*
+
+# ========== SENSITIVE DATA ==========
+# Konfigurationsdateien mit Passwörtern
+config/database.php
+config/production.json
+
+# SSL Zertifikate
+*.pem
+*.key
+*.crt
+*.csr
+
+# ========== BUILD FILES ==========
+dist/
+build/
+.cache/
+
+# ========== DIRECTUS SPECIFIC ==========
+# Admin tokens und Sessions
+.directus-token
+sessions/
+
+# File uploads (werden über Directus verwaltet)
+uploads/
+
+# ========== TESTING ==========
+coverage/
+.nyc_output/
+test-results/
+
+# ========== DOCUMENTATION ==========
+# Generierte Dokumentation
+docs/build/
+api-docs/
+
+# ========== KEEP THESE FILES ==========
+# Wichtige Dateien die NICHT ignoriert werden sollen:
+# !content/images/ (bestehende Website-Bilder)
+# !template/ (Template-System)
+# !*.html (bestehende HTML-Seiten)
+# !docker-compose.yml
+# !DIRECTUS_MIGRATION_PLAN.md
+# !SETUP_ANLEITUNG.md 

@@ -1,0 +1,283 @@
+/* ========== CATEGORY PAGES STYLES ========== */
+/* Gemeinsame Styles für lichtwerbung.html und beschriftungen.html */
+
+/* Hero Section */
+.lichtwerbung-hero,
+.beschriftungen-hero {
+  background: linear-gradient(135deg, #112357 0%, #1a3066 100%);
+  padding: 60px 0;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.lichtwerbung-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('../../content/images/546aa65af854dcf4936912fbbde4dfd2.jpg') center/cover;
+  opacity: 0.1;
+}
+
+.beschriftungen-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('../../content/images/fahrzeugbeschriftung-1.jpg') center/cover;
+  opacity: 0.1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+
+.hero-title {
+  font-size: clamp(3rem, 6vw, 4.5rem);
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  color: white;
+  text-align: center;
+}
+
+.hero-subtitle {
+  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+  color: #ffd401;
+  margin-bottom: 2rem;
+  font-weight: 600;
+  text-align: center;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-description {
+  font-size: 1.2rem;
+  line-height: 1.7;
+  max-width: 800px;
+  margin: 0 auto 3rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Category Cards */
+.categories-section {
+  padding: 80px 0;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 50%, #f8f9fa 100%);
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.section-title {
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-weight: 800;
+  color: #112357;
+  margin-bottom: 1rem;
+}
+
+.section-subtitle {
+  font-size: 1.3rem;
+  color: #6c757d;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.category-card {
+  background-size: cover;
+  background-position: center;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  height: 250px;
+  position: relative;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.category-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.3) 70%, rgba(0, 0, 0, 0.8) 100%);
+  transition: all 0.4s ease;
+}
+
+.category-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+  color: inherit;
+  text-decoration: none;
+}
+
+.category-card:hover::before {
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.4) 70%, rgba(0, 0, 0, 0.9) 100%);
+}
+
+.card-content {
+  padding: 1.5rem;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  color: white;
+}
+
+.card-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 1rem;
+  line-height: 1.3;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.card-cta {
+  display: inline-flex;
+  align-items: center;
+  color: #ffd401;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.card-cta i {
+  margin-left: 8px;
+  transition: transform 0.3s ease;
+}
+
+.category-card:hover .card-cta {
+  color: white;
+  text-shadow: 0 2px 12px rgba(255, 212, 1, 0.5);
+}
+
+.category-card:hover .card-cta i {
+  transform: translateX(5px);
+}
+
+/* CTA Section */
+.cta-section {
+  background: linear-gradient(135deg, #112357 0%, #1a3066 100%);
+  padding: 80px 0;
+  text-align: center;
+  color: white;
+}
+
+.cta-content h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  margin-bottom: 1rem;
+  color: white;
+}
+
+.cta-content p {
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.9);
+  max-width: 600px;
+  margin: 0 auto 2rem;
+  line-height: 1.6;
+}
+
+.cta-btn {
+  background: linear-gradient(135deg, #ffd401 0%, #ffb700 100%);
+  color: #112357;
+  padding: 15px 30px;
+  border-radius: 50px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  font-size: 1.1rem;
+  box-shadow: 0 4px 15px rgba(255, 212, 1, 0.3);
+}
+
+.cta-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(255, 212, 1, 0.4);
+  background: linear-gradient(135deg, #ffb700 0%, #ffd401 100%);
+  color: #112357;
+  text-decoration: none;
+}
+
+.cta-btn i {
+  margin-left: 8px;
+  transition: transform 0.3s ease;
+}
+
+.cta-btn:hover i {
+  transform: translateX(3px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .lichtwerbung-hero, .beschriftungen-hero {
+    padding: 40px 0;
+  }
+  
+  .categories-section {
+    padding: 60px 0;
+  }
+  
+  .category-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 0 1rem;
+  }
+  
+  .category-card {
+    height: 200px;
+  }
+  
+  .card-content {
+    padding: 1rem;
+  }
+  
+  .card-title {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .card-cta {
+    font-size: 0.9rem;
+  }
+  
+  .hero-title {
+    font-size: 2.5rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.1rem;
+  }
+  
+  .hero-description {
+    font-size: 1rem;
+  }
+} 

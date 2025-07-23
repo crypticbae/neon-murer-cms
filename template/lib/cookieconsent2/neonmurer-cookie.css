@@ -1,0 +1,242 @@
+/* ====== NEON MURER COOKIE CONSENT ====== */
+/* Modern Cookie Consent im Corporate Design */
+
+.cc_banner-wrapper {
+  z-index: 100;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  pointer-events: none;
+}
+
+.cc_container {
+  position: relative;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 800px;
+  background: linear-gradient(135deg, #112357 0%, #1a3066 100%);
+  color: white;
+  border-radius: 15px;
+  box-shadow: 
+    0 20px 40px rgba(17, 35, 87, 0.4),
+    0 0 0 1px rgba(255, 212, 1, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  padding: 18px 130px 18px 24px;
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  backdrop-filter: blur(20px);
+  border: 2px solid rgba(255, 212, 1, 0.3);
+  pointer-events: auto;
+  overflow: hidden;
+  
+  /* Animation */
+  animation: slideInUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  animation-fill-mode: both;
+}
+
+/* Moderne Slide-In Animation */
+@keyframes slideInUp {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(100px) scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) scale(1);
+  }
+}
+
+/* Glow-Effekt im Hintergrund */
+.cc_container::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 212, 1, 0.1) 0%, transparent 70%);
+  animation: rotate 20s linear infinite;
+  z-index: -1;
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Message Styling */
+.cc_container .cc_message {
+  font-size: 0.9rem;
+  line-height: 1.4;
+  margin: 0;
+  padding: 0;
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 400;
+  position: relative;
+  z-index: 2;
+}
+
+/* Button - Positionierung am rechten Rand */
+.cc_container .cc_btn {
+  position: absolute !important;
+  top: 50% !important;
+  right: 0 !important;
+  transform: translateY(-50%) !important;
+  z-index: 10 !important;
+  /* Entferne alle ursprünglichen Positionierungen */
+  bottom: auto !important;
+  left: auto !important;
+}
+
+/* Primary Button (Verstanden) - Styling + Positionierung */
+.cc_container .cc_btn {
+  /* Positionierung am rechten Rand */
+  position: absolute !important;
+  top: 50% !important;
+  right: 15px !important;
+  transform: translateY(-50%) !important;
+  z-index: 10 !important;
+  bottom: auto !important;
+  left: auto !important;
+  
+  /* Styling */
+  background: linear-gradient(45deg, #ffd401, #ffed4e) !important;
+  color: #112357 !important;
+  border: none !important;
+  border-radius: 15px !important;
+  padding: 10px 20px !important;
+  font-size: 0.85rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.3px !important;
+  cursor: pointer !important;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+  text-transform: none !important;
+  box-shadow: 
+    0 6px 15px rgba(255, 212, 1, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3) !important;
+  overflow: hidden !important;
+  min-width: 110px !important;
+  text-align: center !important;
+}
+
+.cc_container .cc_btn:hover {
+  background: linear-gradient(45deg, #ffed4e, #fff76a);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 
+    0 12px 30px rgba(255, 212, 1, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.cc_container .cc_btn:active {
+  transform: translateY(-1px) scale(1.01);
+  box-shadow: 
+    0 6px 15px rgba(255, 212, 1, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+/* Link Styling (Weitere Informationen) - Inline im Text */
+.cc_container .cc_message a,
+.cc_container .cc_message a:visited {
+  color: #ffd401;
+  text-decoration: underline;
+  text-decoration-color: rgba(255, 212, 1, 0.5);
+  font-weight: 500;
+  padding: 0;
+  border: none;
+  background: none;
+  transition: all 0.3s ease;
+}
+
+.cc_container .cc_message a:hover,
+.cc_container .cc_message a:active {
+  color: #ffed4e;
+  text-decoration-color: #ffed4e;
+}
+
+/* Logo/Icon (optional) */
+.cc_container .cc_logo {
+  display: none;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 500px) {
+  .cc_container {
+    width: 95%;
+    bottom: 15px;
+    padding: 16px 100px 16px 20px;
+    border-radius: 12px;
+  }
+  
+  .cc_container .cc_message {
+    font-size: 0.85rem;
+    text-align: left;
+    padding-right: 0;
+  }
+  
+  .cc_container .cc_btn {
+    padding: 10px 16px !important;
+    font-size: 0.8rem !important;
+    min-width: 80px !important;
+    border-radius: 12px !important;
+    right: 12px !important;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .cc_container {
+    bottom: 25px;
+    max-width: 700px;
+    padding: 20px 140px 20px 28px;
+  }
+  
+  .cc_container .cc_message {
+    font-size: 0.95rem;
+    padding-right: 0;
+  }
+  
+  .cc_container .cc_btn {
+    font-size: 0.9rem !important;
+    padding: 12px 24px !important;
+    right: 18px !important;
+  }
+}
+
+/* Große Bildschirme */
+@media screen and (min-width: 1200px) {
+  .cc_container {
+    bottom: 30px;
+    max-width: 800px;
+    padding: 22px 150px 22px 32px;
+  }
+  
+  .cc_container .cc_message {
+    padding-right: 0;
+  }
+}
+
+/* Print-Styles */
+@media print {
+  .cc_banner-wrapper,
+  .cc_container {
+    display: none !important;
+  }
+}
+
+/* Accessibility */
+.cc_container .cc_btn:focus,
+.cc_container a:focus {
+  outline: 3px solid rgba(255, 212, 1, 0.6);
+  outline-offset: 2px;
+}
+
+/* Dark Mode Support (falls vorhanden) */
+@media (prefers-color-scheme: dark) {
+  .cc_container {
+    box-shadow: 
+      0 25px 50px rgba(0, 0, 0, 0.6),
+      0 0 0 1px rgba(255, 212, 1, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+} 

@@ -1,0 +1,217 @@
+/* ========== HALBRELIEF-PLATTENSCHRIFTEN.HTML STYLES ========== */
+
+/* Hero Section - 1:1 copy from stellenangebote.html */
+.stellenangebote-hero {
+  background: linear-gradient(135deg, #112357 0%, #1a3066 100%);
+  padding: 100px 0;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.stellenangebote-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('../../../content/images/team-gruppenfoto.jpg') center/cover;
+  opacity: 0.15;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+
+.hero-title {
+  font-size: clamp(3rem, 6vw, 4.5rem);
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  color: white;
+}
+
+.hero-subtitle {
+  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+  color: #ffd401;
+  margin-bottom: 2rem;
+  font-weight: 600;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-description {
+  font-size: 1.2rem;
+  line-height: 1.7;
+  max-width: 900px;
+  margin: 0 auto;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Projects Section */
+.projects-section {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  padding: 80px 0;
+}
+
+.projects-bg {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+.projects-title {
+  color: #112357;
+  font-weight: 800;
+  font-size: clamp(2.5rem, 6vw, 4rem);
+}
+
+.title-gradient {
+  color: #112357;
+}
+
+.title-highlight {
+  color: #ffd401;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.intro-text {
+  color: #666;
+  font-size: 1.1rem;
+  line-height: 1.7;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Modern Project Gallery */
+.modern-project-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 2rem;
+  justify-items: center;
+}
+
+.project-card {
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  max-width: 450px;
+  width: 100%;
+}
+
+.project-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+.project-image-wrapper {
+  position: relative;
+  overflow: hidden;
+  height: 300px;
+}
+
+.project-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.project-card:hover .project-image {
+  transform: scale(1.05);
+}
+
+.project-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(17, 35, 87, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.project-card:hover .project-overlay {
+  opacity: 1;
+}
+
+.project-icon {
+  background: #ffd401;
+  color: #112357;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  transform: scale(0.8);
+  transition: transform 0.3s ease;
+}
+
+.project-card:hover .project-icon {
+  transform: scale(1);
+}
+
+.project-content {
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.project-name {
+  color: #112357;
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin: 0;
+  line-height: 1.3;
+}
+
+/* Decorative Elements */
+.projects-decorations {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.deco-circle {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 212, 1, 0.05);
+  animation: float 8s ease-in-out infinite;
+}
+
+.deco-1 {
+  width: 150px;
+  height: 150px;
+  top: 15%;
+  right: 5%;
+  animation-delay: 0s;
+}
+
+.deco-2 {
+  width: 100px;
+  height: 100px;
+  bottom: 15%;
+  left: 10%;
+  animation-delay: 3s;
+}
+
+.deco-3 {
+  width: 80px;
+  height: 80px;
+  top: 50%;
+  right: 15%;
+  animation-delay: 6s;
+} 

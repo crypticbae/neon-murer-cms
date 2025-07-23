@@ -1,0 +1,399 @@
+/* ========== IMPRESSUM PAGE STYLES ========== */
+
+/* Hero Section */
+.impressum-hero {
+  background: linear-gradient(135deg, #112357 0%, #1a3066 100%);
+  padding: 100px 0;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.impressum-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('../../content/images/team-gruppenfoto.jpg') center/cover;
+  opacity: 0.15;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+
+.hero-title {
+  font-size: clamp(3rem, 6vw, 4.5rem);
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  color: white;
+}
+
+.hero-subtitle {
+  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+  color: #ffd401;
+  margin-bottom: 2rem;
+  font-weight: 600;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-description {
+  font-size: 1.2rem;
+  line-height: 1.7;
+  max-width: 900px;
+  margin: 0 auto;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Content Section */
+.impressum-content {
+  background: #f8f9fa;
+}
+
+.content-section {
+  margin-bottom: 3rem;
+}
+
+.section-title {
+  color: #112357;
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #ffd401;
+}
+
+.section-title i {
+  color: #ffd401;
+  font-size: 1.6rem;
+}
+
+/* Info Cards */
+.info-card {
+  background: white;
+  border-radius: 15px;
+  padding: 2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 212, 1, 0.2);
+  transition: all 0.3s ease;
+}
+
+.info-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+.company-name {
+  color: #112357;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.address-info .address {
+  color: #333;
+  font-size: 1.1rem;
+  margin-bottom: 0.8rem;
+  line-height: 1.6;
+}
+
+.address-info .contact {
+  margin-bottom: 0.8rem;
+}
+
+.address-info .contact a {
+  color: #112357;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.address-info .contact a:hover {
+  color: #ffd401;
+}
+
+.owner-name {
+  color: #112357;
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.business-info p {
+  margin-bottom: 0.8rem;
+  color: #333;
+  font-size: 1.1rem;
+}
+
+.business-info strong {
+  color: #112357;
+  font-weight: 600;
+}
+
+/* Opening Hours */
+.opening-hours {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.hours-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.hours-row:last-child {
+  border-bottom: none;
+}
+
+.days {
+  color: #112357;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.times {
+  color: #333;
+  font-weight: 500;
+}
+
+.times.closed {
+  color: #dc3545;
+  font-style: italic;
+}
+
+/* Realization Info */
+.realization-info {
+  color: #333;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.realization-info a {
+  color: #112357;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.realization-info a:hover {
+  color: #ffd401;
+}
+
+/* Legal Text */
+.legal-text p {
+  color: #333;
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+  text-align: justify;
+}
+
+.legal-text p:last-child {
+  margin-bottom: 0;
+}
+
+/* Sidebar */
+.sidebar-content {
+  position: sticky;
+  top: 120px;
+}
+
+/* Location Cards */
+.location-card {
+  background: white;
+  border-radius: 15px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 212, 1, 0.2);
+  transition: all 0.3s ease;
+}
+
+.location-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+.location-title {
+  color: #112357;
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.location-title i {
+  color: #ffd401;
+}
+
+.location-info h4 {
+  color: #112357;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.location-info .address {
+  color: #666;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.contact-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.contact-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.8rem 1.2rem;
+  border: 2px solid #112357;
+  border-radius: 8px;
+  color: #112357;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  background: transparent;
+  cursor: pointer;
+}
+
+.contact-btn:hover {
+  background: #112357;
+  color: white;
+  transform: translateY(-2px);
+}
+
+.contact-btn i {
+  font-size: 0.9rem;
+}
+
+.map-btn {
+  background: #ffd401;
+  border-color: #ffd401;
+  color: #112357;
+}
+
+.map-btn:hover {
+  background: #112357;
+  border-color: #112357;
+  color: white;
+}
+
+/* Quick Links */
+.quick-links-card {
+  background: linear-gradient(135deg, #112357 0%, #1a3066 100%);
+  border-radius: 15px;
+  padding: 2rem;
+  color: white;
+}
+
+.links-title {
+  color: white;
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.links-title i {
+  color: #ffd401;
+}
+
+.links-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.quick-link {
+  display: flex;
+  align-items: center;
+  padding: 0.8rem;
+  border-radius: 8px;
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.quick-link:hover {
+  background: rgba(255, 212, 1, 0.2);
+  border-color: #ffd401;
+  color: white;
+  transform: translateX(5px);
+}
+
+.quick-link i {
+  color: #ffd401;
+  font-size: 0.9rem;
+}
+
+/* Responsive */
+@media (max-width: 991px) {
+  .sidebar-content {
+    position: static;
+    margin-top: 3rem;
+  }
+  
+  .hours-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .contact-actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  
+  .contact-btn {
+    flex: 1;
+    min-width: 120px;
+  }
+}
+
+@media (max-width: 768px) {
+  .content-section {
+    margin-bottom: 2rem;
+  }
+  
+  .info-card {
+    padding: 1.5rem;
+  }
+  
+  .location-card {
+    padding: 1.5rem;
+  }
+  
+  .quick-links-card {
+    padding: 1.5rem;
+  }
+  
+  .section-title {
+    font-size: 1.5rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .section-title i {
+    font-size: 1.4rem;
+  }
+} 

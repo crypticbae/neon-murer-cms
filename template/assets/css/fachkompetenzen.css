@@ -1,0 +1,305 @@
+/* ========== FACHKOMPETENZEN PAGE STYLES ========== */
+
+/* Hero Section */
+.fachkompetenzen-hero {
+  background: linear-gradient(135deg, #112357 0%, #1a3066 100%);
+  padding: 100px 0;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.fachkompetenzen-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('../../content/images/team-gruppenfoto.jpg') center/cover;
+  opacity: 0.15;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+
+.hero-title {
+  font-size: clamp(3rem, 6vw, 4.5rem);
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  color: white;
+}
+
+.hero-subtitle {
+  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+  color: #ffd401;
+  margin-bottom: 2rem;
+  font-weight: 600;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-description {
+  font-size: 1.2rem;
+  line-height: 1.7;
+  max-width: 900px;
+  margin: 0 auto;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Fachkompetenzen Section */
+.fachkompetenzen-section {
+  padding: 100px 0;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 50%, #f8f9fa 100%);
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 5rem;
+}
+
+.section-title {
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-weight: 800;
+  color: #112357;
+  margin-bottom: 1rem;
+}
+
+.section-subtitle {
+  font-size: 1.3rem;
+  color: #6c757d;
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Focus Cards Container */
+.focus-cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Individual Focus Card */
+.focus-card {
+  position: relative;
+  height: 450px;
+  border-radius: 25px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  box-shadow: 0 15px 35px rgba(17, 35, 87, 0.1), 
+              0 5px 15px rgba(0, 0, 0, 0.07);
+}
+
+.focus-card:hover {
+  transform: translateY(-15px) scale(1.03);
+  box-shadow: 0 25px 60px rgba(17, 35, 87, 0.2),
+              0 10px 30px rgba(255, 212, 1, 0.1);
+  z-index: 10;
+}
+
+/* Blur effect for non-hovered cards */
+.focus-cards-container.has-hover .focus-card:not(.hovered) {
+  filter: blur(4px) brightness(0.6);
+  transform: scale(0.95);
+}
+
+/* Card Background Image */
+.focus-card-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: all 0.4s ease;
+}
+
+.focus-card:hover .focus-card-bg {
+  transform: scale(1.1);
+}
+
+/* Card Overlay */
+.focus-card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    rgba(17, 35, 87, 0.1) 0%,
+    rgba(17, 35, 87, 0.4) 50%,
+    rgba(17, 35, 87, 0.85) 100%
+  );
+  opacity: 0;
+  transition: all 0.4s ease;
+  display: flex;
+  align-items: flex-end;
+  padding: 2.5rem;
+}
+
+.focus-card:hover .focus-card-overlay {
+  opacity: 1;
+}
+
+/* Card Content */
+.focus-card-content {
+  color: white;
+  transform: translateY(30px);
+  transition: all 0.4s ease;
+  width: 100%;
+}
+
+.focus-card:hover .focus-card-content {
+  transform: translateY(0);
+}
+
+.focus-card-title {
+  font-size: 1.9rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, #ffffff, #ffd401);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  line-height: 1.2;
+}
+
+.focus-card-description {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 1.5rem;
+}
+
+.focus-card-features {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.focus-card-tag {
+  background: rgba(255, 212, 1, 0.25);
+  color: #ffd401;
+  padding: 0.4rem 1rem;
+  border-radius: 25px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border: 1px solid rgba(255, 212, 1, 0.4);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.focus-card:hover .focus-card-tag {
+  background: rgba(255, 212, 1, 0.35);
+  border: 1px solid rgba(255, 212, 1, 0.6);
+  transform: translateY(-2px);
+}
+
+/* Icon Badge */
+.focus-card-icon {
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  width: 70px;
+  height: 70px;
+  background: linear-gradient(145deg, #ffd401, #ffed4e);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.7rem;
+  color: #112357;
+  opacity: 0;
+  transform: scale(0.8) rotate(-180deg);
+  transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  box-shadow: 0 10px 30px rgba(255, 212, 1, 0.4);
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  z-index: 2;
+}
+
+.focus-card:hover .focus-card-icon {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+  box-shadow: 0 15px 40px rgba(255, 212, 1, 0.5),
+              0 0 25px rgba(255, 212, 1, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .focus-cards-container {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .focus-card {
+    height: 400px;
+  }
+  
+  .focus-card-overlay {
+    padding: 2rem;
+  }
+  
+  .focus-card-title {
+    font-size: 1.6rem;
+  }
+  
+  .focus-card-description {
+    font-size: 1rem;
+    margin-bottom: 1.2rem;
+  }
+  
+  .focus-card-features {
+    gap: 0.5rem;
+  }
+  
+  .focus-card-tag {
+    font-size: 0.8rem;
+    padding: 0.3rem 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .focus-card {
+    height: 350px;
+  }
+  
+  .focus-card-overlay {
+    padding: 1.5rem;
+  }
+  
+  .focus-card-title {
+    font-size: 1.4rem;
+  }
+  
+  .focus-card-icon {
+    width: 60px;
+    height: 60px;
+    font-size: 1.4rem;
+    top: 20px;
+    right: 20px;
+  }
+}
+
+/* Additional Responsive Styles */
+@media (max-width: 768px) {
+  .fachkompetenzen-hero {
+    padding: 60px 0;
+  }
+  
+  .fachkompetenzen-section {
+    padding: 80px 0;
+  }
+} 
