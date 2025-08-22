@@ -25,6 +25,21 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../index.html'));
 });
 
+// Debug route to see what files exist
+app.get('/debug/files', (req, res) => {
+  const fs = require('fs');
+  try {
+    const files = fs.readdirSync(path.join(__dirname, '..'));
+    res.json({ 
+      files: files,
+      __dirname: __dirname,
+      parentDir: path.join(__dirname, '..')
+    });
+  } catch (error) {
+    res.json({ error: error.message });
+  }
+});
+
 // Static HTML pages
 const staticPages = [
   'beschriftungen',
@@ -82,9 +97,19 @@ app.get('/cms-admin', (req, res) => {
   res.sendFile(path.join(__dirname, '../cms-admin/index.html'));
 });
 
-// 404 fallback
+// Catch-all for any missing routes - try to serve as static file
 app.get('*', (req, res) => {
-  res.status(404).send('Page not found');
+  try {
+    // Try to serve the file directly
+    const filePath = path.join(__dirname, '..', req.path);
+    res.sendFile(filePath, (err) => {
+      if (err) {
+        res.status(404).send(`Page not found: ${req.path}`);
+      }
+    });
+  } catch (error) {
+    res.status(404).send(`Page not found: ${req.path}`);
+  }
 });
 
 module.exports = app;
