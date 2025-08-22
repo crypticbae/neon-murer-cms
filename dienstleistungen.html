@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="de" id="www-neonmurer-ch">
 <head>
+  <!-- CDN Preloads für bessere Performance -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="preconnect" href="https://code.jquery.com" crossorigin>
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
 
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta charset="utf-8">
@@ -10,34 +16,38 @@
   <link rel="stylesheet" type="text/css" href="template/inc_css/include.css">
   
   <!-- Font Awesome CDN für Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <!-- ✅ CSS wurde nach template/assets/css/page-styles.css ausgelagert -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" crossorigin="anonymous">
   <!-- Page Specific CSS -->
   <link rel="stylesheet" href="template/assets/css/dienstleistungen.css">
-<link rel="icon" type="image/png" href="https://www.neonmurer.ch/favicon/favicon-96x96.png" sizes="96x96" />
-  <link rel="icon" type="image/svg+xml" href="https://www.neonmurer.ch/favicon/favicon.svg" />
-  <link rel="shortcut icon" href="https://www.neonmurer.ch/favicon/favicon.ico" />
-  <link rel="apple-touch-icon" sizes="180x180" href="https://www.neonmurer.ch/favicon/apple-touch-icon.png" />
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="favicon/favicon.svg" />
+  <link rel="shortcut icon" href="favicon/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png" />
   <meta name="apple-mobile-web-app-title" content="Neon Murer" />
-  <link rel="manifest" href="https://www.neonmurer.ch/favicon/site.webmanifest" />
+  <link rel="manifest" href="favicon/site.webmanifest" />
   
-  <!--[if lt IE 9]><script src="https://www.neonmurer.ch/template/lib/jquery/jquery-1.12.4.min.js"></script><![endif]-->
-  <!--[if gte IE 9]><!--><script src="https://www.neonmurer.ch/template/lib/jquery/jquery-3.7.1.min.js"></script><!--<![endif]-->
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+  <script src="template/assets/js/slick.min.js"></script>
   
+  <script src="template/assets/js/custom.js"></script>
+  
+  <!-- Template System -->
+  <script src="template/assets/js/templates.js"></script>
+  <script src="template/assets/js/simple-template-loader.js"></script>  
+  <!-- Usage Statistics -->
+  <script src="template/assets/js/neon-usage-stats.js"></script>
+  
+  <!-- Privacy Manager -->
+  <script src="template/assets/js/neon-privacy-manager.js"></script>
+  
+  <!-- SEO Meta Tags -->
   <meta name="description" content="Umfassende Dienstleistungen von Neon Murer - Beratung, Bewilligung, Montage, Reparatur, Reinigung und Weihnachtsbeleuchtung für Ihre Leuchtreklame.">
   <meta name="keywords" content="Dienstleistungen, Beratung, Bewilligung, Montage, Reparatur, Reinigung, Weihnachtsbeleuchtung, Neon Murer">
-  <link rel="canonical" href="https://www.neonmurer.ch/leistungen.html">
-  <script src="https://www.neonmurer.ch/template/assets/js/jquery.easing.min.js"></script>
-  <script src="https://www.neonmurer.ch/template/assets/js/bootstrap.bundle.min.js"></script>
-      <script src="https://www.neonmurer.ch/template/assets/js/slick.min.js"></script>
-    <script src="template/assets/js/search.js"></script>
-    <script src="https://www.neonmurer.ch/template/assets/js/custom.js"></script>
-  
-  <!-- Dropdown JavaScript wurde in Template Loader verschoben -->
-
-  <!-- ========== TEMPLATE SYSTEM ========== -->
-  <script src="template/assets/js/templates.js"></script>
-  <script src="template/assets/js/simple-template-loader.js"></script>
+  <link rel="canonical" href="https://www.neonmurer.ch/dienstleistungen.html">
 </head>
 
 <body class="custom">
@@ -86,7 +96,7 @@
           line-height: 1.1;
         ">
           Unsere <span style="color: white; font-weight: 300;">Services</span>
-            </h2>
+        </h2>
         <p class="carousel-subtitle" style="
           color: rgba(255, 255, 255, 0.85); 
           font-size: 1.25rem; 
@@ -97,109 +107,95 @@
           letter-spacing: 0.3px;
         ">
           Von der Idee bis zur perfekten Umsetzung - entdecken Sie unsere Expertise
-              </p>
-            </div>
+        </p>
+      </div>
 
       <!-- Services Carousel Navigation -->
       <div class="carousel-nav-container mb-4">
         <div class="carousel-nav d-flex justify-content-center flex-wrap gap-3">
           <button class="nav-pill" data-slide="0" style="
-            background: rgba(255, 255, 255, 0.08);
-            color: rgba(255, 255, 255, 0.9);
-            border: 2px solid rgba(255, 255, 255, 0.15);
-            padding: 14px 28px;
-            border-radius: 30px;
-            font-weight: 600;
-            font-size: 0.95rem;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            backdrop-filter: blur(15px);
-            letter-spacing: 0.3px;
-          ">
-            <i class="fas fa-handshake me-2"></i>Beratung
-          </button>
+      background: rgba(255, 255, 255, 0.08);
+      color: rgba(255, 255, 255, 0.9);
+      border: 2px solid rgba(255, 255, 255, 0.15);
+      padding: 14px 28px;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      backdrop-filter: blur(15px);
+      letter-spacing: 0.3px;
+    ">
+      <i class="fas fa-file-contract me-2"></i>Bewilligungseingaben
+    </button>
           <button class="nav-pill" data-slide="1" style="
-            background: rgba(255, 255, 255, 0.08);
-            color: rgba(255, 255, 255, 0.9);
-            border: 2px solid rgba(255, 255, 255, 0.15);
-            padding: 14px 28px;
-            border-radius: 30px;
-            font-weight: 600;
-            font-size: 0.95rem;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            backdrop-filter: blur(15px);
-            letter-spacing: 0.3px;
-          ">
-            <i class="fas fa-file-contract me-2"></i>Bewilligung
-          </button>
+      background: rgba(255, 255, 255, 0.08);
+      color: rgba(255, 255, 255, 0.9);
+      border: 2px solid rgba(255, 255, 255, 0.15);
+      padding: 14px 28px;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      backdrop-filter: blur(15px);
+      letter-spacing: 0.3px;
+    ">
+      <i class="fas fa-handshake me-2"></i>Test Notification
+    </button>
           <button class="nav-pill" data-slide="2" style="
-            background: rgba(255, 255, 255, 0.08);
-            color: rgba(255, 255, 255, 0.9);
-            border: 2px solid rgba(255, 255, 255, 0.15);
-            padding: 14px 28px;
-            border-radius: 30px;
-            font-weight: 600;
-            font-size: 0.95rem;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            backdrop-filter: blur(15px);
-            letter-spacing: 0.3px;
-          ">
-            <i class="fas fa-tools me-2"></i>Montage
-          </button>
+      background: rgba(255, 255, 255, 0.08);
+      color: rgba(255, 255, 255, 0.9);
+      border: 2px solid rgba(255, 255, 255, 0.15);
+      padding: 14px 28px;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      backdrop-filter: blur(15px);
+      letter-spacing: 0.3px;
+    ">
+      <i class="fas fa-tools me-2"></i>Montageservice
+    </button>
           <button class="nav-pill" data-slide="3" style="
-            background: rgba(255, 255, 255, 0.08);
-            color: rgba(255, 255, 255, 0.9);
-            border: 2px solid rgba(255, 255, 255, 0.15);
-            padding: 14px 28px;
-            border-radius: 30px;
-            font-weight: 600;
-            font-size: 0.95rem;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            backdrop-filter: blur(15px);
-            letter-spacing: 0.3px;
-          ">
-            <i class="fas fa-wrench me-2"></i>Reparatur
-          </button>
+      background: rgba(255, 255, 255, 0.08);
+      color: rgba(255, 255, 255, 0.9);
+      border: 2px solid rgba(255, 255, 255, 0.15);
+      padding: 14px 28px;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      backdrop-filter: blur(15px);
+      letter-spacing: 0.3px;
+    ">
+      <i class="fas fa-wrench me-2"></i>Reparaturservice
+    </button>
           <button class="nav-pill" data-slide="4" style="
-            background: rgba(255, 255, 255, 0.08);
-            color: rgba(255, 255, 255, 0.9);
-            border: 2px solid rgba(255, 255, 255, 0.15);
-            padding: 14px 28px;
-            border-radius: 30px;
-            font-weight: 600;
-            font-size: 0.95rem;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            backdrop-filter: blur(15px);
-            letter-spacing: 0.3px;
-          ">
-            <i class="fas fa-spray-can me-2"></i>Reinigung
-          </button>
-          <button class="nav-pill" data-slide="5" style="
-            background: rgba(255, 255, 255, 0.08);
-            color: rgba(255, 255, 255, 0.9);
-            border: 2px solid rgba(255, 255, 255, 0.15);
-            padding: 14px 28px;
-            border-radius: 30px;
-            font-weight: 600;
-            font-size: 0.95rem;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            backdrop-filter: blur(15px);
-            letter-spacing: 0.3px;
-          ">
-            <i class="fas fa-star me-2"></i>Weihnachten
-          </button>
-          </div>
+      background: rgba(255, 255, 255, 0.08);
+      color: rgba(255, 255, 255, 0.9);
+      border: 2px solid rgba(255, 255, 255, 0.15);
+      padding: 14px 28px;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      backdrop-filter: blur(15px);
+      letter-spacing: 0.3px;
+    ">
+      <i class="fas fa-spray-can me-2"></i>Reinigungsservice
+    </button>
         </div>
+      </div>
 
       <!-- Carousel Container -->
       <div class="services-carousel-container" style="position: relative; height: 600px; perspective: 1000px;">
         
-        <!-- Service Slide 1: Persönliche Beratung -->
+        
+        <!-- Service Slide 1: Bewilligungseingaben -->
         <div class="service-slide active" data-slide="0" style="
           position: absolute;
           top: 0;
@@ -210,7 +206,7 @@
           transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         ">
           <div class="row align-items-center">
-            <div class="col-lg-6">
+            <div class="col-lg-6 ">
               <div class="service-card-3d" style="
                 background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.85) 100%);
                 backdrop-filter: blur(20px);
@@ -224,8 +220,6 @@
                 transform: translateZ(50px);
                 transition: all 0.5s ease;
               ">
-
-      
                 <h3 style="
                   color: #112357; 
                   font-weight: 700; 
@@ -233,134 +227,11 @@
                   margin-bottom: 1.5rem;
                   line-height: 1.2;
                 ">
-                  <i class="fas fa-handshake" style="color: #ffd401; margin-right: 15px; font-size: 2rem;"></i>
-                  Persönliche Beratung
-                </h3>
-                
-                <p style="
-                  color: #666; 
-                  line-height: 1.7; 
-                  font-size: 1.1rem; 
-                  margin-bottom: 2rem;
-                ">
-                  Schweizweite Vor-Ort-Beratung mit professioneller Analyse, Vermessung und realistischen Fotomontagen. Unser Expertenteam entwickelt die perfekte Lösung für Ihre Leuchtreklame.
-                </p>
-
-                <div class="service-features mb-3">
-                  <div class="d-flex flex-wrap gap-2">
-                    <span class="feature-pill" style="
-                      background: rgba(255, 212, 1, 0.2);
-                      color: #112357;
-                      padding: 8px 16px;
-                      border-radius: 20px;
-                      font-size: 0.9rem;
-                      font-weight: 600;
-                    ">🎯 Vor-Ort-Termin</span>
-                    <span class="feature-pill" style="
-                      background: rgba(255, 212, 1, 0.2);
-                      color: #112357;
-                      padding: 8px 16px;
-                      border-radius: 20px;
-                      font-size: 0.9rem;
-                      font-weight: 600;
-                    ">📸 Fotomontage</span>
-                    <span class="feature-pill" style="
-                      background: rgba(255, 212, 1, 0.2);
-                      color: #112357;
-                      padding: 8px 16px;
-                      border-radius: 20px;
-                      font-size: 0.9rem;
-                      font-weight: 600;
-                    ">📐 Vermessung</span>
-                  </div>
-                </div>
-
-                <div class="service-action mt-4">
-                  <button class="cta-button" onclick="mailtoLink('neon','neonmurer.ch');return false;" style="
-                    background: linear-gradient(45deg, #112357, #1a2f63);
-                    color: white;
-                    border: none;
-                    padding: 15px 30px;
-                    border-radius: 25px;
-                    font-weight: 600;
-                    font-size: 1.1rem;
-                    cursor: pointer;
-                    transition: all 0.3s ease;
-                    box-shadow: 0 10px 25px rgba(17, 35, 87, 0.3);
-                  ">
-                    Beratung anfragen
-                    <i class="fas fa-arrow-right ms-2"></i>
-                  </button>
-              </div>
-              </div>
-            </div>
-            
-            <div class="col-lg-6">
-              <div class="service-visual" style="
-                position: relative;
-                height: 500px;
-                border-radius: 25px;
-                overflow: hidden;
-                box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
-              ">
-                <img src="content/images/leistungen-1.jpg" alt="Persönliche Beratung" style="
-                  width: 100%;
-                  height: 100%;
-                  object-fit: cover;
-                  transition: transform 0.5s ease;
-                ">
-                <div class="image-overlay" style="
-                  position: absolute;
-                  top: 0;
-                  left: 0;
-                  right: 0;
-                  bottom: 0;
-                  background: linear-gradient(45deg, rgba(255, 212, 1, 0.2), rgba(17, 35, 87, 0.3));
-                  opacity: 0;
-                  transition: opacity 0.3s ease;
-                "></div>
-                  </div>
-                </div>
-              </div>
-              </div>
-
-        <!-- Service Slide 2: Bewilligungseingaben -->
-        <div class="service-slide" data-slide="1" style="
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          opacity: 0;
-          transform: translateX(100px) rotateY(15deg) scale(0.95);
-          transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        ">
-          <div class="row align-items-center">
-            <div class="col-lg-6 order-lg-2">
-              <div class="service-card-3d" style="
-                background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.85) 100%);
-                backdrop-filter: blur(20px);
-                border-radius: 25px;
-                padding: 3rem;
-                box-shadow: 
-                  0 25px 50px rgba(0, 0, 0, 0.3),
-                  0 0 0 1px rgba(255, 255, 255, 0.2),
-                  inset 0 1px 0 rgba(255, 255, 255, 0.3);
-                border: 1px solid rgba(17, 35, 87, 0.3);
-                transform: translateZ(50px);
-                transition: all 0.5s ease;
-              ">
-
-            
-                <h3 style="
-                  color: #112357; 
-                  font-weight: 700; 
-                  font-size: 2.2rem; 
-                  margin-bottom: 1.5rem;
-                  line-height: 1.2;
-                ">
-                  <i class="fas fa-file-contract" style="color: #ffd401; margin-right: 15px; font-size: 2rem;"></i>
+                  <i class="fas fa-file-contract" style="color: #112357; margin-right: 15px; font-size: 2rem;"></i>
                   Bewilligungseingaben
                 </h3>
+                
+                <h4 style="color: #666; font-size: 1.3rem; margin-bottom: 1rem;">Komplette Abwicklung</h4>
                 
                 <p style="
                   color: #666; 
@@ -371,37 +242,41 @@
                   Komplette Abwicklung aller Bewilligungsverfahren. Von Reklamegesuch bis Katasterplan - wir übernehmen den gesamten Papierkram für Sie.
                 </p>
 
+                
                 <div class="service-features mb-3">
                   <div class="d-flex flex-wrap gap-2">
                     <span class="feature-pill" style="
-                      background: rgba(17, 35, 87, 0.1);
-                      color: #112357;
-                      padding: 8px 16px;
-                      border-radius: 20px;
-                      font-size: 0.9rem;
-                      font-weight: 600;
-                    ">⏱️ 4-8 Wochen</span>
+        background: rgba(255, 212, 1, 0.15);
+        color: #112357;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        border: 1px solid rgba(255, 212, 1, 0.3);
+      ">⏱️ 4-8 Wochen</span>
                     <span class="feature-pill" style="
-                      background: rgba(17, 35, 87, 0.1);
-                      color: #112357;
-                      padding: 8px 16px;
-                      border-radius: 20px;
-                      font-size: 0.9rem;
-                      font-weight: 600;
-                    ">📋 Vollservice</span>
+        background: rgba(255, 212, 1, 0.15);
+        color: #112357;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        border: 1px solid rgba(255, 212, 1, 0.3);
+      ">📋 Vollservice</span>
                     <span class="feature-pill" style="
-                      background: rgba(17, 35, 87, 0.1);
-                      color: #112357;
-                      padding: 8px 16px;
-                      border-radius: 20px;
-                      font-size: 0.9rem;
-                      font-weight: 600;
-                    ">🏛️ Gemeinde</span>
+        background: rgba(255, 212, 1, 0.15);
+        color: #112357;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        border: 1px solid rgba(255, 212, 1, 0.3);
+      ">🏛️ Gemeinde</span>
                   </div>
                 </div>
 
                 <div class="service-action mt-4">
-                  <button class="cta-button" onclick="mailtoLink('neon','neonmurer.ch');return false;" style="
+                  <button class="cta-button" href="#" onclick="mailtoLink('neon','neonmurer.ch');return false;" style="
                     background: linear-gradient(45deg, #112357, #1a2f63);
                     color: white;
                     border: none;
@@ -416,11 +291,11 @@
                     Bewilligung beantragen
                     <i class="fas fa-arrow-right ms-2"></i>
                   </button>
-              </div>
+                </div>
               </div>
             </div>
             
-            <div class="col-lg-6 order-lg-1">
+            <div class="col-lg-6 ">
               <div class="service-visual" style="
                 position: relative;
                 height: 500px;
@@ -428,135 +303,17 @@
                 overflow: hidden;
                 box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
               ">
-                <img src="content/images/leistungen-2.jpg" alt="Bewilligungseingaben" style="
-                  width: 100%;
-                  height: 100%;
-                  object-fit: cover;
-                  transition: transform 0.5s ease;
-                ">
-                <div class="image-overlay" style="
-                  position: absolute;
-                  top: 0;
-                  left: 0;
-                  right: 0;
-                  bottom: 0;
-                  background: linear-gradient(45deg, rgba(17, 35, 87, 0.3), rgba(255, 212, 1, 0.2));
-                  opacity: 0;
-                  transition: opacity 0.3s ease;
-                "></div>
-                  </div>
-                </div>
-              </div>
-              </div>
-
-        <!-- Service Slide 3: Montageservice -->
-        <div class="service-slide" data-slide="2" style="
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          opacity: 0;
-          transform: translateX(100px) rotateY(15deg) scale(0.95);
-          transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        ">
-          <div class="row align-items-center">
-            <div class="col-lg-6">
-              <div class="service-card-3d" style="
-                background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.85) 100%);
-                backdrop-filter: blur(20px);
-                border-radius: 25px;
-                padding: 3rem;
-                box-shadow: 
-                  0 25px 50px rgba(0, 0, 0, 0.3),
-                  0 0 0 1px rgba(255, 255, 255, 0.2),
-                  inset 0 1px 0 rgba(255, 255, 255, 0.3);
-                border: 1px solid rgba(255, 212, 1, 0.3);
-                transform: translateZ(50px);
-                transition: all 0.5s ease;
-              ">
-                  <h3 style="
-                    color: #112357; 
-                    font-weight: 700; 
-                    font-size: 2.2rem; 
-                    margin-bottom: 1.5rem;
-                    line-height: 1.2;
+                
+                <picture>
+                  <source data-srcset="content/images/leistungen-2.webp" type="image/webp">
+                  <source data-srcset="content/images/leistungen-2-optimized.jpg" type="image/jpeg">
+                  <img data-src="content/images/leistungen-2.jpg" loading="lazy" class="lazy-image" alt="Bewilligungseingaben" style="
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    transition: transform 0.5s ease;
                   ">
-                  <i class="fas fa-tools" style="color: #ffd401; margin-right: 15px; font-size: 2rem;"></i>
-                    Montageservice
-                  </h3>
-                  
-                  <p style="
-                  color: #666; 
-                    line-height: 1.7; 
-                    font-size: 1.1rem; 
-                    margin-bottom: 2rem;
-                  ">
-                    Professionelle Montage mit Spezialfahrzeugen und Hebebühnen bis 22m Höhe. ESTI-konforme Installation für höchste Sicherheit und Qualität.
-                  </p>
-
-                  <div class="service-features mb-3">
-                    <div class="d-flex flex-wrap gap-2">
-                      <span class="feature-pill" style="
-                      background: rgba(255, 212, 1, 0.2);
-                      color: #112357;
-                        padding: 8px 16px;
-                        border-radius: 20px;
-                        font-size: 0.9rem;
-                        font-weight: 600;
-                      ">🏗️ Hebebühne 22m</span>
-                      <span class="feature-pill" style="
-                      background: rgba(255, 212, 1, 0.2);
-                      color: #112357;
-                        padding: 8px 16px;
-                        border-radius: 20px;
-                        font-size: 0.9rem;
-                        font-weight: 600;
-                      ">⚡ ESTI-konform</span>
-                      <span class="feature-pill" style="
-                      background: rgba(255, 212, 1, 0.2);
-                      color: #112357;
-                        padding: 8px 16px;
-                        border-radius: 20px;
-                        font-size: 0.9rem;
-                        font-weight: 600;
-                      ">👷 Professionell</span>
-                  </div>
-                </div>
-
-                  <div class="service-action mt-4">
-                  <button class="cta-button" onclick="mailtoLink('neon','neonmurer.ch');return false;" style="
-                      background: linear-gradient(45deg, #112357, #1a2f63);
-                      color: white;
-                      border: none;
-                      padding: 15px 30px;
-                      border-radius: 25px;
-                      font-weight: 600;
-                      font-size: 1.1rem;
-                      cursor: pointer;
-                      transition: all 0.3s ease;
-                    box-shadow: 0 10px 25px rgba(17, 35, 87, 0.3);
-                    ">
-                      Montage buchen
-                      <i class="fas fa-arrow-right ms-2"></i>
-                    </button>
-                </div>
-              </div>
-            </div>
-            
-            <div class="col-lg-6">
-              <div class="service-visual" style="
-                position: relative;
-                height: 500px;
-                border-radius: 25px;
-                overflow: hidden;
-                box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
-              ">
-                <img src="content/images/leistungen-3.jpg" alt="Montageservice" style="
-                  width: 100%;
-                  height: 100%;
-                  object-fit: cover;
-                  transition: transform 0.5s ease;
-                ">
+                </picture>
                 <div class="image-overlay" style="
                   position: absolute;
                   top: 0;
@@ -567,86 +324,12 @@
                   opacity: 0;
                   transition: opacity 0.3s ease;
                 "></div>
-                  </div>
-                </div>
-              </div>
-              </div>
-
-        <!-- Service Slides 4-6 (Reparatur, Reinigung, Weihnachten) folgen dem gleichen Muster... -->
-        <!-- Ich füge sie gekürzt hinzu für bessere Performance -->
-
-        <!-- Service Slide 4: Reparaturservice -->
-        <div class="service-slide" data-slide="3" style="
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          opacity: 0;
-          transform: translateX(100px) rotateY(15deg) scale(0.95);
-          transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        ">
-          <div class="row align-items-center">
-            <div class="col-lg-6">
-              <div class="service-card-3d" style="
-                background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.85) 100%);
-                backdrop-filter: blur(20px);
-                border-radius: 25px;
-                padding: 3rem;
-                box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
-                border: 1px solid rgba(255, 212, 1, 0.3);
-                transform: translateZ(50px);
-                transition: all 0.5s ease;
-              ">
-
-            
-                <h3 style="color: #112357; font-weight: 700; font-size: 2.2rem; margin-bottom: 1.5rem; line-height: 1.2;">
-                  <i class="fas fa-wrench" style="color: #ffd401; margin-right: 15px; font-size: 2rem;"></i>
-                  Reparaturservice
-                </h3>
-                
-                <p style="color: #666; line-height: 1.7; font-size: 1.1rem; margin-bottom: 2rem;">
-                  Schnelle Reparaturen meist innerhalb einer Woche. Mit eigener Glasbläserei, Schriftenmalerei und Plexi-Atelier für perfekte Ergebnisse.
-                </p>
-
-                <div class="service-features mb-3">
-                  <div class="d-flex flex-wrap gap-2">
-                    <span class="feature-pill" style="background: rgba(255, 212, 1, 0.15); color: #112357; padding: 8px 16px; border-radius: 20px; font-size: 0.9rem; font-weight: 600; border: 1px solid rgba(255, 212, 1, 0.3);">⚡ 1 Woche</span>
-                    <span class="feature-pill" style="background: rgba(255, 212, 1, 0.15); color: #112357; padding: 8px 16px; border-radius: 20px; font-size: 0.9rem; font-weight: 600; border: 1px solid rgba(255, 212, 1, 0.3);">🔬 Glasbläserei</span>
-                    <span class="feature-pill" style="background: rgba(255, 212, 1, 0.15); color: #112357; padding: 8px 16px; border-radius: 20px; font-size: 0.9rem; font-weight: 600; border: 1px solid rgba(255, 212, 1, 0.3);">🏗️ Alle Höhen</span>
-                  </div>
-                </div>
-
-                <div class="service-action mt-4">
-                  <button class="cta-button" onclick="mailtoLink('neon','neonmurer.ch');return false;" style="
-                    background: linear-gradient(45deg, #112357, #1a2f63);
-                    color: white;
-                    border: none;
-                    padding: 15px 30px;
-                    border-radius: 25px;
-                    font-weight: 600;
-                    font-size: 1.1rem;
-                    cursor: pointer;
-                    transition: all 0.3s ease;
-                    box-shadow: 0 10px 25px rgba(17, 35, 87, 0.3);
-                  ">
-                    Reparatur anfragen
-                    <i class="fas fa-arrow-right ms-2"></i>
-                  </button>
-              </div>
               </div>
             </div>
-            
-            <div class="col-lg-6">
-              <div class="service-visual" style="position: relative; height: 500px; border-radius: 25px; overflow: hidden; box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);">
-                <img src="content/images/leistungen-4.jpg" alt="Reparaturservice" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;">
-                <div class="image-overlay" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(45deg, rgba(40, 167, 69, 0.2), rgba(17, 35, 87, 0.3)); opacity: 0; transition: opacity 0.3s ease;"></div>
-                  </div>
-                </div>
-              </div>
-              </div>
-
-        <!-- Service Slide 5: Reinigungsservice -->
-        <div class="service-slide" data-slide="4" style="
+          </div>
+        </div>
+        <!-- Service Slide 2: Test Notification -->
+        <div class="service-slide " data-slide="1" style="
           position: absolute;
           top: 0;
           left: 0;
@@ -662,32 +345,439 @@
                 backdrop-filter: blur(20px);
                 border-radius: 25px;
                 padding: 3rem;
-                box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+                box-shadow: 
+                  0 25px 50px rgba(0, 0, 0, 0.3),
+                  0 0 0 1px rgba(255, 255, 255, 0.2),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.3);
                 border: 1px solid rgba(255, 212, 1, 0.3);
                 transform: translateZ(50px);
                 transition: all 0.5s ease;
               ">
-
-            
-                <h3 style="color: #112357; font-weight: 700; font-size: 2.2rem; margin-bottom: 1.5rem; line-height: 1.2;">
-                  <i class="fas fa-spray-can" style="color: #ffd401; margin-right: 15px; font-size: 2rem;"></i>
-                  Reinigungsservice
+                <h3 style="
+                  color: #112357; 
+                  font-weight: 700; 
+                  font-size: 2.2rem; 
+                  margin-bottom: 1.5rem;
+                  line-height: 1.2;
+                ">
+                  <i class="fas fa-handshake" style="color: #ffd401; margin-right: 15px; font-size: 2rem;"></i>
+                  Test Notification
                 </h3>
                 
-                <p style="color: #666; line-height: 1.7; font-size: 1.1rem; margin-bottom: 2rem;">
-                  Jährliche Reinigung und Kontrolle mit Service- oder Vollservice-Vertrag. Immer gepflegte Leuchtreklame für den besten Eindruck.
+                
+                
+                <p style="
+                  color: #666; 
+                  line-height: 1.7; 
+                  font-size: 1.1rem; 
+                  margin-bottom: 2rem;
+                ">
+                  Test desc
                 </p>
 
+                
+
+                <div class="service-action mt-4">
+                  <button class="cta-button" href="#" onclick="mailtoLink('neon','neonmurer.ch');return false;" style="
+                    background: linear-gradient(45deg, #112357, #1a2f63);
+                    color: white;
+                    border: none;
+                    padding: 15px 30px;
+                    border-radius: 25px;
+                    font-weight: 600;
+                    font-size: 1.1rem;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                    box-shadow: 0 10px 25px rgba(17, 35, 87, 0.3);
+                  ">
+                    Service anfragen
+                    <i class="fas fa-arrow-right ms-2"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-lg-6 order-lg-1">
+              <div class="service-visual" style="
+                position: relative;
+                height: 500px;
+                border-radius: 25px;
+                overflow: hidden;
+                box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+              ">
+                
+                <picture>
+                  <source data-srcset="/content/images/blachen-fahnen-2.webp" type="image/webp">
+                  <source data-srcset="/content/images/blachen-fahnen-2-optimized.jpg" type="image/jpeg">
+                  <img data-src="/content/images/blachen-fahnen-2.jpg" loading="lazy" class="lazy-image" alt="Test Notification" style="
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    transition: transform 0.5s ease;
+                  ">
+                </picture>
+                <div class="image-overlay" style="
+                  position: absolute;
+                  top: 0;
+                  left: 0;
+                  right: 0;
+                  bottom: 0;
+                  background: linear-gradient(45deg, rgba(255, 212, 1, 0.2), rgba(17, 35, 87, 0.3));
+                  opacity: 0;
+                  transition: opacity 0.3s ease;
+                "></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Service Slide 3: Montageservice -->
+        <div class="service-slide " data-slide="2" style="
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          opacity: 0;
+          transform: translateX(100px) rotateY(15deg) scale(0.95);
+          transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        ">
+          <div class="row align-items-center">
+            <div class="col-lg-6 ">
+              <div class="service-card-3d" style="
+                background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.85) 100%);
+                backdrop-filter: blur(20px);
+                border-radius: 25px;
+                padding: 3rem;
+                box-shadow: 
+                  0 25px 50px rgba(0, 0, 0, 0.3),
+                  0 0 0 1px rgba(255, 255, 255, 0.2),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.3);
+                border: 1px solid rgba(255, 212, 1, 0.3);
+                transform: translateZ(50px);
+                transition: all 0.5s ease;
+              ">
+                <h3 style="
+                  color: #112357; 
+                  font-weight: 700; 
+                  font-size: 2.2rem; 
+                  margin-bottom: 1.5rem;
+                  line-height: 1.2;
+                ">
+                  <i class="fas fa-tools" style="color: #ffd401; margin-right: 15px; font-size: 2rem;"></i>
+                  Montageservice
+                </h3>
+                
+                <h4 style="color: #666; font-size: 1.3rem; margin-bottom: 1rem;">Professionelle Installation</h4>
+                
+                <p style="
+                  color: #666; 
+                  line-height: 1.7; 
+                  font-size: 1.1rem; 
+                  margin-bottom: 2rem;
+                ">
+                  Professionelle Montage mit Spezialfahrzeugen und Hebebühnen bis 22m Höhe. ESTI-konforme Installation für höchste Sicherheit und Qualität.
+                </p>
+
+                
                 <div class="service-features mb-3">
                   <div class="d-flex flex-wrap gap-2">
-                    <span class="feature-pill" style="background: rgba(255, 212, 1, 0.15); color: #112357; padding: 8px 16px; border-radius: 20px; font-size: 0.9rem; font-weight: 600; border: 1px solid rgba(255, 212, 1, 0.3);">📅 Jährlich</span>
-                    <span class="feature-pill" style="background: rgba(255, 212, 1, 0.15); color: #112357; padding: 8px 16px; border-radius: 20px; font-size: 0.9rem; font-weight: 600; border: 1px solid rgba(255, 212, 1, 0.3);">🛡️ Vollservice</span>
-                    <span class="feature-pill" style="background: rgba(255, 212, 1, 0.15); color: #112357; padding: 8px 16px; border-radius: 20px; font-size: 0.9rem; font-weight: 600; border: 1px solid rgba(255, 212, 1, 0.3);">📋 Vertrag</span>
+                    <span class="feature-pill" style="
+        background: rgba(255, 212, 1, 0.15);
+        color: #112357;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        border: 1px solid rgba(255, 212, 1, 0.3);
+      ">🏗️ Hebebühne 22m</span>
+                    <span class="feature-pill" style="
+        background: rgba(255, 212, 1, 0.15);
+        color: #112357;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        border: 1px solid rgba(255, 212, 1, 0.3);
+      ">⚡ ESTI-konform</span>
+                    <span class="feature-pill" style="
+        background: rgba(255, 212, 1, 0.15);
+        color: #112357;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        border: 1px solid rgba(255, 212, 1, 0.3);
+      ">👷 Professionell</span>
                   </div>
                 </div>
 
                 <div class="service-action mt-4">
-                  <button class="cta-button" onclick="mailtoLink('neon','neonmurer.ch');return false;" style="
+                  <button class="cta-button" href="#" onclick="mailtoLink('neon','neonmurer.ch');return false;" style="
+                    background: linear-gradient(45deg, #112357, #1a2f63);
+                    color: white;
+                    border: none;
+                    padding: 15px 30px;
+                    border-radius: 25px;
+                    font-weight: 600;
+                    font-size: 1.1rem;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                    box-shadow: 0 10px 25px rgba(17, 35, 87, 0.3);
+                  ">
+                    Montage buchen
+                    <i class="fas fa-arrow-right ms-2"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-lg-6 ">
+              <div class="service-visual" style="
+                position: relative;
+                height: 500px;
+                border-radius: 25px;
+                overflow: hidden;
+                box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+              ">
+                
+                <picture>
+                  <source data-srcset="content/images/leistungen-3.webp" type="image/webp">
+                  <source data-srcset="content/images/leistungen-3-optimized.jpg" type="image/jpeg">
+                  <img data-src="content/images/leistungen-3.jpg" loading="lazy" class="lazy-image" alt="Montageservice" style="
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    transition: transform 0.5s ease;
+                  ">
+                </picture>
+                <div class="image-overlay" style="
+                  position: absolute;
+                  top: 0;
+                  left: 0;
+                  right: 0;
+                  bottom: 0;
+                  background: linear-gradient(45deg, rgba(255, 212, 1, 0.2), rgba(17, 35, 87, 0.3));
+                  opacity: 0;
+                  transition: opacity 0.3s ease;
+                "></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Service Slide 4: Reparaturservice -->
+        <div class="service-slide " data-slide="3" style="
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          opacity: 0;
+          transform: translateX(100px) rotateY(15deg) scale(0.95);
+          transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        ">
+          <div class="row align-items-center">
+            <div class="col-lg-6 order-lg-2">
+              <div class="service-card-3d" style="
+                background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.85) 100%);
+                backdrop-filter: blur(20px);
+                border-radius: 25px;
+                padding: 3rem;
+                box-shadow: 
+                  0 25px 50px rgba(0, 0, 0, 0.3),
+                  0 0 0 1px rgba(255, 255, 255, 0.2),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.3);
+                border: 1px solid rgba(255, 212, 1, 0.3);
+                transform: translateZ(50px);
+                transition: all 0.5s ease;
+              ">
+                <h3 style="
+                  color: #112357; 
+                  font-weight: 700; 
+                  font-size: 2.2rem; 
+                  margin-bottom: 1.5rem;
+                  line-height: 1.2;
+                ">
+                  <i class="fas fa-wrench" style="color: #28a745; margin-right: 15px; font-size: 2rem;"></i>
+                  Reparaturservice
+                </h3>
+                
+                <h4 style="color: #666; font-size: 1.3rem; margin-bottom: 1rem;">Schnell und zuverlässig</h4>
+                
+                <p style="
+                  color: #666; 
+                  line-height: 1.7; 
+                  font-size: 1.1rem; 
+                  margin-bottom: 2rem;
+                ">
+                  Schnelle Reparaturen meist innerhalb einer Woche. Mit eigener Glasbläserei, Schriftenmalerei und Plexi-Atelier für perfekte Ergebnisse.
+                </p>
+
+                
+                <div class="service-features mb-3">
+                  <div class="d-flex flex-wrap gap-2">
+                    <span class="feature-pill" style="
+        background: rgba(255, 212, 1, 0.15);
+        color: #112357;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        border: 1px solid rgba(255, 212, 1, 0.3);
+      ">⚡ 1 Woche</span>
+                    <span class="feature-pill" style="
+        background: rgba(255, 212, 1, 0.15);
+        color: #112357;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        border: 1px solid rgba(255, 212, 1, 0.3);
+      ">🔬 Glasbläserei</span>
+                    <span class="feature-pill" style="
+        background: rgba(255, 212, 1, 0.15);
+        color: #112357;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        border: 1px solid rgba(255, 212, 1, 0.3);
+      ">🏗️ Alle Höhen</span>
+                  </div>
+                </div>
+
+                <div class="service-action mt-4">
+                  <button class="cta-button" href="#" onclick="mailtoLink('neon','neonmurer.ch');return false;" style="
+                    background: linear-gradient(45deg, #112357, #1a2f63);
+                    color: white;
+                    border: none;
+                    padding: 15px 30px;
+                    border-radius: 25px;
+                    font-weight: 600;
+                    font-size: 1.1rem;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                    box-shadow: 0 10px 25px rgba(17, 35, 87, 0.3);
+                  ">
+                    Reparatur anfragen
+                    <i class="fas fa-arrow-right ms-2"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-lg-6 order-lg-1">
+              <div class="service-visual" style="
+                position: relative;
+                height: 500px;
+                border-radius: 25px;
+                overflow: hidden;
+                box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+              ">
+                
+                <picture>
+                  <source data-srcset="content/images/leistungen-4.webp" type="image/webp">
+                  <source data-srcset="content/images/leistungen-4-optimized.jpg" type="image/jpeg">
+                  <img data-src="content/images/leistungen-4.jpg" loading="lazy" class="lazy-image" alt="Reparaturservice" style="
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    transition: transform 0.5s ease;
+                  ">
+                </picture>
+                <div class="image-overlay" style="
+                  position: absolute;
+                  top: 0;
+                  left: 0;
+                  right: 0;
+                  bottom: 0;
+                  background: linear-gradient(45deg, rgba(255, 212, 1, 0.2), rgba(17, 35, 87, 0.3));
+                  opacity: 0;
+                  transition: opacity 0.3s ease;
+                "></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Service Slide 5: Reinigungsservice -->
+        <div class="service-slide " data-slide="4" style="
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          opacity: 0;
+          transform: translateX(100px) rotateY(15deg) scale(0.95);
+          transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        ">
+          <div class="row align-items-center">
+            <div class="col-lg-6 ">
+              <div class="service-card-3d" style="
+                background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.85) 100%);
+                backdrop-filter: blur(20px);
+                border-radius: 25px;
+                padding: 3rem;
+                box-shadow: 
+                  0 25px 50px rgba(0, 0, 0, 0.3),
+                  0 0 0 1px rgba(255, 255, 255, 0.2),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.3);
+                border: 1px solid rgba(255, 212, 1, 0.3);
+                transform: translateZ(50px);
+                transition: all 0.5s ease;
+              ">
+                <h3 style="
+                  color: #112357; 
+                  font-weight: 700; 
+                  font-size: 2.2rem; 
+                  margin-bottom: 1.5rem;
+                  line-height: 1.2;
+                ">
+                  <i class="fas fa-spray-can" style="color: #17a2b8; margin-right: 15px; font-size: 2rem;"></i>
+                  Reinigungsservice
+                </h3>
+                
+                <h4 style="color: #666; font-size: 1.3rem; margin-bottom: 1rem;">Wartung und Pflege</h4>
+                
+                <p style="
+                  color: #666; 
+                  line-height: 1.7; 
+                  font-size: 1.1rem; 
+                  margin-bottom: 2rem;
+                ">
+                  Jährliche Reinigung und Kontrolle mit Service- oder Vollservice-Vertrag. Immer gepflegte Leuchtreklame für den besten Eindruck.
+                </p>
+
+                
+                <div class="service-features mb-3">
+                  <div class="d-flex flex-wrap gap-2">
+                    <span class="feature-pill" style="
+        background: rgba(255, 212, 1, 0.15);
+        color: #112357;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        border: 1px solid rgba(255, 212, 1, 0.3);
+      ">📅 Jährlich</span>
+                    <span class="feature-pill" style="
+        background: rgba(255, 212, 1, 0.15);
+        color: #112357;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        border: 1px solid rgba(255, 212, 1, 0.3);
+      ">🛡️ Vollservice</span>
+                    <span class="feature-pill" style="
+        background: rgba(255, 212, 1, 0.15);
+        color: #112357;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        border: 1px solid rgba(255, 212, 1, 0.3);
+      ">📋 Vertrag</span>
+                  </div>
+                </div>
+
+                <div class="service-action mt-4">
+                  <button class="cta-button" href="#" onclick="mailtoLink('neon','neonmurer.ch');return false;" style="
                     background: linear-gradient(45deg, #112357, #1a2f63);
                     color: white;
                     border: none;
@@ -702,103 +792,43 @@
                     Service buchen
                     <i class="fas fa-arrow-right ms-2"></i>
                   </button>
-              </div>
+                </div>
               </div>
             </div>
             
-            <div class="col-lg-6 order-lg-1">
-              <div class="service-visual" style="position: relative; height: 500px; border-radius: 25px; overflow: hidden; box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);">
-                <img src="content/images/leistungen-5.jpg" alt="Reinigungsservice" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;">
-                <div class="image-overlay" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(45deg, rgba(23, 162, 184, 0.2), rgba(17, 35, 87, 0.3)); opacity: 0; transition: opacity 0.3s ease;"></div>
-                  </div>
-                </div>
-              </div>
-              </div>
-
-        <!-- Service Slide 6: Weihnachtsbeleuchtung -->
-        <div class="service-slide" data-slide="5" style="
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          opacity: 0;
-          transform: translateX(100px) rotateY(15deg) scale(0.95);
-          transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        ">
-          <div class="row align-items-center">
-            <div class="col-lg-6">
-              <div class="service-card-3d special-christmas" style="
-                background: linear-gradient(135deg, #dc3545 0%, #fd7e14 100%);
-                border-radius: 25px;
-                padding: 3rem;
-                box-shadow: 0 25px 50px rgba(220, 53, 69, 0.4);
-                border: 3px solid #ffd401;
-                transform: translateZ(50px);
-                transition: all 0.5s ease;
+            <div class="col-lg-6 ">
+              <div class="service-visual" style="
                 position: relative;
+                height: 500px;
+                border-radius: 25px;
                 overflow: hidden;
+                box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
               ">
-                <div class="christmas-glow" style="
-                  position: absolute;
-                  top: -50%;
-                  left: -50%;
-                  width: 200%;
-                  height: 200%;
-                  background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
-                  animation: rotate 15s linear infinite;
-                "></div>
-
-                <div style="position: relative; z-index: 2;">
-
-            
-                  <h3 style="color: white; font-weight: 700; font-size: 2.2rem; margin-bottom: 1.5rem; line-height: 1.2; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-                    <i class="fas fa-star" style="color: #ffd401; margin-right: 15px; font-size: 2rem;"></i>
-                    Weihnachtsbeleuchtung
-                  </h3>
-                  
-                  <p style="color: white; line-height: 1.7; font-size: 1.1rem; margin-bottom: 2rem; font-weight: 500;">
-                    Festliche Weihnachtsbeleuchtung mit Quick-Fix-System und IP44-Standard. Kompletter Montage- und Demontage-Service inklusive.
-                  </p>
-
-                  <div class="service-features mb-3">
-                    <div class="d-flex flex-wrap gap-2">
-                      <span class="feature-pill" style="background: rgba(255, 255, 255, 0.9); color: #dc3545; padding: 8px 16px; border-radius: 20px; font-size: 0.9rem; font-weight: 600; box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);">⚡ Quick-Fix</span>
-                      <span class="feature-pill" style="background: rgba(255, 255, 255, 0.9); color: #dc3545; padding: 8px 16px; border-radius: 20px; font-size: 0.9rem; font-weight: 600; box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);">🌧️ IP44</span>
-                      <span class="feature-pill" style="background: rgba(255, 255, 255, 0.9); color: #dc3545; padding: 8px 16px; border-radius: 20px; font-size: 0.9rem; font-weight: 600; box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);">🎁 Saisonal</span>
-                  </div>
-                </div>
-
-                  <div class="service-action mt-4">
-                  <button class="cta-button christmas-button" onclick="mailtoLink('neon','neonmurer.ch');return false;" style="
-                    background: linear-gradient(45deg, #112357, #1a2f63);
-                    color: white;
-                    border: none;
-                    padding: 15px 30px;
-                    border-radius: 25px;
-                    font-weight: 600;
-                    font-size: 1.1rem;
-                    cursor: pointer;
-                    transition: all 0.3s ease;
-                    box-shadow: 0 10px 25px rgba(17, 35, 87, 0.4);
+                
+                <picture>
+                  <source data-srcset="content/images/leistungen-5.webp" type="image/webp">
+                  <source data-srcset="content/images/leistungen-5-optimized.jpg" type="image/jpeg">
+                  <img data-src="content/images/leistungen-5.jpg" loading="lazy" class="lazy-image" alt="Reinigungsservice" style="
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    transition: transform 0.5s ease;
                   ">
-                      Beleuchtung planen
-                      <i class="fas fa-arrow-right ms-2"></i>
-                    </button>
-              </div>
-                </div>
+                </picture>
+                <div class="image-overlay" style="
+                  position: absolute;
+                  top: 0;
+                  left: 0;
+                  right: 0;
+                  bottom: 0;
+                  background: linear-gradient(45deg, rgba(255, 212, 1, 0.2), rgba(17, 35, 87, 0.3));
+                  opacity: 0;
+                  transition: opacity 0.3s ease;
+                "></div>
               </div>
             </div>
-            
-            <div class="col-lg-6">
-              <div class="service-visual" style="position: relative; height: 500px; border-radius: 25px; overflow: hidden; box-shadow: 0 25px 50px rgba(220, 53, 69, 0.3); border: 3px solid #ffd401;">
-                <img src="content/images/leistungen-6.jpg" alt="Weihnachtsbeleuchtung" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;">
-                <div class="image-overlay" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(45deg, rgba(220, 53, 69, 0.3), rgba(255, 212, 1, 0.2)); opacity: 0; transition: opacity 0.3s ease;"></div>
-                  </div>
-                </div>
-              </div>
-              </div>
-        
-        <!-- Carousel Navigation Arrows -->
+          </div>
+        </div><!-- Carousel Navigation Arrows -->
         <button class="carousel-prev" style="
           position: absolute;
           left: 20px;
@@ -838,7 +868,7 @@
         ">
           <i class="fas fa-chevron-right"></i>
         </button>
-            </div>
+      </div>
 
       <!-- Progress Indicator -->
       <div class="carousel-progress mt-4">
@@ -851,7 +881,7 @@
             overflow: hidden;
           ">
             <div class="progress-fill" style="
-              width: 16.66%;
+              width: 16.666666666666668%;
               height: 100%;
               background: linear-gradient(90deg, #ffd401, #ffed4e);
               border-radius: 2px;
@@ -893,10 +923,10 @@
             <a href="#" onclick="mailtoLink('neon','neonmurer.ch');return false;" class="btn btn-outline-light btn-lg mb-3" style="padding: 1rem 2.5rem; border-radius: 50px; font-weight: 700; text-decoration: none;">
               <i class="fas fa-envelope me-2"></i>E-Mail senden
             </a>
+          </div>
         </div>
       </div>
     </div>
-  </div>
   </section>
 
 </main>
@@ -915,7 +945,7 @@
 // ========== INTERACTIVE SERVICES CAROUSEL ==========
 document.addEventListener('DOMContentLoaded', function() {
   let currentSlide = 0;
-  const totalSlides = 6;
+  const totalSlides = 5;
   let autoplayInterval;
   
   const slides = document.querySelectorAll('.service-slide');
@@ -926,8 +956,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Initialize carousel
   function initCarousel() {
-    showSlide(0);
-    startAutoplay();
+    if (totalSlides > 0) {
+      showSlide(0);
+      startAutoplay();
+    }
   }
 
   // Show specific slide
@@ -967,8 +999,10 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Update progress bar
-    const progressWidth = ((index + 1) / totalSlides) * 100;
-    progressFill.style.width = progressWidth + '%';
+    if (totalSlides > 0) {
+      const progressWidth = ((index + 1) / totalSlides) * 100;
+      progressFill.style.width = progressWidth + '%';
+    }
 
     // Add slide animation effects
     addSlideEffects(index);
@@ -976,41 +1010,49 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Add special effects for current slide
   function addSlideEffects(index) {
-    const currentSlideEl = slides[index];
-    const serviceCard = currentSlideEl.querySelector('.service-card-3d');
-    const serviceImage = currentSlideEl.querySelector('.service-visual img');
-    const overlay = currentSlideEl.querySelector('.image-overlay');
+    if (slides[index]) {
+      const currentSlideEl = slides[index];
+      const serviceCard = currentSlideEl.querySelector('.service-card-3d');
+      const serviceImage = currentSlideEl.querySelector('.service-visual img');
+      const overlay = currentSlideEl.querySelector('.image-overlay');
 
-    // Card entrance animation
-  setTimeout(() => {
-      serviceCard.style.transform = 'translateZ(50px) translateY(-10px)';
-      serviceImage.style.transform = 'scale(1.05)';
-      overlay.style.opacity = '0.3';
-    }, 200);
+      // Card entrance animation
+      setTimeout(() => {
+        if (serviceCard) serviceCard.style.transform = 'translateZ(50px) translateY(-10px)';
+        if (serviceImage) serviceImage.style.transform = 'scale(1.05)';
+        if (overlay) overlay.style.opacity = '0.3';
+      }, 200);
 
-    setTimeout(() => {
-      serviceCard.style.transform = 'translateZ(50px) translateY(0)';
-      serviceImage.style.transform = 'scale(1)';
-      overlay.style.opacity = '0';
-    }, 800);
+      setTimeout(() => {
+        if (serviceCard) serviceCard.style.transform = 'translateZ(50px) translateY(0)';
+        if (serviceImage) serviceImage.style.transform = 'scale(1)';
+        if (overlay) overlay.style.opacity = '0';
+      }, 800);
+    }
   }
 
   // Navigation functions
   function nextSlide() {
-    const next = (currentSlide + 1) % totalSlides;
-    showSlide(next);
-    resetAutoplay();
+    if (totalSlides > 0) {
+      const next = (currentSlide + 1) % totalSlides;
+      showSlide(next);
+      resetAutoplay();
+    }
   }
 
   function prevSlide() {
-    const prev = (currentSlide - 1 + totalSlides) % totalSlides;
-    showSlide(prev);
-    resetAutoplay();
+    if (totalSlides > 0) {
+      const prev = (currentSlide - 1 + totalSlides) % totalSlides;
+      showSlide(prev);
+      resetAutoplay();
+    }
   }
 
   // Autoplay functions
   function startAutoplay() {
-    autoplayInterval = setInterval(nextSlide, 5000); // 5 seconds
+    if (totalSlides > 1) {
+      autoplayInterval = setInterval(nextSlide, 5000); // 5 seconds
+    }
   }
 
   function stopAutoplay() {
@@ -1023,100 +1065,36 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   // Event listeners
-  navPills.forEach((pill, index) => {
-    pill.addEventListener('click', () => {
-      showSlide(index);
-      resetAutoplay();
+  if (navPills.length > 0) {
+    navPills.forEach((pill, index) => {
+      pill.addEventListener('click', () => {
+        showSlide(index);
+        resetAutoplay();
+      });
     });
-  });
+  }
 
-  nextBtn.addEventListener('click', nextSlide);
-  prevBtn.addEventListener('click', prevSlide);
+  if (nextBtn) nextBtn.addEventListener('click', nextSlide);
+  if (prevBtn) prevBtn.addEventListener('click', prevSlide);
 
   // Pause autoplay on hover
   const carouselSection = document.querySelector('.services-carousel-section');
-  carouselSection.addEventListener('mouseenter', stopAutoplay);
-  carouselSection.addEventListener('mouseleave', startAutoplay);
-
-  // Keyboard navigation
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowLeft') prevSlide();
-    if (e.key === 'ArrowRight') nextSlide();
-    if (e.key >= '1' && e.key <= '6') {
-      showSlide(parseInt(e.key) - 1);
-      resetAutoplay();
-  }
-});
-
-// Touch/swipe support for mobile
-let touchStartX = 0;
-let touchEndX = 0;
-
-  carouselSection.addEventListener('touchstart', (e) => {
-  touchStartX = e.changedTouches[0].screenX;
-  });
-
-  carouselSection.addEventListener('touchend', (e) => {
-  touchEndX = e.changedTouches[0].screenX;
-  handleSwipe();
-  });
-
-function handleSwipe() {
-  const swipeThreshold = 50;
-    const diff = touchStartX - touchEndX;
-    
-    if (Math.abs(diff) > swipeThreshold) {
-      if (diff > 0) {
-        nextSlide(); // Swipe left -> next
-    } else {
-        prevSlide(); // Swipe right -> prev
-      }
-    }
-  }
-
-  // Enhanced button hover effects
-  function addButtonHoverEffects() {
-    const ctaButtons = document.querySelectorAll('.cta-button');
-    
-    ctaButtons.forEach(button => {
-      button.addEventListener('mouseenter', function() {
-        this.style.transform = 'translateY(-3px) scale(1.05)';
-        this.style.boxShadow = '0 15px 35px rgba(17, 35, 87, 0.4)';
-      });
-      
-      button.addEventListener('mouseleave', function() {
-        this.style.transform = 'translateY(0) scale(1)';
-        this.style.boxShadow = '0 10px 25px rgba(17, 35, 87, 0.3)';
-      });
-    });
-
-    // Navigation arrows hover
-    [prevBtn, nextBtn].forEach(btn => {
-      btn.addEventListener('mouseenter', function() {
-        this.style.background = 'rgba(255, 212, 1, 0.2)';
-        this.style.borderColor = 'rgba(255, 212, 1, 0.5)';
-        this.style.transform = 'translateY(-50%) scale(1.1)';
-      });
-      
-      btn.addEventListener('mouseleave', function() {
-        this.style.background = 'rgba(255, 255, 255, 0.1)';
-        this.style.borderColor = 'rgba(255, 255, 255, 0.2)';
-        this.style.transform = 'translateY(-50%) scale(1)';
-      });
-    });
+  if (carouselSection) {
+    carouselSection.addEventListener('mouseenter', stopAutoplay);
+    carouselSection.addEventListener('mouseleave', startAutoplay);
   }
 
   // Initialize everything
   initCarousel();
-  addButtonHoverEffects();
 });
 
-  // Email protection function
-  function mailtoLink(prefix, domain) {
-    var email = prefix + '@' + domain;
-    window.location.href = 'mailto:' + email;
-  }
+// Email protection function
+function mailtoLink(prefix, domain) {
+  var email = prefix + '@' + domain;
+  window.location.href = 'mailto:' + email;
+}
 </script>
 
+<script src="template/assets/js/lazy-loading.js"></script>
 </body>
-</html> 
+</html>

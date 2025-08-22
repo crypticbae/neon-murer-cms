@@ -1,0 +1,201 @@
+/* Modern Customer Management Styles */
+
+/* Form sections */
+.form-section {
+    margin-bottom: 2rem;
+}
+
+.section-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #495057;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #e9ecef;
+}
+
+.modern-form .form-label {
+    font-weight: 500;
+    color: #495057;
+    margin-bottom: 0.5rem;
+}
+
+.modern-form .form-control,
+.modern-form .form-select {
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    transition: all 0.2s ease;
+}
+
+.modern-form .form-control:focus,
+.modern-form .form-select:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.1);
+}
+
+.modern-form .form-control-lg {
+    padding: 1rem 1.25rem;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+/* Customer cards */
+.customer-card {
+    transition: all 0.3s ease;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.customer-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1) !important;
+}
+
+.customer-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+.contact-section {
+    min-height: 60px;
+}
+
+.last-activity {
+    border-left: 3px solid #0d6efd;
+}
+
+.card-footer-info {
+    border-top: 1px solid #f8f9fa;
+    padding-top: 0.75rem;
+    margin-top: 0.5rem;
+}
+
+/* Table improvements */
+.table-row-hover:hover {
+    background-color: #f8f9fa;
+}
+
+.table th {
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+    color: #6c757d;
+}
+
+/* Empty state */
+.empty-state {
+    padding: 3rem 2rem;
+}
+
+.empty-state i {
+    opacity: 0.5;
+}
+
+/* Modern badges */
+.badge {
+    font-weight: 500;
+    font-size: 0.75rem;
+    border-radius: 6px;
+    padding: 0.4rem 0.8rem;
+}
+
+/* Search and filter improvements */
+.input-group-text {
+    border-color: #e9ecef;
+}
+
+.form-control.border-start-0 {
+    border-left: none;
+}
+
+.form-control.border-end-0 {
+    border-right: none;
+}
+
+.input-group .form-control:focus + .input-group-text,
+.input-group .input-group-text + .form-control:focus {
+    border-color: #0d6efd;
+}
+
+/* Button improvements */
+.btn-ghost {
+    background: transparent;
+    border: 1px solid #e9ecef;
+    color: #6c757d;
+}
+
+.btn-ghost:hover {
+    background: #f8f9fa;
+    border-color: #dee2e6;
+    color: #495057;
+}
+
+/* Statistics cards improvements */
+.card.shadow-sm {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04) !important;
+    border-radius: 12px;
+}
+
+.card.shadow-sm:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+    transform: translateY(-1px);
+    transition: all 0.2s ease;
+}
+
+/* Responsive improvements */
+@media (max-width: 768px) {
+    .customer-card {
+        margin-bottom: 1rem;
+    }
+    
+    .customer-avatar {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+    }
+    
+    .modern-form .form-control-lg {
+        font-size: 1rem;
+    }
+    
+    .section-title {
+        font-size: 0.9rem;
+    }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    .section-title {
+        color: #adb5bd;
+        border-bottom-color: #495057;
+    }
+    
+    .modern-form .form-label {
+        color: #adb5bd;
+    }
+    
+    .customer-avatar {
+        background: linear-gradient(135deg, #495057 0%, #6c757d 100%);
+    }
+}
+
+/* Print styles */
+@media print {
+    .customer-card {
+        break-inside: avoid;
+        margin-bottom: 1rem;
+    }
+    
+    .dropdown,
+    .btn-group {
+        display: none !important;
+    }
+}

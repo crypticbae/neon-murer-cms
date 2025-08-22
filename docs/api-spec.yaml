@@ -1,0 +1,1072 @@
+openapi: 3.0.3
+info:
+  title: Neon Murer CMS API
+  description: |
+    Vollständige REST API für das Neon Murer Content Management System.
+    
+    ## Authentifizierung
+    Die meisten Endpoints erfordern JWT-Token Authentication über den `Authorization: Bearer <token>` Header.
+    
+    ## Fehlerbehandlung
+    Alle Endpoints verwenden einheitliche HTTP-Status-Codes und JSON-Antworten.
+    
+    ## Rate Limiting
+    API-Aufrufe sind auf 100 Requests pro Minute pro IP-Adresse begrenzt.
+    
+  version: 1.0.0
+  contact:
+    name: Neon Murer AG
+    url: https://neonmurer.ch
+  license:
+    name: Proprietary
+    
+servers:
+  - url: http://localhost:3001/api
+    description: Development Server
+  - url: https://cms.neonmurer.ch/api  
+    description: Production Server
+
+tags:
+  - name: Auth
+    description: Authentifizierung und Benutzerverwaltung
+  - name: Analytics
+    description: Website-Analytics und Statistiken
+  - name: Customers
+    description: Kundenverwaltung
+  - name: Media
+    description: Medienverwaltung (Bilder, Dateien)
+  - name: Pages
+    description: Seitenverwaltung
+  - name: Team
+    description: Team-Mitgliederverwaltung
+  - name: Jobs
+    description: Stellenausschreibungen
+  - name: News
+    description: News und Aktuelles
+  - name: Settings
+    description: System-Einstellungen
+  - name: Health
+    description: System-Gesundheit und Monitoring
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      
+  schemas:
+    Error:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: false
+        error:
+          type: string
+          example: "Fehlermeldung"
+        details:
+          type: object
+          
+    ValidationError:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: false
+        error:
+          type: string
+          example: "Validierungsfehler"
+        details:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
+                
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "cmdid4eas0000wa04ime8men5"
+        email:
+          type: string
+          format: email
+          example: "admin@neonmurer.ch"
+        firstName:
+          type: string
+          example: "Max"
+        lastName:
+          type: string
+          example: "Mustermann"
+        role:
+          type: string
+          enum: [admin, editor, viewer]
+          example: "admin"
+        isActive:
+          type: boolean
+          example: true
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+          
+    AuthTokens:
+      type: object
+      properties:
+        accessToken:
+          type: string
+          example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+        refreshToken:
+          type: string
+          example: "def456789abcdef..."
+        expiresIn:
+          type: integer
+          example: 3600
+          
+    Customer:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "customer_123"
+        company:
+          type: string
+          example: "Mustermann GmbH"
+        firstName:
+          type: string
+          example: "Max"
+        lastName:
+          type: string
+          example: "Mustermann"
+        email:
+          type: string
+          format: email
+          example: "max@mustermann.ch"
+        phone:
+          type: string
+          example: "+41 44 123 45 67"
+        address:
+          type: string
+          example: "Musterstrasse 123"
+        city:
+          type: string
+          example: "Zürich"
+        zipCode:
+          type: string
+          example: "8001"
+        country:
+          type: string
+          example: "Schweiz"
+        status:
+          type: string
+          enum: [ACTIVE, INACTIVE, PROSPECT]
+          example: "ACTIVE"
+        contacts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Contact'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+          
+    Contact:
+      type: object
+      properties:
+        id:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        position:
+          type: string
+        department:
+          type: string
+        isActive:
+          type: boolean
+          
+    MediaFile:
+      type: object
+      properties:
+        id:
+          type: integer
+        filename:
+          type: string
+          example: "image-1738255046223.jpg"
+        originalName:
+          type: string
+          example: "original-image.jpg"
+        path:
+          type: string
+          example: "content/images/image-1738255046223.jpg"
+        size:
+          type: integer
+          example: 256000
+        mimeType:
+          type: string
+          example: "image/jpeg"
+        extension:
+          type: string
+          example: "jpg"
+        altText:
+          type: string
+        description:
+          type: string
+        optimized:
+          type: boolean
+          example: true
+        compressionRatio:
+          type: number
+          example: 0.75
+        createdAt:
+          type: string
+          format: date-time
+          
+    AnalyticsDashboard:
+      type: object
+      properties:
+        kpis:
+          type: object
+          properties:
+            totalPageViews:
+              type: integer
+              example: 213
+            uniqueVisitors:
+              type: integer
+              example: 218
+            avgSessionDuration:
+              type: integer
+              example: 3
+            bounceRate:
+              type: number
+              example: 0.25
+            mobilePercentage:
+              type: integer
+              example: 11
+        charts:
+          type: object
+          properties:
+            dailyPageViews:
+              type: object
+            deviceBreakdown:
+              type: object
+              properties:
+                mobile:
+                  type: integer
+                desktop:
+                  type: integer
+            trafficSources:
+              type: array
+              items:
+                type: object
+                properties:
+                  source:
+                    type: string
+                  percentage:
+                    type: integer
+                  visitors:
+                    type: integer
+
+paths:
+  # AUTH ENDPOINTS
+  /auth/login:
+    post:
+      tags: [Auth]
+      summary: Benutzer anmelden
+      description: Meldet einen Benutzer an und gibt JWT-Tokens zurück
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email, password]
+              properties:
+                email:
+                  type: string
+                  format: email
+                  example: "admin@neonmurer.ch"
+                password:
+                  type: string
+                  example: "securePassword123"
+      responses:
+        '200':
+          description: Erfolgreich angemeldet
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: "Login erfolgreich"
+                  user:
+                    $ref: '#/components/schemas/User'
+                  tokens:
+                    $ref: '#/components/schemas/AuthTokens'
+        '401':
+          description: Ungültige Anmeldedaten
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '422':
+          description: Validierungsfehler
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+                
+  /auth/register:
+    post:
+      tags: [Auth]
+      summary: Neuen Benutzer registrieren
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email, password, firstName, lastName]
+              properties:
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+                  minLength: 8
+                firstName:
+                  type: string
+                lastName:
+                  type: string
+                role:
+                  type: string
+                  enum: [admin, editor, viewer]
+                  default: viewer
+      responses:
+        '201':
+          description: Benutzer erfolgreich erstellt
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: "Benutzer erfolgreich erstellt"
+                  user:
+                    $ref: '#/components/schemas/User'
+                  tokens:
+                    $ref: '#/components/schemas/AuthTokens'
+        '409':
+          description: E-Mail bereits vergeben
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+                
+  /auth/me:
+    get:
+      tags: [Auth]
+      summary: Aktuelle Benutzerinfo abrufen
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Benutzerinfo erfolgreich abgerufen
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  user:
+                    $ref: '#/components/schemas/User'
+        '401':
+          description: Nicht authentifiziert
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+                
+  /auth/refresh:
+    post:
+      tags: [Auth]
+      summary: Access Token erneuern
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [refreshToken]
+              properties:
+                refreshToken:
+                  type: string
+      responses:
+        '200':
+          description: Token erfolgreich erneuert
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  tokens:
+                    $ref: '#/components/schemas/AuthTokens'
+        '401':
+          description: Ungültiger Refresh Token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+                
+  /auth/logout:
+    post:
+      tags: [Auth]
+      summary: Benutzer abmelden
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Erfolgreich abgemeldet
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: "Logout erfolgreich"
+                    
+  # ANALYTICS ENDPOINTS
+  /analytics/dashboard:
+    get:
+      tags: [Analytics]
+      summary: Analytics Dashboard-Daten
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: period
+          in: query
+          schema:
+            type: string
+            enum: [day, week, month, year]
+            default: month
+          description: Zeitraum für die Analyse
+      responses:
+        '200':
+          description: Dashboard-Daten erfolgreich abgerufen
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    $ref: '#/components/schemas/AnalyticsDashboard'
+                    
+  /analytics/track:
+    post:
+      tags: [Analytics]
+      summary: Seitenaufruf tracken
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [path]
+              properties:
+                path:
+                  type: string
+                  example: "/"
+                userAgent:
+                  type: string
+                referrer:
+                  type: string
+                sessionId:
+                  type: string
+      responses:
+        '201':
+          description: Tracking erfolgreich
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    
+  # CUSTOMERS ENDPOINTS
+  /customers:
+    get:
+      tags: [Customers]
+      summary: Alle Kunden abrufen
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: includeContacts
+          in: query
+          schema:
+            type: boolean
+            default: false
+        - name: includeActivities
+          in: query
+          schema:
+            type: boolean
+            default: false
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [ACTIVE, INACTIVE, PROSPECT]
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 50
+      responses:
+        '200':
+          description: Kunden erfolgreich abgerufen
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  customers:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Customer'
+                  total:
+                    type: integer
+                  page:
+                    type: integer
+                  limit:
+                    type: integer
+                    
+    post:
+      tags: [Customers]
+      summary: Neuen Kunden erstellen
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email]
+              properties:
+                company:
+                  type: string
+                firstName:
+                  type: string
+                lastName:
+                  type: string
+                email:
+                  type: string
+                  format: email
+                phone:
+                  type: string
+                address:
+                  type: string
+                city:
+                  type: string
+                zipCode:
+                  type: string
+                country:
+                  type: string
+                  default: "Schweiz"
+                status:
+                  type: string
+                  enum: [ACTIVE, INACTIVE, PROSPECT]
+                  default: PROSPECT
+      responses:
+        '201':
+          description: Kunde erfolgreich erstellt
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  customer:
+                    $ref: '#/components/schemas/Customer'
+                    
+  /customers/export:
+    get:
+      tags: [Customers]
+      summary: Kunden exportieren
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: format
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [xlsx, csv, json]
+        - name: includeContacts
+          in: query
+          schema:
+            type: boolean
+            default: true
+      responses:
+        '200':
+          description: Export erfolgreich
+          content:
+            application/vnd.openxmlformats-officedocument.spreadsheetml.sheet:
+              schema:
+                type: string
+                format: binary
+            text/csv:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Customer'
+                  
+  /customers/stats:
+    get:
+      tags: [Customers]
+      summary: Kunden-Statistiken
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Statistiken erfolgreich abgerufen
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  stats:
+                    type: object
+                    properties:
+                      total:
+                        type: integer
+                      active:
+                        type: integer
+                      inactive:
+                        type: integer
+                      prospects:
+                        type: integer
+                        
+  /customers/{id}:
+    get:
+      tags: [Customers]
+      summary: Einzelnen Kunden abrufen
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Kunde erfolgreich abgerufen
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  customer:
+                    $ref: '#/components/schemas/Customer'
+        '404':
+          description: Kunde nicht gefunden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+                
+    put:
+      tags: [Customers]
+      summary: Kunden aktualisieren
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                company:
+                  type: string
+                firstName:
+                  type: string
+                lastName:
+                  type: string
+                email:
+                  type: string
+                  format: email
+                phone:
+                  type: string
+                address:
+                  type: string
+                city:
+                  type: string
+                zipCode:
+                  type: string
+                country:
+                  type: string
+                status:
+                  type: string
+                  enum: [ACTIVE, INACTIVE, PROSPECT]
+      responses:
+        '200':
+          description: Kunde erfolgreich aktualisiert
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  customer:
+                    $ref: '#/components/schemas/Customer'
+                    
+    delete:
+      tags: [Customers]
+      summary: Kunden löschen
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Kunde erfolgreich gelöscht
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: "Kunde erfolgreich gelöscht"
+                    
+  # MEDIA ENDPOINTS
+  /media:
+    get:
+      tags: [Media]
+      summary: Alle Medien abrufen
+      responses:
+        '200':
+          description: Medien erfolgreich abgerufen
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  media:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/MediaFile'
+                      
+  /media/upload:
+    post:
+      tags: [Media]
+      summary: Dateien hochladen
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                files:
+                  type: array
+                  items:
+                    type: string
+                    format: binary
+      responses:
+        '200':
+          description: Upload erfolgreich
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  files:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/MediaFile'
+                  message:
+                    type: string
+                  totalSavings:
+                    type: string
+                    
+  /media/stats:
+    get:
+      tags: [Media]
+      summary: Medien-Statistiken
+      responses:
+        '200':
+          description: Statistiken erfolgreich abgerufen
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  stats:
+                    type: object
+                    properties:
+                      totalFiles:
+                        type: integer
+                      totalSize:
+                        type: integer
+                      averageCompression:
+                        type: number
+                        
+  /media/{filename}:
+    delete:
+      tags: [Media]
+      summary: Datei löschen
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: filename
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Datei erfolgreich gelöscht
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    
+  # SETTINGS ENDPOINTS
+  /settings/general:
+    get:
+      tags: [Settings]
+      summary: Allgemeine Einstellungen abrufen
+      responses:
+        '200':
+          description: Einstellungen erfolgreich abgerufen
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  settings:
+                    type: object
+                    
+    put:
+      tags: [Settings]
+      summary: Allgemeine Einstellungen aktualisieren
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                siteName:
+                  type: string
+                siteDescription:
+                  type: string
+                contactEmail:
+                  type: string
+                  format: email
+                contactPhone:
+                  type: string
+      responses:
+        '200':
+          description: Einstellungen erfolgreich aktualisiert
+          
+  /settings/backup/create:
+    post:
+      tags: [Settings]
+      summary: Backup erstellen
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Backup erfolgreich erstellt
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  filename:
+                    type: string
+                  size:
+                    type: integer
+                    
+  /settings/backup/list:
+    get:
+      tags: [Settings]
+      summary: Verfügbare Backups auflisten
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Backup-Liste erfolgreich abgerufen
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  backups:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        filename:
+                          type: string
+                        size:
+                          type: integer
+                        date:
+                          type: string
+                          format: date-time
+                          
+  # HEALTH ENDPOINTS
+  /health:
+    get:
+      tags: [Health]
+      summary: System-Gesundheit prüfen
+      responses:
+        '200':
+          description: System läuft normal
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "healthy"
+                  timestamp:
+                    type: string
+                    format: date-time
+                  version:
+                    type: string
+                    example: "1.0.0"
+                  uptime:
+                    type: number
+                  database:
+                    type: object
+                    properties:
+                      status:
+                        type: string
+                        example: "connected"
+                      latency:
+                        type: number
+                        
+  /health/database:
+    get:
+      tags: [Health]
+      summary: Datenbank-Gesundheit prüfen
+      responses:
+        '200':
+          description: Datenbank-Status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  latency:
+                    type: number
+                  tables:
+                    type: array
+                    items:
+                      type: string

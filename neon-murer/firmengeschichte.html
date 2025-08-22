@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="de" id="www-neonmurer-ch">
 <head>
+  <!-- CDN Preloads für bessere Performance -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="preconnect" href="https://code.jquery.com" crossorigin>
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
 
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta charset="utf-8">
@@ -10,33 +16,38 @@
   <link rel="stylesheet" type="text/css" href="../template/inc_css/include.css">
   
   <!-- Font Awesome CDN für Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" crossorigin="anonymous">
   <!-- ✅ CSS wurde nach ../template/assets/css/page-styles.css ausgelagert -->
   <!-- Alle redundanten Styles sind jetzt zentral verwaltet -->
-<link rel="icon" type="image/png" href="https://www.neonmurer.ch/favicon/favicon-96x96.png" sizes="96x96" />
-  <link rel="icon" type="image/svg+xml" href="https://www.neonmurer.ch/favicon/favicon.svg" />
-  <link rel="shortcut icon" href="https://www.neonmurer.ch/favicon/favicon.ico" />
-  <link rel="apple-touch-icon" sizes="180x180" href="https://www.neonmurer.ch/favicon/apple-touch-icon.png" />
+<link rel="icon" type="image/png" href="../favicon/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="../favicon/favicon.svg" />
+  <link rel="shortcut icon" href="../favicon/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="../favicon/apple-touch-icon.png" />
   <meta name="apple-mobile-web-app-title" content="Neon Murer" />
-  <link rel="manifest" href="https://www.neonmurer.ch/favicon/site.webmanifest" />
+  <link rel="manifest" href="../favicon/site.webmanifest" />
   
-  <!--[if lt IE 9]><script src="https://www.neonmurer.ch/template/lib/jquery/jquery-1.12.4.min.js"></script><![endif]-->
-  <!--[if gte IE 9]><!--><script src="https://www.neonmurer.ch/template/lib/jquery/jquery-3.7.1.min.js"></script><!--<![endif]-->
+  <!--[if lt IE 9]><script src="https://code.jquery.com/jquery-3.7.1.min.js" crossorigin="anonymous"></script><![endif]-->
+  <!--[if gte IE 9]><!--><script src="https://code.jquery.com/jquery-3.7.1.min.js" crossorigin="anonymous"></script><!--<![endif]-->
   
   <meta name="description" content="Über 75 Jahre Erfahrung in der Lichtwerbung - Die Geschichte der Neon Murer AG von der Gründung bis heute.">
   <meta name="keywords" content="Firmengeschichte, Neon Murer, Lichtwerbung, Tradition, Innovation">
   <link rel="canonical" href="https://www.neonmurer.ch/firmengeschichte.html">
-  <script src="https://www.neonmurer.ch/template/assets/js/jquery.easing.min.js"></script>
-  <script src="https://www.neonmurer.ch/template/assets/js/bootstrap.bundle.min.js"></script>
-      <script src="https://www.neonmurer.ch/template/assets/js/slick.min.js"></script>
-    <script src="../template/assets/js/search.js"></script>
-    <script src="https://www.neonmurer.ch/template/assets/js/custom.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+      <script src="../template/assets/js/slick.min.js"></script>
+    
+    <script src="../template/assets/js/custom.js"></script>
   
   <!-- Dropdown JavaScript wurde in Template Loader verschoben -->
 
   <!-- ========== TEMPLATE SYSTEM ========== -->
   <script src="../template/assets/js/templates.js"></script>
-  <script src="../template/assets/js/simple-template-loader.js"></script>
+  <script src="../template/assets/js/simple-template-loader.js"></script>  
+  <!-- Usage Statistics -->
+  <script src="../template/assets/js/neon-usage-stats.js"></script>
+  
+  <!-- Privacy Manager -->
+  <script src="../template/assets/js/neon-privacy-manager.js"></script>
 
   <!-- Page Specific CSS -->
   <link rel="stylesheet" href="../template/assets/css/firmengeschichte.css">
@@ -57,7 +68,8 @@
 
 <main>
   <!-- Hero Section -->
-  <section class="story-hero">
+  <section class="story-hero" style="background-image: url('/content/images/halbrelief-plattenschriften-2.jpg');">
+    <div class="hero-overlay"></div>
     <div class="hero-content">
       <h1 class="story-title">Unsere Geschichte</h1>
       <p class="story-subtitle">75 Jahre Leidenschaft für Lichtwerbung</p>
@@ -67,13 +79,18 @@
     </div>
   </section>
 
-  <!-- Chapter 1: Tradition -->
+  
+  
+  
+  
+  
+  <!-- Chapter 1: Eine Tradition beginnt -->
   <section class="story-section story-chapter">
-    <div class="chapter-background" style="background-image: url('../content/images/mitarbeiter.jpg');"></div>
+    <div class="chapter-background" style="background-image: url('/content/images/leuchttransparente-3.jpg');"></div>
     <div class="chapter-overlay"></div>
     <div class="container-fluid maxwidth">
       <div class="row align-items-center">
-        <div class="col-12 col-lg-6">
+        <div class="col-12 col-lg-6 ">
           <div class="chapter-content">
             <div class="chapter-year">75+ Jahre</div>
             <h2 class="chapter-title">Eine Tradition beginnt</h2>
@@ -82,16 +99,20 @@
             </p>
           </div>
         </div>
-        <div class="col-12 col-lg-6">
+        <div class="col-12 col-lg-6 ">
           <div class="chapter-image">
-            <img src="../content/images/leistungen-1.jpg" alt="Tradition in der Lichtwerbung">
+            <picture>
+  <source data-srcset="../content/images-optimized/leistungen-1.webp" type="image/webp">
+  <source data-srcset="../content/images-optimized/leistungen-1-optimized.jpg" type="image/jpeg">
+  <img src="../content/images/leistungen-1.jpg" alt="Tradition in der Lichtwerbung" class="project-image" loading="lazy">
+</picture>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Chapter 2: Gründung -->
+  <!-- Chapter 2: Die Vision von Josef Murer -->
   <section class="story-section story-chapter">
     <div class="chapter-background" style="background-image: url('../content/images/leistungen-2.jpg');"></div>
     <div class="chapter-overlay"></div>
@@ -108,20 +129,24 @@
         </div>
         <div class="col-12 col-lg-6 order-lg-1">
           <div class="chapter-image">
-            <img src="../content/images/leistungen-3.jpg" alt="Josef Murer Gründung">
+            <picture>
+  <source data-srcset="../content/images-optimized/leistungen-3.webp" type="image/webp">
+  <source data-srcset="../content/images-optimized/leistungen-3-optimized.jpg" type="image/jpeg">
+  <img src="../content/images/leistungen-3.jpg" alt="Josef Murer Gründung" class="project-image" loading="lazy">
+</picture>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Chapter 3: Übernahme -->
+  <!-- Chapter 3: Neue Generation, bewährte Werte -->
   <section class="story-section story-chapter">
     <div class="chapter-background" style="background-image: url('../content/images/leistungen-4.jpg');"></div>
     <div class="chapter-overlay"></div>
     <div class="container-fluid maxwidth">
       <div class="row align-items-center">
-        <div class="col-12 col-lg-6">
+        <div class="col-12 col-lg-6 ">
           <div class="chapter-content">
             <div class="chapter-year">1985</div>
             <h2 class="chapter-title">Neue Generation, bewährte Werte</h2>
@@ -130,16 +155,20 @@
             </p>
           </div>
         </div>
-        <div class="col-12 col-lg-6">
+        <div class="col-12 col-lg-6 ">
           <div class="chapter-image">
-            <img src="../content/images/leistungen-5.jpg" alt="Benno Murer Übernahme">
+            <picture>
+  <source data-srcset="../content/images-optimized/leistungen-5.webp" type="image/webp">
+  <source data-srcset="../content/images-optimized/leistungen-5-optimized.jpg" type="image/jpeg">
+  <img src="../content/images/leistungen-5.jpg" alt="Benno Murer Übernahme" class="project-image" loading="lazy">
+</picture>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Chapter 4: Expansion -->
+  <!-- Chapter 4: Wachstum braucht Raum -->
   <section class="story-section story-chapter">
     <div class="chapter-background" style="background-image: url('../content/images/leistungen-6.jpg');"></div>
     <div class="chapter-overlay"></div>
@@ -156,20 +185,24 @@
         </div>
         <div class="col-12 col-lg-6 order-lg-1">
           <div class="chapter-image">
-            <img src="../content/images/person1.jpg" alt="Expansion und Wachstum">
+            <picture>
+  <source data-srcset="../content/images-optimized/person1.webp" type="image/webp">
+  <source data-srcset="../content/images-optimized/person1-optimized.jpg" type="image/jpeg">
+  <img src="../content/images/person1.jpg" alt="Expansion und Wachstum" class="project-image" loading="lazy">
+</picture>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Chapter 5: AG Umwandlung -->
+  <!-- Chapter 5: Neon Murer AG -->
   <section class="story-section story-chapter">
     <div class="chapter-background" style="background-image: url('../content/images/person2.jpg');"></div>
     <div class="chapter-overlay"></div>
     <div class="container-fluid maxwidth">
       <div class="row align-items-center">
-        <div class="col-12 col-lg-6">
+        <div class="col-12 col-lg-6 ">
           <div class="chapter-content">
             <div class="chapter-year">2006</div>
             <h2 class="chapter-title">Neon Murer AG</h2>
@@ -178,16 +211,20 @@
             </p>
           </div>
         </div>
-        <div class="col-12 col-lg-6">
+        <div class="col-12 col-lg-6 ">
           <div class="chapter-image">
-            <img src="../content/images/person3.jpg" alt="Neon Murer AG">
+            <picture>
+  <source data-srcset="../content/images-optimized/person3.webp" type="image/webp">
+  <source data-srcset="../content/images-optimized/person3-optimized.jpg" type="image/jpeg">
+  <img src="../content/images/person3.jpg" alt="Neon Murer AG" class="project-image" loading="lazy">
+</picture>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Chapter 6: Standort Uznach -->
+  <!-- Chapter 6: Expansion nach Uznach -->
   <section class="story-section story-chapter">
     <div class="chapter-background" style="background-image: url('../content/images/uznach1.jpg');"></div>
     <div class="chapter-overlay"></div>
@@ -204,7 +241,11 @@
         </div>
         <div class="col-12 col-lg-6 order-lg-1">
           <div class="chapter-image">
-            <img src="../content/images/uznach2.jpg.jpg" alt="Produktionswerk Uznach">
+            <picture>
+  <source data-srcset="../content/images-optimized/uznach2.jpg.webp" type="image/webp">
+  <source data-srcset="../content/images-optimized/uznach2.jpg-optimized.jpg" type="image/jpeg">
+  <img src="../content/images/uznach2.jpg.jpg" alt="Produktionswerk Uznach" class="project-image" loading="lazy">
+</picture>
           </div>
         </div>
       </div>
@@ -318,5 +359,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 
+  <script src="../template/assets/js/lazy-loading.js"></script>
 </body>
 </html> 

@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 
+                           http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+  <!-- 🏠 Hauptseite -->
+  <url>
+    <loc>https://www.neonmurer.ch/</loc>
+    <lastmod>2025-01-15T10:00:00+01:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- 📄 Hauptkategorien -->
+  <url>
+    <loc>https://www.neonmurer.ch/lichtwerbung.html</loc>
+    <lastmod>2025-01-15T10:00:00+01:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://www.neonmurer.ch/beschriftungen.html</loc>
+    <lastmod>2025-01-15T10:00:00+01:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://www.neonmurer.ch/digital-signage.html</loc>
+    <lastmod>2025-01-15T10:00:00+01:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://www.neonmurer.ch/dienstleistungen.html</loc>
+    <lastmod>2025-01-15T10:00:00+01:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 💡 Lichtwerbung Unterseiten -->
+  <url>
+    <loc>https://www.neonmurer.ch/lichtwerbung/leuchtschriften.html</loc>
+    <lastmod>2025-01-15T10:00:00+01:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.neonmurer.ch/lichtwerbung/leuchttransparente.html</loc>
+    <lastmod>2025-01-15T10:00:00+01:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.neonmurer.ch/lichtwerbung/halbrelief-plattenschriften.html</loc>
+    <lastmod>2025-01-15T10:00:00+01:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.neonmurer.ch/lichtwerbung/neon-led-technik.html</loc>
+    <lastmod>2025-01-15T10:00:00+01:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.neonmurer.ch/lichtwerbung/pylonen.html</loc>
+    <lastmod>2025-01-15T10:00:00+01:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- ✏️ Beschriftungen Unterseiten -->
+  <url>
+    <loc>https://www.neonmurer.ch/beschriftungen/signaletik.html</loc>
+    <lastmod>2025-01-15T10:00:00+01:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.neonmurer.ch/beschriftungen/tafelbeschriftung.html</loc>
+    <lastmod>2025-01-15T10:00:00+01:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.neonmurer.ch/beschriftungen/fahrzeugbeschriftung.html</loc>
+    <lastmod>2025-01-15T10:00:00+01:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.neonmurer.ch/beschriftungen/fensterbeschriftung.html</loc>
+    <lastmod>2025-01-15T10:00:00+01:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.neonmurer.ch/beschriftungen/blachen-fahnen.html</loc>
+    <lastmod>2025-01-15T10:00:00+01:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.neonmurer.ch/beschriftungen/grossformatdruck.html</loc>
+    <lastmod>2025-01-15T10:00:00+01:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 🏢 Unternehmen (Neon Murer) -->
+  <url>
+    <loc>https://www.neonmurer.ch/neon-murer/firmengeschichte.html</loc>
+    <lastmod>2025-01-15T10:00:00+01:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.neonmurer.ch/neon-murer/fachkompetenzen.html</loc>
+    <lastmod>2025-01-15T10:00:00+01:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.neonmurer.ch/neon-murer/kontaktpersonen.html</loc>
+    <lastmod>2025-01-15T10:00:00+01:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.neonmurer.ch/neon-murer/news.html</loc>
+    <lastmod>2025-01-15T10:00:00+01:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://www.neonmurer.ch/neon-murer/stellenangebote.html</loc>
+    <lastmod>2025-01-15T10:00:00+01:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- 📧 Newsletter -->
+  <url>
+    <loc>https://www.neonmurer.ch/newsletter-anmeldung.html</loc>
+    <lastmod>2025-01-15T10:00:00+01:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- ⚖️ Rechtliche Seiten -->
+  <url>
+    <loc>https://www.neonmurer.ch/impressum.html</loc>
+    <lastmod>2025-01-15T10:00:00+01:00</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <url>
+    <loc>https://www.neonmurer.ch/datenschutz.html</loc>
+    <lastmod>2025-01-15T10:00:00+01:00</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <url>
+    <loc>https://www.neonmurer.ch/geschaeftsbedingungen.html</loc>
+    <lastmod>2025-01-15T10:00:00+01:00</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+</urlset>

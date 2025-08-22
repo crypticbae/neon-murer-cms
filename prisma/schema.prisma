@@ -1,0 +1,763 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  password     String
+  name         String
+  role         Role     @default(ADMIN)
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  createdPages Page[]
+
+  @@map("users")
+}
+
+model Page {
+  id              String           @id @default(cuid())
+  title           String
+  slug            String           @unique
+  path            String           @unique
+  category        String
+  type            PageType
+  status          PageStatus       @default(PUBLISHED)
+  metaTitle       String?
+  metaDescription String?
+  keywords        String?
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  createdBy       String
+  heroSection     HeroSection?
+  creator         User             @relation(fields: [createdBy], references: [id])
+  projectsSection ProjectsSection?
+
+  @@map("pages")
+}
+
+model HeroSection {
+  id              String  @id @default(cuid())
+  title           String
+  subtitle        String?
+  description     String?
+  backgroundColor String  @default("#1a1a1a")
+  backgroundImage String?
+  pageId          String  @unique
+  page            Page    @relation(fields: [pageId], references: [id], onDelete: Cascade)
+
+  @@map("hero_sections")
+}
+
+model ProjectsSection {
+  id          String    @id @default(cuid())
+  title       String    @default("Unsere Kundenprojekte")
+  subtitle    String?
+  description String?
+  pageId      String    @unique
+  projects    Project[]
+  page        Page      @relation(fields: [pageId], references: [id], onDelete: Cascade)
+
+  @@map("projects_sections")
+}
+
+model Project {
+  id                String          @id @default(cuid())
+  name              String
+  description       String?
+  imageUrl          String
+  imageAlt          String?
+  order             Int             @default(0)
+  isVisible         Boolean         @default(true)
+  projectsSectionId String
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
+  projectsSection   ProjectsSection @relation(fields: [projectsSectionId], references: [id], onDelete: Cascade)
+
+  @@unique([projectsSectionId, order])
+  @@map("projects")
+}
+
+// ========== FIRMENGESCHICHTE MODELS ==========
+
+model CompanyHistory {
+  id              String                 @id @default(cuid())
+  title           String                 @default("Unsere Geschichte")
+  subtitle        String                 @default("75 Jahre Leidenschaft für Lichtwerbung")
+  heroBackgroundImage String?
+  finaleTitle     String                 @default("Heute und in die Zukunft")
+  finaleText      String                 @default("Die langjährige Erfahrung und eine gut ausgebaute Infrastruktur ermöglichen es uns, Ihre Ideen effizient und qualitativ hochstehend zu realisieren. Das möchten wir Ihnen gerne beweisen.")
+  isActive        Boolean                @default(true)
+  createdAt       DateTime               @default(now())
+  updatedAt       DateTime               @updatedAt
+  chapters        CompanyHistoryChapter[]
+
+  @@map("company_history")
+}
+
+model CompanyHistoryChapter {
+  id                String         @id @default(cuid())
+  year              String         // z.B. "75+ Jahre", "1948", "1985"
+  title             String         // z.B. "Eine Tradition beginnt"
+  text              String         // Längerer Beschreibungstext
+  backgroundImage   String?        // Hintergrundbild URL
+  foregroundImage   String?        // Vordergrundbild URL
+  imageAlt          String?        // Alt-Text für Vordergrundbild
+  order             Int            @default(0)
+  layoutDirection   ChapterLayout  @default(LEFT) // Abwechselnd LEFT/RIGHT
+  isVisible         Boolean        @default(true)
+  companyHistoryId  String
+  createdAt         DateTime       @default(now())
+  updatedAt         DateTime       @updatedAt
+  companyHistory    CompanyHistory @relation(fields: [companyHistoryId], references: [id], onDelete: Cascade)
+
+  @@unique([companyHistoryId, order])
+  @@map("company_history_chapters")
+}
+
+model Media {
+  id           String   @id @default(cuid())
+  filename     String
+  originalName String
+  mimeType     String
+  size         Int
+  path         String
+  url          String
+  alt          String?
+  description  String?
+  category     String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@map("media")
+}
+
+model Job {
+  id              String           @id @default(cuid())
+  title           String
+  position        String
+  department      String
+  jobType         String           @default("vollzeit")
+  location        String           @default("neuhaus")
+  description     String?
+  content         String
+  excerpt         String?
+  validUntil      DateTime?
+  salary          String?
+  benefits        String?
+  status          JobStatus        @default(DRAFT)
+  isActive        Boolean          @default(true)
+  showOnWebsite   Boolean          @default(true)
+  metaTitle       String?
+  metaDescription String?
+  keywords        String?
+  featuredImage   String?
+  author          String           @default("Administrator")
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  requirements    JobRequirement[]
+
+  @@map("jobs")
+}
+
+model JobRequirement {
+  id    String @id @default(cuid())
+  text  String
+  order Int    @default(0)
+  jobId String
+  job   Job    @relation(fields: [jobId], references: [id], onDelete: Cascade)
+
+  @@unique([jobId, order])
+  @@map("job_requirements")
+}
+
+model NewsArticle {
+  id              String     @id @default(cuid())
+  title           String
+  slug            String     @unique
+  category        String     @default("unternehmen")
+  excerpt         String?
+  content         String
+  newsDate        DateTime   @default(now())
+  isBreaking      Boolean    @default(false)
+  isFeatured      Boolean    @default(false)
+  status          NewsStatus @default(DRAFT)
+  showOnWebsite   Boolean    @default(true)
+  metaTitle       String?
+  metaDescription String?
+  keywords        String?
+  featuredImage   String?
+  author          String     @default("Administrator")
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
+
+  @@map("news_articles")
+}
+
+model Customer {
+  id               String            @id @default(cuid())
+  company          String
+  firstName        String?
+  lastName         String?
+  email            String?           @unique
+  phone            String?
+  city             String?
+  zipCode          String?
+  country          String?           @default("Schweiz")
+  industry         String?
+  website          String?
+  notes            String?
+  status           CustomerStatus    @default(PROSPECT)
+  totalProjects    Int               @default(0)
+  lastContact      DateTime?
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+  acquisitionDate  DateTime          @default(now())
+  actualRevenue    Decimal?          @default(0)
+  customerType     CustomerType      @default(BUSINESS)
+  isActive         Boolean           @default(true)
+  leadSource       String?
+  nextFollowUp     DateTime?
+  priority         CustomerPriority  @default(MEDIUM)
+  revenuePotential Decimal?
+  segment          String?
+  state            String?
+  street           String?
+  tags             String?
+  activities       Activity[]
+  contacts         Contact[]
+  projects         CustomerProject[]
+  documents        Document[]
+
+  @@map("customers")
+}
+
+model Contact {
+  id         String     @id @default(cuid())
+  firstName  String
+  lastName   String
+  title      String?
+  department String?
+  email      String?
+  phone      String?
+  mobile     String?
+  position   String?
+  isPrimary  Boolean    @default(false)
+  isActive   Boolean    @default(true)
+  language   String?    @default("de")
+  notes      String?
+  customerId String
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+  activities Activity[]
+  customer   Customer   @relation(fields: [customerId], references: [id], onDelete: Cascade)
+
+  @@map("contacts")
+}
+
+model Activity {
+  id            String         @id @default(cuid())
+  type          ActivityType
+  subject       String
+  description   String?
+  status        ActivityStatus @default(PLANNED)
+  activityDate  DateTime
+  duration      Int?
+  location      String?
+  followUpDate  DateTime?
+  followUpNotes String?
+  customerId    String
+  contactId     String?
+  createdBy     String         @default("Administrator")
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  contact       Contact?       @relation(fields: [contactId], references: [id])
+  customer      Customer       @relation(fields: [customerId], references: [id], onDelete: Cascade)
+
+  @@map("activities")
+}
+
+model CustomerProject {
+  id             String        @id @default(cuid())
+  title          String
+  description    String?
+  type           String?
+  status         ProjectStatus @default(PLANNED)
+  estimatedValue Decimal?
+  actualValue    Decimal?
+  startDate      DateTime?
+  endDate        DateTime?
+  deadline       DateTime?
+  customerId     String
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+  customer       Customer      @relation(fields: [customerId], references: [id], onDelete: Cascade)
+
+  @@map("customer_projects")
+}
+
+model Document {
+  id           String           @id @default(cuid())
+  filename     String
+  originalName String
+  mimeType     String
+  size         Int
+  path         String
+  url          String
+  title        String?
+  description  String?
+  category     DocumentCategory
+  isPublic     Boolean          @default(false)
+  customerId   String
+  uploadedBy   String           @default("Administrator")
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
+  customer     Customer         @relation(fields: [customerId], references: [id], onDelete: Cascade)
+
+  @@map("documents")
+}
+
+model Analytics {
+  id       String   @id @default(cuid())
+  pageId   String
+  views    Int      @default(0)
+  visitors Int      @default(0)
+  date     DateTime @default(now())
+
+  @@unique([pageId, date])
+  @@map("analytics")
+}
+
+model CategoryCard {
+  id              String   @id @default(cuid())
+  title           String
+  subtitle        String?
+  linkUrl         String
+  ctaText         String   @default("Mehr erfahren")
+  backgroundImage String?
+  backgroundColor String?
+  icon            String?
+  pageSlug        String
+  category        String
+  isActive        Boolean  @default(true)
+  order           Int      @default(0)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@map("category_cards")
+}
+
+model TeamMember {
+  id           String   @id @default(cuid())
+  firstName    String
+  lastName     String
+  email        String   @unique
+  phone        String?
+  position     String
+  department   String?
+  location     String   @default("Werk Uznach")
+  profileImage String?
+  biography    String?
+  specialties  String?
+  linkedinUrl  String?
+  isActive     Boolean  @default(true)
+  displayOrder Int      @default(0)
+  isPublic     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@map("team_members")
+}
+
+enum Role {
+  ADMIN
+  EDITOR
+  VIEWER
+}
+
+enum PageType {
+  HOMEPAGE
+  SERVICE
+  CATEGORY
+  PAGE
+}
+
+enum PageStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+enum JobStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+enum ChapterLayout {
+  LEFT
+  RIGHT
+}
+
+// ========== FACHKOMPETENZEN MODELS ==========
+
+model FachKompetenzen {
+  id                    String                @id @default(cuid())
+  heroTitle             String                @default("Unsere Fachkompetenzen")
+  heroSubtitle          String                @default("75 Jahre Erfahrung und Expertise in der Werbetechnik")
+  heroDescription       String                @default("Von traditioneller Handwerkskunst bis hin zu modernster Technologie – unsere vielfältigen Fachkompetenzen ermöglichen es uns, massgeschneiderte Lösungen für jeden Anspruch zu realisieren. Entdecken Sie die Bereiche, in denen wir Ihr zuverlässiger Partner sind.")
+  heroBackgroundImage   String?
+  sectionTitle          String                @default("Unsere Kernkompetenzen")
+  sectionSubtitle       String                @default("Modernste Technik trifft auf bewährte Handwerkskunst – so entstehen Werbelösungen auf höchstem Niveau")
+  isActive              Boolean               @default(true)
+  createdAt             DateTime              @default(now())
+  updatedAt             DateTime              @updatedAt
+  cards                 FachKompetenzCard[]
+
+  @@map("fachkompetenzen")
+}
+
+model FachKompetenzCard {
+  id                String           @id @default(cuid())
+  title             String           // z.B. "Metallbauarbeiten"
+  description       String           // Beschreibungstext
+  backgroundImage   String?          // Hintergrundbild URL
+  iconClass         String           @default("fa-solid fa-cog") // Font Awesome Icon
+  features          Json             // Array von Feature-Tags
+  order             Int              @default(0)
+  isVisible         Boolean          @default(true)
+  fachKompetenzenId String
+  createdAt         DateTime         @default(now())
+  updatedAt         DateTime         @updatedAt
+  fachKompetenzen   FachKompetenzen  @relation(fields: [fachKompetenzenId], references: [id], onDelete: Cascade)
+
+  @@unique([fachKompetenzenId, order])
+  @@map("fachkompetenz_cards")
+}
+
+enum NewsStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+enum CustomerType {
+  BUSINESS
+  PRIVATE
+  GOVERNMENT
+  NGO
+}
+
+enum CustomerStatus {
+  ACTIVE
+  INACTIVE
+  PROSPECT
+  LOST
+  VIP
+}
+
+enum CustomerPriority {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
+
+enum ActivityType {
+  CALL
+  MEETING
+  EMAIL
+  VISIT
+  QUOTE
+  PROPOSAL
+  FOLLOW_UP
+  COMPLAINT
+  SUPPORT
+  OTHER
+}
+
+enum ActivityStatus {
+  PLANNED
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+  POSTPONED
+}
+
+enum ProjectStatus {
+  PLANNED
+  IN_PROGRESS
+  ON_HOLD
+  COMPLETED
+  CANCELLED
+}
+
+enum DocumentCategory {
+  CONTRACT
+  QUOTE
+  INVOICE
+  DRAWING
+  PHOTO
+  PRESENTATION
+  OTHER
+}
+
+// ========== ANALYTICS MODELS ==========
+
+model AnalyticsSession {
+  id                String      @id @default(cuid())
+  sessionId         String      @unique // Anonymized session identifier
+  ipHash            String?     // Hashed IP for anonymity
+  userAgent         String?
+  country           String?
+  city              String?
+  device            String?     // mobile, desktop, tablet
+  browser           String?     // chrome, firefox, safari, edge
+  os                String?     // windows, macos, linux, ios, android
+  referrer          String?     // where they came from
+  utmSource         String?     // marketing source
+  utmMedium         String?     // marketing medium
+  utmCampaign       String?     // marketing campaign
+  language          String?     // browser language
+  screenResolution  String?     // 1920x1080
+  isBot             Boolean     @default(false)
+  firstVisit        DateTime    @default(now())
+  lastActivity      DateTime    @default(now())
+  totalPageViews    Int         @default(0)
+  totalDuration     Int         @default(0) // in seconds
+  bounced           Boolean     @default(false) // left after 1 page < 30s
+  converted         Boolean     @default(false) // contact form, phone click etc
+  pageViews         PageView[]
+
+  @@map("analytics_sessions")
+  @@index([firstVisit])
+  @@index([referrer])
+  @@index([device])
+  @@index([country])
+}
+
+model PageView {
+  id              String            @id @default(cuid())
+  sessionId       String
+  session         AnalyticsSession  @relation(fields: [sessionId], references: [sessionId])
+  path            String            // /lichtwerbung/leuchtschriften.html
+  title           String?           // page title
+  loadTime        Int?              // page load time in ms
+  timeOnPage      Int?              // time spent on page in seconds
+  scrollDepth     Int?              // max scroll percentage
+  exitPage        Boolean           @default(false) // was this the last page in session
+  timestamp       DateTime          @default(now())
+  
+  @@map("page_views")
+  @@index([timestamp])
+  @@index([path])
+  @@index([sessionId])
+}
+
+model AnalyticsEvent {
+  id          String   @id @default(cuid())
+  sessionId   String
+  eventType   String   // 'contact_form', 'phone_click', 'email_click', 'download', 'external_link'
+  eventValue  String?  // form name, phone number, link URL etc
+  path        String   // page where event occurred
+  timestamp   DateTime @default(now())
+  
+  @@map("analytics_events")
+  @@index([timestamp])
+  @@index([eventType])
+  @@index([sessionId])
+}
+
+// Daily aggregated data for fast dashboard queries
+model AnalyticsDailyStats {
+  id                String   @id @default(cuid())
+  date              DateTime @unique @db.Date
+  totalPageViews    Int      @default(0)
+  uniqueVisitors    Int      @default(0)
+  totalSessions     Int      @default(0)
+  avgSessionDuration Float   @default(0)
+  bounceRate        Float    @default(0)
+  conversionRate    Float    @default(0)
+  mobileUsers       Int      @default(0)
+  desktopUsers      Int      @default(0)
+  tabletUsers       Int      @default(0)
+  topPages          Json?    // { "/path": count, ... }
+  topReferrers      Json?    // { "google.com": count, ... }
+  topCountries      Json?    // { "CH": count, "DE": count, ... }
+  
+  @@map("analytics_daily_stats")
+  @@index([date])
+}
+
+// ========== SETTINGS MODEL ==========
+
+model Setting {
+  id          String   @id @default(cuid())
+  category    String   // 'general', 'seo', 'social', 'email', 'security', 'backup'
+  key         String   
+  value       Json     // Flexible JSON for different data types
+  isPublic    Boolean  @default(false) // Public settings can be accessed without auth
+  description String?  // Optional description for admin UI
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@unique([category, key])
+  @@map("settings")
+  @@index([category])
+  @@index([isPublic])
+}
+
+model DienstleistungPage {
+  id          String   @id @default(cuid())
+  title       String
+  subtitle    String
+  description String   @db.Text
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Relationship to services
+  services    DienstleistungService[]
+  
+  @@map("dienstleistung_pages")
+}
+
+model DienstleistungService {
+  id              String   @id @default(cuid())
+  title           String
+  subtitle        String?
+  description     String   @db.Text
+  iconClass       String   // Font Awesome icon
+  iconColor       String   @default("#ffd401")
+  backgroundImage String?  // Image URL
+  features        String[] // Array of feature strings
+  ctaText         String   @default("Service anfragen")
+  order           Int      @default(0)
+  isVisible       Boolean  @default(true)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
+  // Relationship
+  pageId          String
+  page            DienstleistungPage @relation(fields: [pageId], references: [id], onDelete: Cascade)
+  
+  @@map("dienstleistung_services")
+  @@index([order])
+  @@index([pageId])
+  @@unique([pageId, order])
+}
+
+// ========== NEWSLETTER MODELS ==========
+
+model NewsletterTemplate {
+  id           String   @id @default(cuid())
+  name         String
+  content      String   @db.Text // JSON content with blocks
+  htmlContent  String   @db.Text // Generated HTML
+  previewImage String?  // Base64 preview image
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@map("newsletter_templates")
+}
+
+model NewsletterSubscriber {
+  id            String   @id @default(cuid())
+  email         String   @unique
+  firstName     String
+  lastName      String
+  isActive      Boolean  @default(true)
+  isConfirmed   Boolean  @default(false)
+  confirmToken  String?  @unique
+  segments      String[] // Array of segment names
+  source        String?  // z.B. "website", "cms", "import"
+  ipAddress     String?
+  userAgent     String?
+  subscribedAt  DateTime @default(now())
+  confirmedAt   DateTime?
+  unsubscribedAt DateTime?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@map("newsletter_subscribers")
+}
+
+model NewsletterCampaign {
+  id           String   @id @default(cuid())
+  name         String
+  subject      String
+  templateId   String
+  htmlContent  String   @db.Text
+  sentAt       DateTime?
+  scheduledAt  DateTime?
+  status       CampaignStatus @default(DRAFT)
+  recipients   Int      @default(0)
+  opens        Int      @default(0)
+  clicks       Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@map("newsletter_campaigns")
+}
+
+enum CampaignStatus {
+  DRAFT
+  SCHEDULED
+  SENDING
+  SENT
+  CANCELLED
+}
+
+// AGB (Terms & Conditions) Management
+model AgbSection {
+  id             String      @id @default(cuid())
+  title          String
+  content        String      @db.Text
+  boxType        AgbBoxType  @default(DEFAULT)
+  sortOrder      Int
+  isActive       Boolean     @default(true)
+  showInQuickNav Boolean     @default(false)
+  iconClass      String?     // Font Awesome icon class
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+
+  @@map("agb_sections")
+}
+
+enum AgbBoxType {
+  DEFAULT     // Standard weiß/grau
+  HIGHLIGHT   // Gelb
+  IMPORTANT   // Rot/Warning
+}
+
+// Datenschutz (Privacy Policy) Management
+model DatenschutzSection {
+  id             String              @id @default(cuid())
+  title          String
+  content        String              @db.Text
+  boxType        DatenschutzBoxType  @default(DEFAULT)
+  sortOrder      Int
+  isActive       Boolean             @default(true)
+  showInQuickNav Boolean             @default(false)
+  iconClass      String?             // Font Awesome icon class
+  isEditable     Boolean             @default(true) // Cookie-Abschnitt nicht editierbar
+  createdAt      DateTime            @default(now())
+  updatedAt      DateTime            @updatedAt
+
+  @@map("datenschutz_sections")
+}
+
+enum DatenschutzBoxType {
+  DEFAULT     // Standard weiß/grau
+  HIGHLIGHT   // Gelb
+  IMPORTANT   // Rot/Warning
+}
+
+

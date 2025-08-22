@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neon Murer - Admin Login</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #09226c;
+            --secondary-color: #6c757d;
+            --accent-color: #ffd401;
+            --light-bg: #f8f9fa;
+            --dark-bg: #1e2a38;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--dark-bg) 0%, var(--primary-color) 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'DM Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+        }
+        
+        .login-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            width: 100%;
+            max-width: 420px;
+            margin: 1rem;
+        }
+        
+        .login-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--dark-bg) 100%);
+            color: white;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .login-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="30" fill="none" stroke="rgba(255,212,1,0.1)" stroke-width="0.5"/><circle cx="50" cy="50" r="20" fill="none" stroke="rgba(255,212,1,0.05)" stroke-width="0.3"/></svg>');
+            animation: logoSpin 20s linear infinite;
+        }
+        
+        @keyframes logoSpin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .login-header .logo-container {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .login-header .logo {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            filter: drop-shadow(0 0 20px rgba(52, 152, 219, 0.5));
+            transition: all 0.3s ease;
+        }
+
+        .login-header .logo:hover {
+            transform: scale(1.05);
+            filter: drop-shadow(0 0 30px rgba(52, 152, 219, 0.8));
+        }
+
+        .login-header .logo svg {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .login-header h2 {
+            margin: 0;
+            font-weight: 600;
+            font-size: 1.5rem;
+        }
+        
+        .login-header p {
+            margin: 0.5rem 0 0 0;
+            opacity: 0.9;
+            font-size: 0.9rem;
+            color: var(--accent-color);
+        }
+        
+        .login-body {
+            padding: 2rem;
+        }
+        
+        .form-floating {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-control {
+            border-radius: 10px;
+            border: 2px solid #e9ecef;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(9, 34, 108, 0.25);
+        }
+        
+        .btn-login {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--dark-bg) 100%);
+            border: none;
+            border-radius: 12px;
+            padding: 0.875rem 2rem;
+            font-weight: 600;
+            width: 100%;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-login::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 212, 1, 0.3), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(9, 34, 108, 0.4);
+        }
+        
+        .btn-login:hover::before {
+            left: 100%;
+        }
+        
+        .remember-me {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-check-input:checked {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        
+        .forgot-password {
+            text-align: center;
+            margin-top: 1rem;
+        }
+        
+        .forgot-password a {
+            color: #667eea;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        
+        .forgot-password a:hover {
+            text-decoration: underline;
+        }
+        
+        .alert {
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+        }
+        
+                    @media (max-width: 480px) {
+            .login-container {
+                margin: 1rem;
+                max-width: calc(100% - 2rem);
+            }
+            
+            .login-body {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Loading Animation */
+        .btn-login.loading {
+            position: relative;
+            color: transparent;
+        }
+
+        .btn-login.loading::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            margin: -10px 0 0 -10px;
+            border: 2px solid var(--accent-color);
+            border-top: 2px solid transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-header">
+            <div class="logo-container">
+                <div class="logo">
+                    <svg width="60" height="60" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="blueGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#3498db"/>
+                                <stop offset="50%" style="stop-color:#5dade2"/>
+                                <stop offset="100%" style="stop-color:#85c1e9"/>
+                            </linearGradient>
+                            <linearGradient id="darkBg" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#1e2a38"/>
+                                <stop offset="100%" style="stop-color:#2c3e50"/>
+                            </linearGradient>
+                            <linearGradient id="cosmicGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#9b59b6"/>
+                                <stop offset="33%" style="stop-color:#3498db"/>
+                                <stop offset="66%" style="stop-color:#1abc9c"/>
+                                <stop offset="100%" style="stop-color:#f39c12"/>
+                                <animate attributeName="gradientTransform" values="rotate(0);rotate(360)" dur="20s" repeatCount="indefinite"/>
+                            </linearGradient>
+                            <radialGradient id="nebula" cx="50%" cy="50%" r="50%">
+                                <stop offset="0%" style="stop-color:#e74c3c;stop-opacity:0.8"/>
+                                <stop offset="30%" style="stop-color:#9b59b6;stop-opacity:0.6"/>
+                                <stop offset="70%" style="stop-color:#3498db;stop-opacity:0.3"/>
+                                <stop offset="100%" style="stop-color:#2c3e50;stop-opacity:0"/>
+                                <animate attributeName="r" values="30%;70%;30%" dur="15s" repeatCount="indefinite"/>
+                            </radialGradient>
+                            <filter id="starGlow">
+                                <feGaussianBlur stdDeviation="1" result="coloredBlur"/>
+                                <feMerge>
+                                    <feMergeNode in="coloredBlur"/>
+                                    <feMergeNode in="SourceGraphic"/>
+                                </feMerge>
+                            </filter>
+                        </defs>
+                        
+                        <!-- Deep Space Background -->
+                        <rect width="48" height="48" rx="12" fill="url(#darkBg)"/>
+                        
+                        <!-- Cosmic Nebula Background -->
+                        <circle cx="24" cy="24" r="20" fill="url(#nebula)">
+                            <animateTransform attributeName="transform" type="rotate" values="0 24 24;360 24 24" dur="25s" repeatCount="indefinite"/>
+                        </circle>
+                        
+                        <!-- Animated Border with cosmic colors -->
+                        <rect width="48" height="48" rx="12" fill="none" stroke="url(#cosmicGlow)" stroke-width="1.5">
+                            <animate attributeName="stroke-width" values="1;3;1" dur="4s" repeatCount="indefinite"/>
+                            <animate attributeName="opacity" values="0.7;1;0.7" dur="3s" repeatCount="indefinite"/>
+                        </rect>
+                        
+                        <!-- Galaxy Spiral Arms -->
+                        <g opacity="0.6">
+                            <path d="M24 4 Q36 12 32 24 Q28 36 24 44 Q12 36 16 24 Q20 12 24 4" stroke="url(#blueGlow)" stroke-width="0.8" fill="none">
+                                <animateTransform attributeName="transform" type="rotate" values="0 24 24;360 24 24" dur="12s" repeatCount="indefinite"/>
+                                <animate attributeName="opacity" values="0.3;0.8;0.3" dur="6s" repeatCount="indefinite"/>
+                            </path>
+                            <path d="M44 24 Q36 36 24 32 Q12 28 4 24 Q12 12 24 16 Q36 12 44 24" stroke="url(#cosmicGlow)" stroke-width="0.6" fill="none">
+                                <animateTransform attributeName="transform" type="rotate" values="360 24 24;0 24 24" dur="18s" repeatCount="indefinite"/>
+                                <animate attributeName="opacity" values="0.2;0.7;0.2" dur="8s" repeatCount="indefinite"/>
+                            </path>
+                        </g>
+                        
+                        <!-- Multiple Rotating Rings - Galaxy Structure -->
+                        <circle cx="24" cy="24" r="22" fill="none" stroke="url(#blueGlow)" stroke-width="0.3" opacity="0.4" stroke-dasharray="3,6">
+                            <animateTransform attributeName="transform" type="rotate" values="0 24 24;360 24 24" dur="10s" repeatCount="indefinite"/>
+                        </circle>
+                        
+                        <circle cx="24" cy="24" r="18" fill="none" stroke="url(#cosmicGlow)" stroke-width="0.4" opacity="0.5" stroke-dasharray="2,4">
+                            <animateTransform attributeName="transform" type="rotate" values="360 24 24;0 24 24" dur="8s" repeatCount="indefinite"/>
+                        </circle>
+                        
+                        <circle cx="24" cy="24" r="14" fill="none" stroke="url(#blueGlow)" stroke-width="0.5" opacity="0.6" stroke-dasharray="1,3">
+                            <animateTransform attributeName="transform" type="rotate" values="0 24 24;360 24 24" dur="6s" repeatCount="indefinite"/>
+                        </circle>
+                        
+                        <circle cx="24" cy="24" r="10" fill="none" stroke="url(#cosmicGlow)" stroke-width="0.6" opacity="0.7" stroke-dasharray="1,2">
+                            <animateTransform attributeName="transform" type="rotate" values="360 24 24;0 24 24" dur="4s" repeatCount="indefinite"/>
+                        </circle>
+                        
+                        <!-- Cosmic Star Field -->
+                        <g filter="url(#starGlow)">
+                            <!-- Twinkling Stars -->
+                            <circle cx="8" cy="8" r="0.5" fill="#ffffff">
+                                <animate attributeName="opacity" values="0.2;1;0.2" dur="3s" repeatCount="indefinite"/>
+                                <animate attributeName="r" values="0.3;0.7;0.3" dur="3s" repeatCount="indefinite"/>
+                            </circle>
+                            <circle cx="40" cy="10" r="0.4" fill="#f39c12">
+                                <animate attributeName="opacity" values="0.1;0.8;0.1" dur="2.5s" repeatCount="indefinite"/>
+                            </circle>
+                            <circle cx="42" cy="40" r="0.6" fill="#e74c3c">
+                                <animate attributeName="opacity" values="0.3;1;0.3" dur="4s" repeatCount="indefinite"/>
+                            </circle>
+                            <circle cx="6" cy="42" r="0.3" fill="#9b59b6">
+                                <animate attributeName="opacity" values="0.2;0.9;0.2" dur="3.5s" repeatCount="indefinite"/>
+                            </circle>
+                            <circle cx="35" cy="6" r="0.4" fill="#1abc9c">
+                                <animate attributeName="opacity" values="0.1;1;0.1" dur="2.8s" repeatCount="indefinite"/>
+                            </circle>
+                            <circle cx="10" cy="38" r="0.5" fill="#3498db">
+                                <animate attributeName="opacity" values="0.4;1;0.4" dur="3.2s" repeatCount="indefinite"/>
+                            </circle>
+                        </g>
+                        
+                        <!-- Cosmic Energy Orbs -->
+                        <g opacity="0.8">
+                            <!-- Orbiting energy orbs -->
+                            <g>
+                                <circle cx="34" cy="24" r="2" fill="url(#cosmicGlow)" opacity="0.6">
+                                    <animate attributeName="opacity" values="0.3;0.8;0.3" dur="2s" repeatCount="indefinite"/>
+                                    <animate attributeName="r" values="1.5;2.5;1.5" dur="2s" repeatCount="indefinite"/>
+                                </circle>
+                                <animateTransform attributeName="transform" type="rotate" values="0 24 24;360 24 24" dur="5s" repeatCount="indefinite"/>
+                            </g>
+                            
+                            <g>
+                                <circle cx="14" cy="24" r="1.8" fill="url(#blueGlow)" opacity="0.7">
+                                    <animate attributeName="opacity" values="0.4;1;0.4" dur="1.8s" repeatCount="indefinite"/>
+                                    <animate attributeName="r" values="1.3;2.3;1.3" dur="1.8s" repeatCount="indefinite"/>
+                                </circle>
+                                <animateTransform attributeName="transform" type="rotate" values="180 24 24;540 24 24" dur="7s" repeatCount="indefinite"/>
+                            </g>
+                            
+                            <g>
+                                <circle cx="24" cy="34" r="1.6" fill="url(#nebula)" opacity="0.5">
+                                    <animate attributeName="opacity" values="0.2;0.7;0.2" dur="2.2s" repeatCount="indefinite"/>
+                                    <animate attributeName="r" values="1.2;2.0;1.2" dur="2.2s" repeatCount="indefinite"/>
+                                </circle>
+                                <animateTransform attributeName="transform" type="rotate" values="90 24 24;450 24 24" dur="6s" repeatCount="indefinite"/>
+                            </g>
+                            
+                            <g>
+                                <circle cx="24" cy="14" r="1.4" fill="#e74c3c" opacity="0.6">
+                                    <animate attributeName="opacity" values="0.3;0.9;0.3" dur="1.6s" repeatCount="indefinite"/>
+                                    <animate attributeName="r" values="1.0;1.8;1.0" dur="1.6s" repeatCount="indefinite"/>
+                                </circle>
+                                <animateTransform attributeName="transform" type="rotate" values="270 24 24;-90 24 24" dur="8s" repeatCount="indefinite"/>
+                            </g>
+                        </g>
+                    </svg>
+                </div>
+                <h2>Neon Murer</h2>
+                <p>Admin Dashboard</p>
+            </div>
+        </div>
+        
+        <div class="login-body">
+            <div id="loginAlert" class="alert alert-danger d-none" role="alert">
+                <i class="fas fa-exclamation-circle me-2"></i>
+                <span id="alertMessage"></span>
+            </div>
+            
+            <form id="loginForm">
+                <div class="form-floating">
+                    <input type="email" class="form-control" id="email" placeholder="name@example.com" required>
+                    <label for="email">
+                        <i class="fas fa-envelope me-2"></i>
+                        E-Mail Adresse
+                    </label>
+                </div>
+                
+                <div class="form-floating">
+                    <input type="password" class="form-control" id="password" placeholder="Passwort" required>
+                    <label for="password">
+                        <i class="fas fa-lock me-2"></i>
+                        Passwort
+                    </label>
+                </div>
+                
+                <div class="remember-me">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="rememberMe">
+                        <label class="form-check-label" for="rememberMe">
+                            Angemeldet bleiben
+                        </label>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn btn-primary btn-login">
+                    <i class="fas fa-sign-in-alt me-2"></i>
+                    Anmelden
+                </button>
+                
+                <div class="forgot-password">
+                    <a href="#" onclick="showForgotPassword()">
+                        Passwort vergessen?
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // API Base URL
+        const API_BASE = window.location.origin.includes('localhost') ? 'http://localhost:3001' : '';
+        
+        // Auth Token Management
+        const AuthManager = {
+            setTokens(tokens) {
+                localStorage.setItem('accessToken', tokens.accessToken);
+                localStorage.setItem('refreshToken', tokens.refreshToken);
+                localStorage.setItem('tokenExpiry', Date.now() + (7 * 24 * 60 * 60 * 1000)); // 7 days
+            },
+            
+            getAccessToken() {
+                return localStorage.getItem('accessToken');
+            },
+            
+            getRefreshToken() {
+                return localStorage.getItem('refreshToken');
+            },
+            
+            isTokenValid() {
+                const token = this.getAccessToken();
+                const expiry = localStorage.getItem('tokenExpiry');
+                return token && expiry && Date.now() < parseInt(expiry);
+            },
+            
+            clearTokens() {
+                localStorage.removeItem('accessToken');
+                localStorage.removeItem('refreshToken');
+                localStorage.removeItem('tokenExpiry');
+                localStorage.removeItem('adminLoggedIn');
+                localStorage.removeItem('adminEmail');
+                localStorage.removeItem('adminUser');
+            },
+            
+            async refreshAccessToken() {
+                const refreshToken = this.getRefreshToken();
+                if (!refreshToken) return false;
+                
+                try {
+                    const response = await fetch(`${API_BASE}/api/auth/refresh`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ refreshToken })
+                    });
+                    
+                    const data = await response.json();
+                    
+                    if (data.success && data.tokens) {
+                        this.setTokens(data.tokens);
+                        return true;
+                    }
+                } catch (error) {
+                    console.error('Token refresh failed:', error);
+                }
+                
+                this.clearTokens();
+                return false;
+            }
+        };
+        
+        // Login Form Handler
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+            const submitBtn = document.querySelector('button[type="submit"]');
+            
+            // Validation
+            if (!email || !password) {
+                showAlert('Bitte füllen Sie alle Felder aus.', 'warning');
+                return;
+            }
+            
+            // Show loading state
+            submitBtn.disabled = true;
+            submitBtn.classList.add('loading');
+            submitBtn.innerHTML = 'Anmeldung...';
+            
+            try {
+                const response = await fetch(`${API_BASE}/api/auth/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email, password })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    // Store tokens and user data
+                    AuthManager.setTokens(data.tokens);
+                    localStorage.setItem('adminLoggedIn', 'true');
+                    localStorage.setItem('adminEmail', data.user.email);
+                    localStorage.setItem('adminUser', JSON.stringify(data.user));
+                    
+                    showAlert('Erfolgreich angemeldet! Weiterleitung...', 'success');
+                    
+                    // Redirect to dashboard
+                    setTimeout(() => {
+                        window.location.href = 'index.html';
+                    }, 1000);
+                    
+                } else {
+                    // Handle API errors
+                    let errorMessage = 'Anmeldung fehlgeschlagen.';
+                    
+                    if (data.error) {
+                        errorMessage = data.error;
+                    } else if (data.details && data.details.length > 0) {
+                        errorMessage = data.details.map(detail => detail.msg).join(', ');
+                    }
+                    
+                    showAlert(errorMessage, 'danger');
+                }
+                
+            } catch (error) {
+                console.error('Login error:', error);
+                showAlert('Verbindungsfehler. Bitte versuchen Sie es später erneut.', 'danger');
+            } finally {
+                // Reset button state
+                submitBtn.disabled = false;
+                submitBtn.classList.remove('loading');
+                submitBtn.innerHTML = '<i class="fas fa-sign-in-alt me-2"></i>Anmelden';
+            }
+        });
+        
+        function showAlert(message, type) {
+            const alert = document.getElementById('loginAlert');
+            const alertMessage = document.getElementById('alertMessage');
+            
+            alert.className = `alert alert-${type}`;
+            alertMessage.textContent = message;
+            alert.classList.remove('d-none');
+            
+            // Auto-hide success messages
+            if (type === 'success') {
+                setTimeout(() => {
+                    alert.classList.add('d-none');
+                }, 3000);
+            }
+        }
+        
+        function showForgotPassword() {
+            alert('Bitte kontaktieren Sie den Systemadministrator zur Passwort-Zurücksetzung.\n\nE-Mail: admin@neonmurer.ch\nTelefon: +41 55 225 50 25');
+        }
+        
+        // Check if already logged in
+        if (AuthManager.isTokenValid() && localStorage.getItem('adminLoggedIn') === 'true') {
+            window.location.href = 'index.html';
+        }
+        
+        // Demo credentials info
+        setTimeout(() => {
+            showAlert('Demo: admin@neonmurer.ch / admin123', 'info');
+        }, 1000);
+    </script>
+</body>
+</html> 

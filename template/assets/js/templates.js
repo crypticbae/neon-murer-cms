@@ -4,6 +4,30 @@
  * Version: 1.0.0
  */
 
+// ========== NEON DEBUG SYSTEM ==========
+// Global Debug Flag - nur bei explizitem ?debug=true Parameter aktiviert
+window.NEON_DEBUG = window.location.search.includes('debug=true');
+
+// Debug-freundliche Console-Funktion
+window.neonLog = function(...args) {
+    if (window.NEON_DEBUG) {
+        console.log(...args);
+    }
+};
+
+// Weitere Debug-Funktionen für Konsistenz
+window.neonWarn = function(...args) {
+    if (window.NEON_DEBUG) {
+        console.warn(...args);
+    }
+};
+
+window.neonError = function(...args) {
+    if (window.NEON_DEBUG) {
+        console.error(...args);
+    }
+};
+
 window.EmbeddedTemplates = {
     header: `<!-- ========== HEADER TEMPLATE ========== -->
 <!-- Diese Datei wird automatisch in alle Seiten geladen -->
@@ -82,7 +106,7 @@ window.EmbeddedTemplates = {
             </ul>
           </li>
           <li class="nav-item d-none d-lg-block ms-3 nav-item-search">
-            <a class="nav-link pe-0" href="#" onclick="openSearchModal(); return false;" role="button" aria-expanded="false">
+            <a class="nav-link pe-0" href="#" onclick="modernNeonSearch.openSearch(); return false;" role="button" aria-expanded="false">
               <i class="fas fa-magnifying-glass"></i>
             </a>
           </li>
@@ -126,10 +150,14 @@ window.EmbeddedTemplates = {
 
 <script>
 // Dropdown-Verhalten wird jetzt komplett von simple-template-loader.js verwaltet
-console.log('📝 Dropdown-Script in templates.js deaktiviert - wird von Template Loader übernommen');
+neonLog('📝 Dropdown-Script in templates.js deaktiviert - wird von Template Loader übernommen');
 </script>`,
 
-    footer: `<!-- ========== CLEAN FOOTER TEMPLATE ========== -->
+    footer: `<!-- ========== PRIVACY MANAGER ========== -->
+<!-- Privacy Manager wird automatisch geladen - Ad-Blocker-sicher -->
+<script src="template/assets/js/neon-privacy-manager.js"></script>
+
+<!-- ========== CLEAN FOOTER TEMPLATE ========== -->
 <style>
   .clean-footer {
     background: #112357;
@@ -174,12 +202,21 @@ console.log('📝 Dropdown-Script in templates.js deaktiviert - wird von Templat
     color: #ffd401;
   }
   
-  .contact-item i {
-    width: 20px;
-    margin-right: 12px;
-    color: #ffd401;
-    font-size: 1rem;
+  .clean-footer .contact-item i.fas {
+    width: 20px !important;
+    margin-right: 12px !important;
+    color: #ffd401 !important;
+    font-size: 1rem !important;
+    font-family: "Font Awesome 6 Free" !important;
+    font-weight: 900 !important;
+    font-style: normal !important;
+    display: inline-block !important;
+    text-rendering: auto !important;
+    line-height: 1 !important;
+    vertical-align: baseline !important;
   }
+  
+    /* Entfernt - nicht mehr nötig */
   
   .quick-links {
     list-style: none;
@@ -209,9 +246,43 @@ console.log('📝 Dropdown-Script in templates.js deaktiviert - wird von Templat
     color: #ffd401;
   }
   
-  .quick-links a i {
-    color: #ffd401;
-    font-size: 1rem;
+  .clean-footer .quick-links a i.fas {
+    color: #ffd401 !important;
+    font-size: 1rem !important;
+    font-family: "Font Awesome 6 Free" !important;
+    font-weight: 900 !important;
+    font-style: normal !important;
+    display: inline-block !important;
+    text-rendering: auto !important;
+    line-height: 1 !important;
+  }
+  
+  /* Newsletter Button - Dezent aber erkennbar */
+  .quick-links .newsletter-trigger {
+    color: rgba(255, 255, 255, 0.8) !important;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: flex !important;
+    align-items: center;
+    padding: 4px 0;
+    border-radius: 4px;
+  }
+  
+  .quick-links .newsletter-trigger:hover {
+    color: #ffd401 !important;
+    background-color: rgba(255, 212, 1, 0.1);
+    padding-left: 8px;
+    transform: translateX(4px);
+  }
+  
+  .quick-links .newsletter-trigger i.fas {
+    color: #ffd401 !important;
+    margin-right: 8px;
+    transition: transform 0.3s ease;
+  }
+  
+  .quick-links .newsletter-trigger:hover i.fas {
+    transform: scale(1.1);
   }
   
 
@@ -284,12 +355,12 @@ console.log('📝 Dropdown-Script in templates.js deaktiviert - wird von Templat
                <span><span itemprop="postalCode">8730</span> <span itemprop="addressLocality">Uznach</span></span>
              </div>
            </a>
-           <a href="tel:+41552255025" class="contact-item" itemprop="telephone">
-             <i class="fas fa-phone"></i>
+                      <a href="tel:+41552255025" class="contact-item" itemprop="telephone">
+             <i class="fas fa-phone me-2"></i>
              +41 55 225 50 25
            </a>
-           <a href="#" onclick="mailtoLink('neon','neonmurer.ch');return false;" class="contact-item">
-             <i class="fas fa-envelope"></i>
+           <a href="#" onclick="mailtoLink('neon','neonmurer.ch');return false;" class="contact-item"> 
+             <i class="fas fa-envelope me-2"></i>
              neon@neonmurer.ch
            </a>
          </div>
@@ -307,11 +378,11 @@ console.log('📝 Dropdown-Script in templates.js deaktiviert - wird von Templat
              </div>
            </a>
            <a href="tel:+41552126367" class="contact-item" itemprop="telephone">
-             <i class="fas fa-phone"></i>
+             <i class="fas fa-phone me-2"></i>
              +41 55 212 63 67
            </a>
            <a href="#" onclick="mailtoLink('neon','neonmurer.ch');return false;" class="contact-item">
-             <i class="fas fa-envelope"></i>
+             <i class="fas fa-envelope me-2"></i>
              neon@neonmurer.ch
            </a>
          </div>
@@ -325,6 +396,7 @@ console.log('📝 Dropdown-Script in templates.js deaktiviert - wird von Templat
            <li><a href="beschriftungen/signaletik.html"><i class="fas fa-pen-nib me-2"></i>Beschriftungen</a></li>
            <li><a href="digital-signage.html"><i class="fas fa-tv me-2"></i>Digital Signage</a></li>
            <li><a href="neon-murer/stellenangebote.html"><i class="fas fa-briefcase me-2"></i>Karriere</a></li>
+           <li><a href="newsletter-anmeldung.html"><i class="fas fa-envelope me-2"></i>Newsletter</a></li>
          </ul>
        </div>
     </div>
@@ -332,9 +404,12 @@ console.log('📝 Dropdown-Script in templates.js deaktiviert - wird von Templat
     <!-- Footer Bottom -->
     <div class="footer-bottom">
       <div class="footer-links">
-        <a href="impressum.html">Impressum</a>
-        <a href="datenschutz.html">Datenschutz</a>
-        <a href="geschaeftsbedingungen.html">AGB</a>
+                        <a href="impressum.html">Impressum</a>
+                <a href="datenschutz.html">Datenschutz</a>
+                <a href="geschaeftsbedingungen.html">AGB</a>
+                <a href="javascript:void(0)" onclick="resetCookieConsent(); return false;" style="color: #ffd401;" title="Cookie-Banner öffnen">
+                  <i class="fas fa-cookie-bite"></i>
+                </a>
       </div>
       <p class="copyright">
         © 2025 Neon Murer AG. Alle Rechte vorbehalten.
@@ -342,7 +417,10 @@ console.log('📝 Dropdown-Script in templates.js deaktiviert - wird von Templat
     </div>
     
   </div>
-</footer>`
+</footer>
+
+
+</script>`
 }; 
 
 // ========== MOBILE NAVBAR ENHANCEMENTS ==========
@@ -360,7 +438,7 @@ function initMobileNavbar() {
   const body = document.body;
   
   if (!navbarToggler || !navbarCollapse) {
-    console.log('Navbar elements not found, retrying...');
+    neonLog('Navbar elements not found, retrying...');
     setTimeout(initMobileNavbar, 200);
     return;
   }
@@ -397,7 +475,7 @@ function initMobileNavbar() {
 
   // Enhanced Dropdown Behavior on Mobile - DEAKTIVIERT
   // Diese Funktionalität wurde in simple-template-loader.js verschoben
-  console.log('📝 Mobile Dropdown-Verhalten in templates.js deaktiviert - wird von Template Loader übernommen');
+  neonLog('📝 Mobile Dropdown-Verhalten in templates.js deaktiviert - wird von Template Loader übernommen');
 
   // Smooth scrolling for anchor links
   const navLinks = document.querySelectorAll('.nav-link[href^="#"]');
@@ -495,7 +573,17 @@ function initMobileNavbar() {
     });
   }
 
-  console.log('✅ Mobile navbar initialized successfully!');
+  neonLog('✅ Mobile navbar initialized successfully!');
+}
+
+// Initialize Analytics Tracker for all pages
+function initAnalyticsTracker() {
+  if (typeof NeonAnalyticsTracker !== 'undefined') {
+    window.neonAnalyticsTracker = new NeonAnalyticsTracker();
+    console.error('📊 Analytics Tracker initialized on', window.location.pathname);
+  } else {
+    console.error('❌ NeonAnalyticsTracker not found - script may not be loaded');
+  }
 }
 
 // Auto-close mobile menu on page navigation

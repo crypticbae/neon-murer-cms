@@ -1,0 +1,226 @@
+/* Modern Media Modal Styles */
+
+/* Modal Container */
+#mediaModal .modal-dialog {
+    max-width: 1200px;
+    margin: 1rem auto;
+}
+
+#mediaModal .modal-content {
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+#mediaModal .modal-header {
+    border-bottom: none;
+    padding: 1.5rem 1.5rem 0;
+}
+
+#mediaModal .modal-title {
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+/* Modern Media Preview */
+.media-preview-modern {
+    width: 100%;
+    min-height: 400px;
+    max-height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+}
+
+.media-preview-modern img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.media-preview-modern img:hover {
+    transform: scale(1.02);
+}
+
+.media-preview-modern .empty-state {
+    text-align: center;
+    color: #6c757d;
+    padding: 2rem;
+}
+
+.media-preview-modern .empty-state i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+}
+
+/* Cards */
+#mediaModal .card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+#mediaModal .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+#mediaModal .card-header {
+    border-radius: 12px 12px 0 0;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-bottom: 1px solid #e9ecef;
+    padding: 1rem 1.25rem;
+}
+
+#mediaModal .card-header h6 {
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+#mediaModal .card-body {
+    padding: 1.25rem;
+}
+
+/* Form Elements */
+#mediaModal .form-control {
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+#mediaModal .form-control:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.1);
+}
+
+#mediaModal .form-control[readonly] {
+    background-color: #f8f9fa;
+    color: #6c757d;
+}
+
+#mediaModal .form-label {
+    font-weight: 500;
+    color: #495057;
+    margin-bottom: 0.5rem;
+    font-size: 0.85rem;
+}
+
+/* Buttons */
+#mediaModal .btn {
+    border-radius: 8px;
+    font-weight: 500;
+    padding: 0.6rem 1.2rem;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+#mediaModal .btn:hover {
+    transform: translateY(-1px);
+}
+
+#mediaModal .btn-outline-primary:hover {
+    transform: none;
+}
+
+/* Info Grid */
+.info-grid-modern {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.info-item-modern {
+    display: flex;
+    flex-direction: column;
+}
+
+.info-item-modern .label {
+    font-size: 0.75rem;
+    color: #6c757d;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.25rem;
+}
+
+.info-item-modern .value {
+    font-weight: 600;
+    color: #2c3e50;
+    font-size: 0.9rem;
+}
+
+/* Responsive Design */
+@media (max-width: 991.98px) {
+    #mediaModal .modal-dialog {
+        max-width: 95vw;
+        margin: 0.5rem auto;
+    }
+    
+    #mediaModal .modal-body {
+        padding: 1.5rem;
+    }
+    
+    #mediaModal .col-lg-7,
+    #mediaModal .col-lg-5 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    
+    .media-preview-modern {
+        min-height: 300px;
+        max-height: 400px;
+        margin-bottom: 1rem;
+    }
+}
+
+@media (max-width: 575.98px) {
+    #mediaModal .modal-header,
+    #mediaModal .modal-body,
+    #mediaModal .modal-footer {
+        padding: 1rem;
+    }
+    
+    #mediaModal .card-body {
+        padding: 1rem;
+    }
+    
+    #mediaModal .modal-footer .d-flex {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+    
+    #mediaModal .modal-footer .ms-auto {
+        margin-left: 0 !important;
+        width: 100%;
+    }
+    
+    .info-grid-modern {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Animation */
+#mediaModal.show .modal-content {
+    animation: modalSlideIn 0.3s ease-out;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

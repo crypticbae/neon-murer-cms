@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="de" id="www-neonmurer-ch">
 <head>
+  <!-- CDN Preloads für bessere Performance -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="preconnect" href="https://code.jquery.com" crossorigin>
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
 
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta charset="utf-8">
@@ -10,30 +16,303 @@
   <link rel="stylesheet" type="text/css" href="template/inc_css/include.css">
   
   <!-- Font Awesome CDN für Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" crossorigin="anonymous">
   
-<link rel="icon" type="image/png" href="https://www.neonmurer.ch/favicon/favicon-96x96.png" sizes="96x96" />
-  <link rel="icon" type="image/svg+xml" href="https://www.neonmurer.ch/favicon/favicon.svg" />
-  <link rel="shortcut icon" href="https://www.neonmurer.ch/favicon/favicon.ico" />
-  <link rel="apple-touch-icon" sizes="180x180" href="https://www.neonmurer.ch/favicon/apple-touch-icon.png" />
+<link rel="icon" type="image/png" href="favicon/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="favicon/favicon.svg" />
+  <link rel="shortcut icon" href="favicon/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png" />
   <meta name="apple-mobile-web-app-title" content="Neon Murer" />
-  <link rel="manifest" href="https://www.neonmurer.ch/favicon/site.webmanifest" />
+  <link rel="manifest" href="favicon/site.webmanifest" />
   
-  <!--[if lt IE 9]><script src="https://www.neonmurer.ch/template/lib/jquery/jquery-1.12.4.min.js"></script><![endif]-->
-  <!--[if gte IE 9]><!--><script src="https://www.neonmurer.ch/template/lib/jquery/jquery-3.7.1.min.js"></script><!--<![endif]-->
+  <!--[if lt IE 9]><script src="https://code.jquery.com/jquery-3.7.1.min.js" crossorigin="anonymous"></script><![endif]-->
+  <!--[if gte IE 9]><!--><script src="https://code.jquery.com/jquery-3.7.1.min.js" crossorigin="anonymous"></script><!--<![endif]-->
   
   <meta name="description" content="Datenschutzerklärung der Neon Murer AG. Informationen zum Umgang mit Ihren persönlichen Daten, Cookies, Analytics und Ihren Rechten gemäss schweizerischem Datenschutzgesetz.">
   <meta name="keywords" content="Datenschutz, Datenschutzerklärung, Privatsphäre, Cookies, Google Analytics, Bewerbungen, Newsletter, revDSG">
   <link rel="canonical" href="https://www.neonmurer.ch/datenschutz.html">
-  <script src="https://www.neonmurer.ch/template/assets/js/jquery.easing.min.js"></script>
-  <script src="https://www.neonmurer.ch/template/assets/js/bootstrap.bundle.min.js"></script>
-  <script src="https://www.neonmurer.ch/template/assets/js/slick.min.js"></script>
-  <script src="template/assets/js/search.js"></script>
-  <script src="https://www.neonmurer.ch/template/assets/js/custom.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+  <script src="template/assets/js/slick.min.js"></script>
+  
+  <script src="template/assets/js/custom.js"></script>
 
   <!-- ========== TEMPLATE SYSTEM ========== -->
   <script src="template/assets/js/templates.js"></script>
-  <script src="template/assets/js/simple-template-loader.js"></script>
+  <script src="template/assets/js/simple-template-loader.js"></script>  
+  <!-- Usage Statistics -->
+  <script src="template/assets/js/neon-usage-stats.js"></script>
+  
+  <!-- Privacy Manager -->
+  <script src="template/assets/js/neon-privacy-manager.js"></script>
+  
+  <style>
+    /* Cookie-spezifische Styles für Datenschutz-Seite */
+    .cookie-management-actions {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    
+    .cookie-settings-btn, .cookie-reset-btn {
+      background: linear-gradient(45deg, #112357, #1a2f63);
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 25px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+    }
+    
+    .cookie-settings-btn:hover, .cookie-reset-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(17, 35, 87, 0.3);
+      color: white;
+    }
+    
+    .cookie-reset-btn {
+      background: linear-gradient(45deg, #6c757d, #868e96);
+    }
+    
+    .cookie-reset-btn:hover {
+      box-shadow: 0 6px 20px rgba(108, 117, 125, 0.3);
+    }
+    
+    .cookie-category-card {
+      margin-bottom: 24px;
+      border-left: 4px solid #112357;
+    }
+    
+    .cookie-category-title {
+      color: #112357;
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .cookie-category-desc {
+      color: #666;
+      margin-bottom: 16px;
+      font-style: italic;
+    }
+    
+    .cookie-table {
+      overflow-x: auto;
+      margin: 16px 0;
+    }
+    
+    .cookie-table table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+    
+    .cookie-table th {
+      background: linear-gradient(45deg, #112357, #1a2f63);
+      color: white;
+      padding: 12px 8px;
+      text-align: left;
+      font-weight: 600;
+      border: 1px solid #ddd;
+    }
+    
+    .cookie-table td {
+      padding: 10px 8px;
+      border: 1px solid #ddd;
+      vertical-align: top;
+    }
+    
+    .cookie-table tr:nth-child(even) {
+      background-color: #f8f9fa;
+    }
+    
+    .cookie-table tr:hover {
+      background-color: #e3f2fd;
+    }
+    
+    .cookie-table code {
+      background: #e9ecef;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.85em;
+      color: #112357;
+      font-weight: 600;
+    }
+    
+    .privacy-notes {
+      background: linear-gradient(135deg, rgba(17, 35, 87, 0.05), rgba(17, 35, 87, 0.1));
+      border-radius: 8px;
+      padding: 16px;
+      margin-top: 16px;
+    }
+    
+    .privacy-notes p {
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #112357;
+    }
+    
+    .privacy-notes ul {
+      margin: 0;
+      padding-left: 20px;
+    }
+    
+    .privacy-notes li {
+      margin-bottom: 4px;
+      color: #555;
+    }
+    
+    .no-cookies-message {
+      text-align: center;
+      padding: 24px;
+      background: linear-gradient(135deg, rgba(255, 212, 1, 0.1), rgba(255, 212, 1, 0.2));
+      border-radius: 8px;
+      color: #856404;
+    }
+    
+    .no-cookies-message i {
+      font-size: 2rem;
+      margin-bottom: 12px;
+      display: block;
+    }
+    
+    .browser-cookie-info {
+      background: #f8f9fa;
+      border-radius: 8px;
+      padding: 16px;
+      margin-top: 16px;
+    }
+    
+    .browser-cookie-info h4 {
+      color: #112357;
+      margin-bottom: 12px;
+      font-size: 1rem;
+    }
+    
+    .browser-cookie-info ul {
+      margin: 0;
+      padding-left: 20px;
+    }
+    
+    .browser-cookie-info li {
+      margin-bottom: 6px;
+      font-size: 0.9rem;
+    }
+    
+    /* Kompakte Cookie-Kategorien */
+    .cookie-category-compact {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    
+    .category-row {
+      padding: 16px;
+      background: linear-gradient(135deg, rgba(17, 35, 87, 0.05), rgba(17, 35, 87, 0.1));
+      border-radius: 8px;
+      border-left: 4px solid #112357;
+    }
+    
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    
+    .category-header i {
+      font-size: 1.2rem;
+    }
+    
+    .category-header strong {
+      color: #112357;
+      font-size: 1rem;
+    }
+    
+    .category-desc {
+      font-size: 0.9rem;
+      color: #666;
+      margin-bottom: 12px;
+      line-height: 1.4;
+    }
+    
+    .category-cookies {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+    
+    .cookie-tag {
+      background: #e9ecef;
+      color: #112357;
+      padding: 4px 8px;
+      border-radius: 12px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    
+    .cookie-tag.inactive {
+      background: #f8f9fa;
+      color: #6c757d;
+    }
+    
+    /* Button für Cookie-Banner öffnen */
+    .cookie-reset-btn {
+      background: linear-gradient(45deg, #6c757d, #868e96);
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+    }
+    
+    .cookie-reset-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(108, 117, 125, 0.3);
+      color: white;
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      .cookie-reset-btn {
+        font-size: 0.8rem;
+        padding: 6px 12px;
+      }
+      
+      .category-cookies {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      
+      /* Header bei kleinen Bildschirmen vertikal */
+      @media (max-width: 480px) {
+        .info-card > div:first-child {
+          flex-direction: column !important;
+          gap: 12px;
+          align-items: flex-start !important;
+        }
+      }
+    }
+  </style>
   
   <!-- Page Specific CSS -->
   <link rel="stylesheet" href="template/assets/css/datenschutz.css">
@@ -73,192 +352,17 @@
         <!-- Main Content Column -->
         <div class="col-lg-9">
           
-          <!-- 1. Verantwortlich für die Datenverarbeitung -->
-          <div class="content-section">
-            <h2 class="section-title">
-              <i class="fa-solid fa-building me-3"></i>
-              <span class="section-number">1.</span>
-              Verantwortlich für die Datenverarbeitung
-            </h2>
-            <div class="info-card">
-              <div class="responsible-info">
-                <h3>Neon Murer AG</h3>
-                <p>
-                  Tägernaustrasse 21<br>
-                  CH-8640 Rapperswil-Jona<br>
-                  Tel: +41 (0)55 225 50 25<br>
-                  E-Mail: <a href="mailto:neon@neonmurer.ch">neon@neonmurer.ch</a>
-                </p>
-              </div>
+          <!-- Loading Indicator -->
+          <div id="datenschutz-loading" class="text-center py-5">
+            <div class="spinner-border text-primary" role="status">
+              <span class="visually-hidden">Datenschutzerklärung wird geladen...</span>
             </div>
+            <p class="mt-3 text-muted">Datenschutzerklärung wird geladen...</p>
           </div>
-
-          <!-- 2. Welche Daten erfassen wir? -->
-          <div class="content-section">
-            <h2 class="section-title">
-              <i class="fa-solid fa-database me-3"></i>
-              <span class="section-number">2.</span>
-              Welche Daten erfassen wir?
-            </h2>
-            <div class="info-card">
-              <ul class="data-list">
-                <li><strong>Kontaktdaten bei Anfragen:</strong> Name, E-Mail, Telefonnummer</li>
-                <li><strong>Kundendaten im Rahmen von Aufträgen:</strong> Anschrift, Zahlungsdaten etc.</li>
-                <li><strong>Bewerbungsunterlagen:</strong> Lebenslauf, Zeugnisse etc.</li>
-                <li><strong>Technische Daten bei Website-Nutzung:</strong> IP-Adresse, Browserdaten, Besuchszeitpunkt, besuchte Seiten</li>
-              </ul>
-            </div>
-          </div>
-
-          <!-- 3. Zweck der Datennutzung -->
-          <div class="content-section">
-            <h2 class="section-title">
-              <i class="fa-solid fa-bullseye me-3"></i>
-              <span class="section-number">3.</span>
-              Zweck der Datennutzung
-            </h2>
-            <div class="info-card">
-              <ul class="purpose-list">
-                <li>Bearbeitung von Anfragen und Aufträgen</li>
-                <li>Kommunikation mit Kunden und Interessenten</li>
-                <li>Verarbeitung und Entscheidungsfindung im Bewerbungsprozess</li>
-                <li>Optimierung und Betrieb der Website (inkl. Reichweitenmessung)</li>
-              </ul>
-            </div>
-          </div>
-
-          <!-- 4. Bewerbungsunterlagen -->
-          <div class="content-section">
-            <h2 class="section-title">
-              <i class="fa-solid fa-file-text me-3"></i>
-              <span class="section-number">4.</span>
-              Bewerbungsunterlagen
-            </h2>
-            <div class="info-card highlight-card">
-              <ul class="application-list">
-                <li>Bewerbungen werden <strong>vertraulich behandelt</strong></li>
-                <li><strong>Aufbewahrung:</strong> maximal 6 Monate nach Abschluss des Bewerbungsverfahrens</li>
-                <li>Danach werden die Daten <strong>vollständig gelöscht</strong></li>
-                <li>Bei erfolgter Anstellung werden Bewerbungsdaten in das Personaldossier übernommen</li>
-                <li>Auf Wunsch löschen wir Bewerbungsunterlagen <strong>jederzeit</strong> vor Ablauf dieser Frist</li>
-              </ul>
-            </div>
-          </div>
-
-          <!-- 5. Cookies -->
-          <div class="content-section">
-            <h2 class="section-title">
-              <i class="fa-solid fa-cookie me-3"></i>
-              <span class="section-number">5.</span>
-              Cookies
-            </h2>
-            <div class="info-card">
-              <p>Unsere Website verwendet Cookies:</p>
-              <ul class="cookie-list">
-                <li><strong>Technisch notwendige Cookies:</strong> für den Betrieb der Website</li>
-                <li><strong>Optionale Cookies (Statistik & Marketing):</strong> nur mit Ihrer Zustimmung (Cookie-Banner)</li>
-                <li>Sie können Cookies in Ihrem Browser jederzeit deaktivieren oder löschen</li>
-              </ul>
-            </div>
-          </div>
-
-          <!-- 6. Google Analytics -->
-          <div class="content-section">
-            <h2 class="section-title">
-              <i class="fa-solid fa-chart-line me-3"></i>
-              <span class="section-number">6.</span>
-              Google Analytics
-            </h2>
-            <div class="info-card">
-              <p>Wir verwenden Google Analytics 4 zur anonymisierten Analyse der Website-Nutzung:</p>
-              <ul class="analytics-list">
-                <li>Ihre IP-Adresse wird standardmässig <strong>gekürzt</strong> (Anonymisierung)</li>
-                <li>Es werden <strong>keine personenbezogenen Profile</strong> erstellt</li>
-                <li>Die gewonnenen Daten helfen uns, die Website und unser Angebot zu verbessern</li>
-                <li>Falls Sie nicht möchten, dass Ihre Daten über Google Analytics erfasst werden, können Sie im Cookie-Banner ablehnen</li>
-                <li>Google LLC speichert diese Daten in den USA. Google ist verpflichtet, angemessene Datenschutzstandards zu gewährleisten</li>
-              </ul>
-            </div>
-          </div>
-
-          <!-- 7. Weitergabe der Daten -->
-          <div class="content-section">
-            <h2 class="section-title">
-              <i class="fa-solid fa-share-alt me-3"></i>
-              <span class="section-number">7.</span>
-              Weitergabe der Daten
-            </h2>
-            <div class="info-card important-card">
-              <p><strong>Keine Weitergabe</strong> Ihrer Daten an Dritte ohne Ihre ausdrückliche Zustimmung</p>
-              <p><strong>Ausnahme:</strong> gesetzliche Verpflichtungen oder technische Dienstleister (z. B. Hosting)</p>
-            </div>
-          </div>
-
-          <!-- 8. Aufbewahrung und Löschung -->
-          <div class="content-section">
-            <h2 class="section-title">
-              <i class="fa-solid fa-clock me-3"></i>
-              <span class="section-number">8.</span>
-              Aufbewahrung und Löschung
-            </h2>
-            <div class="info-card">
-              <ul class="retention-list">
-                <li><strong>Geschäftsdaten:</strong> gemäss gesetzlichen Aufbewahrungspflichten (z. B. Buchhaltung)</li>
-                <li><strong>Kontaktdaten:</strong> solange sie für die Kommunikation oder Auftragserfüllung benötigt werden</li>
-                <li><strong>Bewerbungsunterlagen:</strong> max. 6 Monate</li>
-              </ul>
-              <p>Danach werden die Daten gelöscht oder anonymisiert.</p>
-            </div>
-          </div>
-
-          <!-- 9. Ihre Rechte -->
-          <div class="content-section">
-            <h2 class="section-title">
-              <i class="fa-solid fa-user-shield me-3"></i>
-              <span class="section-number">9.</span>
-              Ihre Rechte
-            </h2>
-            <div class="info-card highlight-card">
-              <p>Sie haben das Recht auf:</p>
-              <ul class="rights-list">
-                <li><strong>Auskunft</strong> über gespeicherte Daten</li>
-                <li><strong>Berichtigung</strong> unvollständiger oder falscher Daten</li>
-                <li><strong>Löschung</strong> Ihrer Daten (sofern keine gesetzliche Pflicht zur Aufbewahrung besteht)</li>
-                <li><strong>Widerspruch</strong> gegen die Bearbeitung</li>
-              </ul>
-              <p><strong>Anfragen bitte per E-Mail an:</strong> <a href="mailto:neon@neonmurer.ch">neon@neonmurer.ch</a></p>
-            </div>
-          </div>
-
-          <!-- 10. Datensicherheit -->
-          <div class="content-section">
-            <h2 class="section-title">
-              <i class="fa-solid fa-shield-halved me-3"></i>
-              <span class="section-number">10.</span>
-              Datensicherheit
-            </h2>
-            <div class="info-card">
-              <p>Wir schützen Ihre Daten durch angemessene technische und organisatorische Massnahmen. 
-              Unsere Server befinden sich ausschliesslich in der <strong>Schweiz oder der EU</strong>.</p>
-            </div>
-          </div>
-
-          <!-- 11. Urheberrechte -->
-          <div class="content-section">
-            <h2 class="section-title">
-              <i class="fa-solid fa-copyright me-3"></i>
-              <span class="section-number">11.</span>
-              Urheberrechte
-            </h2>
-            <div class="info-card important-card">
-              <p>Die Urheber- und alle weiteren Rechte an Inhalten, Bildern, Fotos, Videos, Texten sowie anderen Dateien 
-              auf dieser Website gehören ausschliesslich der <strong>Neon Murer AG</strong> oder den ausdrücklich genannten Rechtsinhabern.</p>
-              
-              <p><strong>Jegliche Nutzung, Vervielfältigung, Bearbeitung oder Verbreitung</strong> dieser Inhalte – auch auszugsweise – 
-              ist ohne vorherige schriftliche Zustimmung der jeweiligen Rechteinhaber untersagt.</p>
-              
-              <p class="warning-text">⚠️ Zuwiderhandlungen werden rechtlich verfolgt.</p>
-            </div>
+          
+          <!-- Dynamic Datenschutz Content Container -->
+          <div id="datenschutz-content" style="display: none;">
+            <!-- Datenschutz sections will be loaded here dynamically -->
           </div>
 
         </div>
@@ -273,31 +377,8 @@
                 <i class="fa-solid fa-list me-2"></i>
                 Schnellnavigation
               </h3>
-              <div class="nav-links">
-                <a href="#" class="nav-link" onclick="scrollToSection(1)">
-                  <span class="nav-number">1.</span>
-                  Verantwortliche
-                </a>
-                <a href="#" class="nav-link" onclick="scrollToSection(2)">
-                  <span class="nav-number">2.</span>
-                  Datenerfassung
-                </a>
-                <a href="#" class="nav-link" onclick="scrollToSection(4)">
-                  <span class="nav-number">4.</span>
-                  Bewerbungen
-                </a>
-                <a href="#" class="nav-link" onclick="scrollToSection(5)">
-                  <span class="nav-number">5.</span>
-                  Cookies
-                </a>
-                <a href="#" class="nav-link" onclick="scrollToSection(6)">
-                  <span class="nav-number">6.</span>
-                  Google Analytics
-                </a>
-                <a href="#" class="nav-link" onclick="scrollToSection(9)">
-                  <span class="nav-number">9.</span>
-                  Ihre Rechte
-                </a>
+              <div id="datenschutz-quick-nav-links" class="nav-links">
+                <!-- Navigation links will be loaded dynamically -->
               </div>
             </div>
 
@@ -394,5 +475,8 @@ document.addEventListener('scroll', function() {
 });
 </script>
 
+  <script src="template/assets/js/lazy-loading.js"></script>
+  <!-- Datenschutz Dynamic Loader -->
+  <script src="template/assets/js/datenschutz-loader.js"></script>
 </body>
 </html> 

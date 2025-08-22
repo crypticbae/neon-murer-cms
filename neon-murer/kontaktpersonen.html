@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="de" id="www-neonmurer-ch">
 <head>
+  <!-- CDN Preloads für bessere Performance -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="preconnect" href="https://code.jquery.com" crossorigin>
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
 
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta charset="utf-8">
@@ -8,18 +14,23 @@
   <base href="">
   <title>Kontaktpersonen – Ihr Team bei Neon Murer</title>
   <!-- CSS-Dateien direkt verlinkt für file:// Kompatibilität -->
-  <link rel="stylesheet" type="text/css" href="../template/assets/css/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" href="../template/assets/css/all.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+  <!-- all.min.css entfernt - Font Awesome wird bereits über CDN geladen -->
   <link rel="stylesheet" type="text/css" href="../template/assets/css/animate.css">
   <link rel="stylesheet" type="text/css" href="../template/assets/css/style.css">
   <link rel="stylesheet" type="text/css" href="../template/assets/css/page-styles.css">
   
   <!-- Font Awesome CDN für Icons (Fallback) -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" crossorigin="anonymous">
   
     <!-- ========== TEMPLATE SYSTEM ========== -->
   <script src="../template/assets/js/templates.js"></script>
-  <script src="../template/assets/js/simple-template-loader.js"></script>
+  <script src="../template/assets/js/simple-template-loader.js"></script>  
+  <!-- Usage Statistics -->
+  <script src="../template/assets/js/neon-usage-stats.js"></script>
+  
+  <!-- Privacy Manager -->
+  <script src="../template/assets/js/neon-privacy-manager.js"></script>
 
   <!-- Page Specific CSS -->
   <link rel="stylesheet" href="../template/assets/css/kontaktpersonen.css">
@@ -30,14 +41,14 @@
 <link rel="apple-touch-icon" sizes="180x180" href="/../favicon/apple-touch-icon.png" />
 <meta name="apple-mobile-web-app-title" content="Neon Murer" />
 <link rel="manifest" href="/../favicon/site.webmanifest" />
-  <!--[if lt IE 9]><script src="../template/lib/jquery/jquery-1.12.4.min.js"></script><![endif]-->
-  <!--[if gte IE 9]><!--><script src="../template/lib/jquery/jquery-3.7.1.min.js"></script><!--<![endif]-->
+  <!--[if lt IE 9]><script src="https://code.jquery.com/jquery-3.7.1.min.js" crossorigin="anonymous"></script><![endif]-->
+  <!--[if gte IE 9]><!--><script src="https://code.jquery.com/jquery-3.7.1.min.js" crossorigin="anonymous"></script><!--<![endif]-->
   <meta name="description" content="Finden Sie die richtigen Ansprechpartner bei Neon Murer. Unser kompetentes Team steht Ihnen für Beratung und Unterstützung rund um Lichtwerbung und Werbetechnik zur Seite.">
   <link rel="canonical" href="https://www.neonmurer.ch/neon-murer/kontaktpersonen.html">
-  <script src="../template/assets/js/jquery.easing.min.js"></script>
-  <script src="../template/assets/js/bootstrap.bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
   <script src="../template/assets/js/slick.min.js"></script>
-  <script src="../template/assets/js/search.js"></script>
+  
     <script src="../template/assets/js/custom.js"></script>
   <!-- Dropdown JavaScript wurde in Template Loader verschoben -->
   <meta name="keywords" content="Kontaktpersonen, Ansprechpartner, Neon Murer Team, Kundenberatung, Lichtwerbung, Werbetechnik, Kontakt, Support, Beratung, Ansprechpartner Neon Murer">
@@ -48,8 +59,6 @@
   <meta name="generator" content="cmsGO! 2.4.8">
   <script src="../template/inc_js/frontend.js"></script>
   <!--[if lt IE 9]>
-  <script src="../template/lib/html5shiv/html5shiv.min.js"></script>
-  <script src="../template/lib/respond/respond.min.js"></script>
   <![endif]-->
   <!-- Cookie-Consent entfernt -->
 
@@ -112,254 +121,15 @@
 <!-- Moderne Team-Mitglieder Grid -->
 <section id="team" class="py-5" style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 50%, #f8f9fa 100%);">
   <div class="container-fluid maxwidth">
-    <div class="team-grid">
-    
-      <!-- Benno Murer -->
-      <div class="team-member">
-        <div class="member-card">
-          <div class="member-image-wrapper">
-            <img src="../content/images/person1.jpg" alt="Benno Murer" class="member-image">
-            <div class="member-overlay">
-              <div class="member-social">
-                <a href="mailto:benno.murer@neonmurer.ch" class="social-btn">
-                  <i class="fa-solid fa-envelope"></i>
-                </a>
-                <a href="tel:055 225 50 25" class="social-btn">
-                  <i class="fa-solid fa-phone"></i>
-                </a>
-              </div>
-            </div>
-
-          </div>
-          
-          <div class="member-content">
-            <h3 class="member-name">Benno Murer</h3>
-            <p class="member-position">VR-Vorsitz, Geschäftsführung, Beratung und Verkauf</p>
-            
-            <div class="member-location">
-              <i class="fa-solid fa-map-marker-alt"></i>
-              <span>Werk Uznach</span>
-            </div>
-            
-            <div class="member-actions">
-              <a href="mailto:benno.murer@neonmurer.ch" class="action-btn primary">
-                <i class="fa-solid fa-envelope me-2"></i>
-                E-Mail
-              </a>
-              <a href="tel:055 225 50 25" class="action-btn secondary">
-                <i class="fa-solid fa-phone me-2"></i>
-                Anrufen
-              </a>
-            </div>
+    <div class="team-grid" id="team-grid">
+      <!-- Team-Mitglieder werden dynamisch geladen -->
+      <div class="col-12">
+        <div class="text-center py-4">
+          <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Team-Mitglieder werden geladen...</span>
           </div>
         </div>
       </div>
-      
-      <!-- Andreas Zybach -->
-      <div class="team-member">
-        <div class="member-card">
-          <div class="member-image-wrapper">
-            <img src="../content/images/person2.jpg" alt="Andreas Zybach" class="member-image">
-            <div class="member-overlay">
-              <div class="member-social">
-                <a href="mailto:andreas.zybach@neonmurer.ch" class="social-btn">
-                  <i class="fa-solid fa-envelope"></i>
-                </a>
-                <a href="tel:055 225 50 25" class="social-btn">
-                  <i class="fa-solid fa-phone"></i>
-                </a>
-              </div>
-            </div>
-
-          </div>
-          
-          <div class="member-content">
-            <h3 class="member-name">Andreas Zybach</h3>
-            <p class="member-position">Produktionsleiter, Beratung und Verkauf</p>
-            
-            <div class="member-location">
-              <i class="fa-solid fa-map-marker-alt"></i>
-              <span>Werk Uznach</span>
-            </div>
-            
-            <div class="member-actions">
-              <a href="mailto:andreas.zybach@neonmurer.ch" class="action-btn primary">
-                <i class="fa-solid fa-envelope me-2"></i>
-                E-Mail
-              </a>
-              <a href="tel:055 225 50 25" class="action-btn secondary">
-                <i class="fa-solid fa-phone me-2"></i>
-                Anrufen
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Roman Janser -->
-      <div class="team-member">
-        <div class="member-card">
-          <div class="member-image-wrapper">
-            <img src="../content/images/person3.jpg" alt="Roman Janser" class="member-image">
-            <div class="member-overlay">
-              <div class="member-social">
-                <a href="mailto:roman.janser@neonmurer.ch" class="social-btn">
-                  <i class="fa-solid fa-envelope"></i>
-                </a>
-                <a href="tel:055 225 50 18" class="social-btn">
-                  <i class="fa-solid fa-phone"></i>
-                </a>
-              </div>
-            </div>
- 
-          </div>
-          
-          <div class="member-content">
-            <h3 class="member-name">Roman Janser</h3>
-            <p class="member-position">Beratung und Verkauf</p>
-            
-            <div class="member-location">
-              <i class="fa-solid fa-map-marker-alt"></i>
-              <span>Werk Uznach</span>
-            </div>
-            
-            <div class="member-actions">
-              <a href="mailto:roman.janser@neonmurer.ch" class="action-btn primary">
-                <i class="fa-solid fa-envelope me-2"></i>
-                E-Mail
-              </a>
-              <a href="tel:055 225 50 18" class="action-btn secondary">
-                <i class="fa-solid fa-phone me-2"></i>
-                Anrufen
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Sandy Jucker -->
-      <div class="team-member">
-        <div class="member-card">
-          <div class="member-image-wrapper">
-            <img src="../content/images/person4_new.jpg" alt="Sandy Jucker" class="member-image">
-            <div class="member-overlay">
-              <div class="member-social">
-                <a href="mailto:sandy.jucker@neonmurer.ch" class="social-btn">
-                  <i class="fa-solid fa-envelope"></i>
-                </a>
-                <a href="tel:055 225 50 12" class="social-btn">
-                  <i class="fa-solid fa-phone"></i>
-                </a>
-              </div>
-            </div>
- 
-          </div>
-          
-          <div class="member-content">
-            <h3 class="member-name">Sandy Jucker</h3>
-            <p class="member-position">Beratung und Verkauf</p>
-            
-            <div class="member-location">
-              <i class="fa-solid fa-map-marker-alt"></i>
-              <span>Werk Uznach</span>
-            </div>
-            
-            <div class="member-actions">
-              <a href="mailto:sandy.jucker@neonmurer.ch" class="action-btn primary">
-                <i class="fa-solid fa-envelope me-2"></i>
-                E-Mail
-              </a>
-              <a href="tel:055 225 50 12" class="action-btn secondary">
-                <i class="fa-solid fa-phone me-2"></i>
-                Anrufen
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Beatrice Murer -->
-      <div class="team-member">
-        <div class="member-card">
-          <div class="member-image-wrapper">
-            <img src="../content/images/person5.jpg" alt="Beatrice Murer" class="member-image">
-            <div class="member-overlay">
-              <div class="member-social">
-                <a href="mailto:bea.murer@neonmurer.ch" class="social-btn">
-                  <i class="fa-solid fa-envelope"></i>
-                </a>
-                <a href="tel:055 212 63 67" class="social-btn">
-                  <i class="fa-solid fa-phone"></i>
-                </a>
-              </div>
-            </div>
-
-          </div>
-          
-          <div class="member-content">
-            <h3 class="member-name">Beatrice Murer</h3>
-            <p class="member-position">Geschäftsführung, technische Leitung und Produktionsleitung Schriftenmalerei</p>
-            
-            <div class="member-location">
-              <i class="fa-solid fa-map-marker-alt"></i>
-              <span>Werk Jona</span>
-            </div>
-            
-            <div class="member-actions">
-              <a href="mailto:bea.murer@neonmurer.ch" class="action-btn primary">
-                <i class="fa-solid fa-envelope me-2"></i>
-                E-Mail
-              </a>
-              <a href="tel:055 212 63 67" class="action-btn secondary">
-                <i class="fa-solid fa-phone me-2"></i>
-                Anrufen
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Jan Vetter -->
-      <div class="team-member">
-        <div class="member-card">
-          <div class="member-image-wrapper">
-            <img src="../content/images/person6.jpg" alt="Jan Vetter" class="member-image">
-            <div class="member-overlay">
-              <div class="member-social">
-                <a href="mailto:jan.vetter@neonmurer.ch" class="social-btn">
-                  <i class="fa-solid fa-envelope"></i>
-                </a>
-                <a href="tel:055 225 50 27" class="social-btn">
-                  <i class="fa-solid fa-phone"></i>
-                </a>
-              </div>
-            </div>
-
-          </div>
-          
-          <div class="member-content">
-            <h3 class="member-name">Jan Vetter</h3>
-            <p class="member-position">Graphik, Werbung, technische Beratung und Produktentwicklung</p>
-            
-            <div class="member-location">
-              <i class="fa-solid fa-map-marker-alt"></i>
-              <span>Werk Uznach</span>
-            </div>
-            
-            <div class="member-actions">
-              <a href="mailto:jan.vetter@neonmurer.ch" class="action-btn primary">
-                <i class="fa-solid fa-envelope me-2"></i>
-                E-Mail
-              </a>
-              <a href="tel:055 225 50 27" class="action-btn secondary">
-                <i class="fa-solid fa-phone me-2"></i>
-                Anrufen
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-      
     </div>
   </div>
 </section>
@@ -376,5 +146,131 @@
   </div>
 </div>
 
+<script>
+// Load team members dynamically
+async function loadTeamMembers() {
+  try {
+    const response = await fetch('/api/team-members/public');
+    
+    if (!response.ok) {
+      throw new Error('Failed to load team members');
+    }
+    
+    const data = await response.json();
+    const teamMembers = data.teamMembers;
+    
+    renderTeamMembers(teamMembers);
+    
+  } catch (error) {
+    console.error('Error loading team members:', error);
+    showErrorMessage();
+  }
+}
+
+function renderTeamMembers(teamMembers) {
+  const container = document.getElementById('team-grid');
+  
+  if (!teamMembers || teamMembers.length === 0) {
+    container.innerHTML = `
+      <div class="col-12">
+        <div class="text-center py-5">
+          <h3>Keine Team-Mitglieder verfügbar</h3>
+          <p class="text-muted">Derzeit sind keine Team-Mitglieder verfügbar.</p>
+        </div>
+      </div>
+    `;
+    return;
+  }
+  
+  container.innerHTML = teamMembers.map(member => {
+    const fullName = `${member.firstName} ${member.lastName}`;
+    const profileImage = member.profileImage ? `../${member.profileImage}` : '../content/images/placeholder-person.jpg';
+    const ctaText = member.phone && member.phone.startsWith('055') ? 'Anrufen' : 'Kontakt';
+    
+    return `
+      <div class="team-member">
+        <div class="member-card">
+          <div class="member-image-wrapper">
+            <img src="${profileImage}" alt="${escapeHtml(fullName)}" class="member-image">
+            <div class="member-overlay">
+              <div class="member-social">
+                <a href="mailto:${escapeHtml(member.email)}" class="social-btn">
+                  <i class="fa-solid fa-envelope"></i>
+                </a>
+                ${member.phone ? `
+                  <a href="tel:${escapeHtml(member.phone)}" class="social-btn">
+                    <i class="fa-solid fa-phone"></i>
+                  </a>
+                ` : ''}
+                ${member.linkedinUrl ? `
+                  <a href="${escapeHtml(member.linkedinUrl)}" target="_blank" class="social-btn">
+                    <i class="fa-brands fa-linkedin"></i>
+                  </a>
+                ` : ''}
+              </div>
+            </div>
+          </div>
+          
+          <div class="member-content">
+            <h3 class="member-name">${escapeHtml(fullName)}</h3>
+            <p class="member-position">${escapeHtml(member.position)}</p>
+            
+            ${member.biography ? `
+              <p class="member-biography">${escapeHtml(member.biography)}</p>
+            ` : ''}
+            
+            <div class="member-location">
+              <i class="fa-solid fa-map-marker-alt"></i>
+              <span>${escapeHtml(member.location)}</span>
+            </div>
+            
+            <div class="member-actions">
+              <a href="mailto:${escapeHtml(member.email)}" class="action-btn primary">
+                <i class="fa-solid fa-envelope me-2"></i>
+                E-Mail
+              </a>
+              ${member.phone ? `
+                <a href="tel:${escapeHtml(member.phone)}" class="action-btn secondary">
+                  <i class="fa-solid fa-phone me-2"></i>
+                  ${ctaText}
+                </a>
+              ` : ''}
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function showErrorMessage() {
+  const container = document.getElementById('team-grid');
+  container.innerHTML = `
+    <div class="col-12">
+      <div class="text-center py-5">
+        <h3>Fehler beim Laden</h3>
+        <p class="text-muted">Die Team-Mitglieder konnten nicht geladen werden.</p>
+        <button class="btn btn-primary" onclick="loadTeamMembers()">
+          <i class="fas fa-refresh"></i> Erneut versuchen
+        </button>
+      </div>
+    </div>
+  `;
+}
+
+function escapeHtml(text) {
+  if (!text) return '';
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}
+
+// Load team members when page loads
+document.addEventListener('DOMContentLoaded', function() {
+  loadTeamMembers();
+});
+</script>
+
+  <script src="../template/assets/js/lazy-loading.js"></script>
 </body>
 </html>

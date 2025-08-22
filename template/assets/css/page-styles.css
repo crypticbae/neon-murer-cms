@@ -1029,10 +1029,12 @@ footer a:hover::after {
   transform: translateY(-50%) scale(1.1);
 }
 
+.lightbox-nav.lightbox-prev,
 .lightbox-nav.prev {
   left: 20px;
 }
 
+.lightbox-nav.lightbox-next,
 .lightbox-nav.next {
   right: 20px;
 }
@@ -1066,10 +1068,12 @@ footer a:hover::after {
     font-size: 1.2rem;
   }
   
+  .lightbox-nav.lightbox-prev,
   .lightbox-nav.prev {
     left: 10px;
   }
   
+  .lightbox-nav.lightbox-next,
   .lightbox-nav.next {
     right: 10px;
   }
@@ -1839,19 +1843,35 @@ footer a:hover::after {
 }
 
 /* ====== INDEX PAGE STYLES - AIDA SECTION ====== */
+
+/* FIX: Footer Icons für Startseite */
+footer a i,
+footer .contact-item i,
+footer .contact-item i.fas,
+footer .contact-item i.fa-phone,
+footer .contact-item i.fa-envelope,
+footer a[href^="tel:"] i,
+footer a[href^="mailto:"] i,
+footer a[onclick*="mailtoLink"] i {
+  color: #ffd401 !important;
+  font-family: "Font Awesome 6 Free" !important;
+  font-weight: 900 !important;
+  display: inline-block !important;
+  font-style: normal !important;
+}
 /* AIDA Marketing Section */
 .aida-section {
   background: linear-gradient(135deg, 
-    rgba(255, 255, 255, 0.95) 0%, 
-    rgba(248, 249, 250, 0.98) 50%, 
-    rgba(255, 255, 255, 0.95) 100%);
+    rgba(17, 35, 87, 0.85) 0%, 
+    rgba(26, 48, 102, 0.9) 50%, 
+    rgba(17, 35, 87, 0.9) 100%);
   backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 32px;
+  border: 1px solid rgba(255, 212, 1, 0.2);
+  border-radius: 24px;
   padding: 3rem 2.5rem;
   box-shadow: 
-    0 20px 60px rgba(17, 35, 87, 0.08),
-    0 8px 25px rgba(0, 0, 0, 0.04);
+    0 20px 60px rgba(17, 35, 87, 0.3),
+    0 8px 25px rgba(0, 0, 0, 0.15);
   position: relative;
   overflow: hidden;
   animation: slideInUp 0.8s ease-out;
@@ -1864,14 +1884,14 @@ footer a:hover::after {
 
 .attention-content {
   background: linear-gradient(135deg, #112357 0%, #1a3066 100%);
-  color: white;
-  padding: 8px 20px;
+  color: rgba(255, 255, 255, 0.95);
+  padding: 8px 18px;
   border-radius: 50px;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
-  box-shadow: 0 4px 15px rgba(17, 35, 87, 0.2);
+  letter-spacing: 0.3px;
+  box-shadow: 0 6px 20px rgba(17, 35, 87, 0.3);
   position: relative;
   overflow: hidden;
 }
@@ -1880,11 +1900,11 @@ footer a:hover::after {
   content: '';
   position: absolute;
   top: 0;
-  left: -100%;
-  width: 100%;
+  left: -30%;
+  width: 30%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  transition: left 0.6s ease;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.8s ease;
 }
 
 .attention-content:hover::before {
@@ -1892,21 +1912,49 @@ footer a:hover::after {
 }
 
 .attention-title {
-  font-size: clamp(2.5rem, 5vw, 3.5rem);
-  font-weight: 800;
-  line-height: 1.1;
+  font-size: clamp(2.2rem, 4.5vw, 3.2rem);
+  font-weight: 700;
+  line-height: 1.2;
+  color: rgba(255, 255, 255, 0.95);
 }
 
 .title-highlight {
   color: #ffd401;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.title-glow {
+  color: #ffd401;
+  text-shadow: 
+    0 0 5px rgba(255, 212, 1, 0.8),
+    0 0 10px rgba(255, 212, 1, 0.6),
+    0 0 15px rgba(255, 212, 1, 0.4),
+    0 0 20px rgba(255, 212, 1, 0.3);
+  animation: glow-pulse 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow-pulse {
+  from {
+    text-shadow: 
+      0 0 5px rgba(255, 212, 1, 0.8),
+      0 0 10px rgba(255, 212, 1, 0.6),
+      0 0 15px rgba(255, 212, 1, 0.4),
+      0 0 20px rgba(255, 212, 1, 0.3);
+  }
+  to {
+    text-shadow: 
+      0 0 8px rgba(255, 212, 1, 1),
+      0 0 15px rgba(255, 212, 1, 0.8),
+      0 0 20px rgba(255, 212, 1, 0.6),
+      0 0 25px rgba(255, 212, 1, 0.4);
+  }
 }
 
 .attention-subtitle {
-  font-size: 1.2rem;
-  color: #6c757d;
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.85);
   font-weight: 400;
-  font-style: italic;
+  line-height: 1.6;
 }
 
 /* INTEREST Styles */
@@ -1944,7 +1992,7 @@ footer a:hover::after {
 }
 
 .interest-title {
-  color: #112357;
+  color: rgba(255, 255, 255, 0.95);
   font-size: 1.4rem;
   font-weight: 700;
   margin: 0;
@@ -1966,48 +2014,48 @@ footer a:hover::after {
 
 .desire-item {
   text-align: center;
-  padding: 1.5rem 1rem;
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.6);
-  border: 1px solid rgba(255, 212, 1, 0.2);
+  padding: 1.4rem 1rem;
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(17, 35, 87, 0.6) 0%, rgba(26, 48, 102, 0.65) 100%);
+  border: 1px solid rgba(255, 212, 1, 0.25);
   transition: all 0.3s ease;
 }
 
 .desire-item:hover {
-  transform: translateY(-8px) scale(1.02);
-  background: rgba(255, 255, 255, 0.9);
+  transform: translateY(-5px) scale(1.01);
+  background: linear-gradient(135deg, rgba(17, 35, 87, 0.75) 0%, rgba(26, 48, 102, 0.8) 100%);
   border-color: rgba(255, 212, 1, 0.5);
-  box-shadow: 0 15px 35px rgba(255, 212, 1, 0.15);
+  box-shadow: 0 15px 35px rgba(255, 212, 1, 0.25);
 }
 
 .desire-icon-wrapper {
-  background: linear-gradient(135deg, #ffd401 0%, #ffb700 100%);
+  background: linear-gradient(135deg, #ffd401 0%, #e6b800 100%);
   color: #112357;
-  width: 60px;
-  height: 60px;
+  width: 55px;
+  height: 55px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0 auto 1rem;
-  font-size: 1.5rem;
-  box-shadow: 0 6px 20px rgba(255, 212, 1, 0.3);
+  font-size: 1.4rem;
+  box-shadow: 0 4px 15px rgba(255, 212, 1, 0.2);
   transition: all 0.3s ease;
 }
 
 .desire-item:hover .desire-icon-wrapper {
-  transform: scale(1.1) rotate(10deg);
+  transform: scale(1.05) rotate(5deg);
 }
 
 .desire-item h4 {
-  color: #112357;
+  color: rgba(255, 255, 255, 0.95);
   font-size: 1.1rem;
   font-weight: 700;
   margin-bottom: 0.5rem;
 }
 
 .desire-item p {
-  color: #6c757d;
+  color: rgba(255, 255, 255, 0.8);
   font-size: 0.95rem;
   line-height: 1.5;
   margin: 0;
@@ -2439,20 +2487,20 @@ footer a:hover::after {
 }
 
 .service-showcase {
-  background: rgba(255, 255, 255, 0.8);
-  border: 1px solid rgba(17, 35, 87, 0.1);
-  border-radius: 20px;
-  padding: 2rem;
+  background: linear-gradient(135deg, rgba(17, 35, 87, 0.7) 0%, rgba(26, 48, 102, 0.75) 100%);
+  border: 1px solid rgba(255, 212, 1, 0.2);
+  border-radius: 16px;
+  padding: 1.8rem;
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
 }
 
 .service-showcase:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 40px rgba(17, 35, 87, 0.1);
-  background: rgba(255, 255, 255, 0.95);
-  border-color: rgba(255, 212, 1, 0.3);
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(17, 35, 87, 0.4);
+  background: linear-gradient(135deg, rgba(17, 35, 87, 0.8) 0%, rgba(26, 48, 102, 0.85) 100%);
+  border-color: rgba(255, 212, 1, 0.4);
 }
 
 .service-icon-header {
@@ -2463,16 +2511,16 @@ footer a:hover::after {
 }
 
 .service-icon-header i {
-  background: linear-gradient(135deg, #ffd401 0%, #ffb700 100%);
+  background: linear-gradient(135deg, #ffd401 0%, #e6b800 100%);
   color: #112357;
-  width: 50px;
-  height: 50px;
+  width: 45px;
+  height: 45px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.3rem;
-  box-shadow: 0 4px 15px rgba(255, 212, 1, 0.3);
+  font-size: 1.2rem;
+  box-shadow: 0 3px 12px rgba(255, 212, 1, 0.2);
   transition: all 0.3s ease;
 }
 
@@ -2481,7 +2529,7 @@ footer a:hover::after {
 }
 
 .service-icon-header h4 {
-  color: #112357;
+  color: rgba(255, 255, 255, 0.95);
   font-size: 1.3rem;
   font-weight: 700;
   margin: 0;
@@ -2507,7 +2555,7 @@ footer a:hover::after {
 }
 
 .service-feature span {
-  color: #495057;
+  color: rgba(255, 255, 255, 0.8);
   font-size: 0.95rem;
   font-weight: 500;
 }
@@ -2518,15 +2566,15 @@ footer a:hover::after {
 }
 
 .visualization-card {
-  background: rgba(17, 35, 87, 0.05);
-  border: 1px solid rgba(17, 35, 87, 0.1);
-  border-radius: 20px;
-  padding: 2rem;
+  background: linear-gradient(135deg, rgba(17, 35, 87, 0.75) 0%, rgba(26, 48, 102, 0.8) 100%);
+  border: 1px solid rgba(255, 212, 1, 0.25);
+  border-radius: 16px;
+  padding: 1.8rem;
   text-align: center;
 }
 
 .visualization-card h4 {
-  color: #112357;
+  color: rgba(255, 255, 255, 0.95);
   font-size: 1.4rem;
   font-weight: 700;
   margin-bottom: 1.5rem;
@@ -2539,21 +2587,21 @@ footer a:hover::after {
 }
 
 .vision-point {
-  background: rgba(255, 255, 255, 0.7);
-  border: 1px solid rgba(255, 212, 1, 0.2);
-  border-radius: 15px;
-  padding: 1.5rem;
-  font-size: 1rem;
-  color: #495057;
+  background: linear-gradient(135deg, rgba(17, 35, 87, 0.65) 0%, rgba(26, 48, 102, 0.7) 100%);
+  border: 1px solid rgba(255, 212, 1, 0.25);
+  border-radius: 12px;
+  padding: 1.3rem;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.9);
   line-height: 1.6;
   transition: all 0.3s ease;
 }
 
 .vision-point:hover {
-  transform: translateY(-5px);
-  background: rgba(255, 255, 255, 0.9);
-  border-color: rgba(255, 212, 1, 0.4);
-  box-shadow: 0 10px 25px rgba(255, 212, 1, 0.1);
+  transform: translateY(-3px);
+  background: linear-gradient(135deg, rgba(17, 35, 87, 0.75) 0%, rgba(26, 48, 102, 0.8) 100%);
+  border-color: rgba(255, 212, 1, 0.5);
+  box-shadow: 0 12px 30px rgba(255, 212, 1, 0.2);
 }
 
 .vision-point strong {
@@ -2573,7 +2621,7 @@ footer a:hover::after {
 }
 
 .desire-header h3 {
-  color: #112357;
+  color: rgba(255, 255, 255, 0.95);
   font-size: 1.5rem;
   font-weight: 700;
 }
@@ -4111,6 +4159,19 @@ footer a:hover::after {
 }
 
 /* ========== END MOBILE NAVBAR IMPROVEMENTS ========== */
+
+/* ========== FOOTER ICON FIX FOR INDEX PAGE ========== */
+.clean-footer .contact-item i.fas.fa-phone::before {
+  content: "\f095" !important;
+  font-family: "Font Awesome 6 Free" !important;
+  font-weight: 900 !important;
+}
+
+.clean-footer .contact-item i.fas.fa-envelope::before {
+  content: "\f0e0" !important;
+  font-family: "Font Awesome 6 Free" !important;
+  font-weight: 900 !important;
+}
 
 /* Gleiche Styles für normale nav-links (Digital Signage, Dienstleistungen) */
 .navbar .nav-item .nav-link:not(.dropdown-toggle) {

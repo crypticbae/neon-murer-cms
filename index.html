@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="de" id="www-neonmurer-ch">
 <head>
+  <!-- CDN Preloads für bessere Performance -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="preconnect" href="https://code.jquery.com" crossorigin>
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
 
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta charset="utf-8">
@@ -10,7 +16,20 @@
   <link rel="stylesheet" type="text/css" href="template/inc_css/include.css">
   
   <!-- Font Awesome CDN für Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" crossorigin="anonymous">
+  
+  <!-- Frontend JavaScript Libraries -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+  <script src="template/assets/js/slick.min.js"></script>
+  
+  <!-- Template System Scripts -->
+  <script src="template/assets/js/templates.js"></script>
+  <script src="template/assets/js/simple-template-loader.js"></script>
+
+  <script src="template/assets/js/settings-loader.js?v=20250115"></script>
+  <script src="template/assets/js/custom.js"></script>
+  <script src="template/inc_js/frontend.js"></script>
   
   <!-- SEO Meta Tags -->
   <meta name="description" content="Neon Murer steht für innovative Lichtwerbung, Beschriftungen und massgeschneiderte Werbetechnik-Lösungen. Entdecken Sie unsere Leistungen und bringen Sie Ihre Marke zum Strahlen.">
@@ -45,6 +64,7 @@
   <!-- Weitere SEO-relevante Meta Tags -->
   <meta name="theme-color" content="#112357">
   <meta name="msapplication-TileColor" content="#112357">
+  <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   
@@ -274,12 +294,12 @@
 <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
 <meta name="apple-mobile-web-app-title" content="Neon Murer" />
 <link rel="manifest" href="/favicon/site.webmanifest" />
-  <!--[if lt IE 9]><script src="template/lib/jquery/jquery-1.12.4.min.js"></script><![endif]-->
-  <!--[if gte IE 9]><!--><script src="template/lib/jquery/jquery-3.7.1.min.js"></script><!--<![endif]-->
-  <script src="template/assets/js/jquery.easing.min.js"></script>
-  <script src="template/assets/js/bootstrap.bundle.min.js"></script>
+  <!--[if lt IE 9]><script src="https://code.jquery.com/jquery-3.7.1.min.js" crossorigin="anonymous"></script><![endif]-->
+  <!--[if gte IE 9]><!--><script src="https://code.jquery.com/jquery-3.7.1.min.js" crossorigin="anonymous"></script><!--<![endif]-->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
   <script src="template/assets/js/slick.min.js"></script>
-  <script src="template/assets/js/search.js"></script>
+
     <script src="template/assets/js/custom.js"></script>
   <!-- Dropdown JavaScript wurde in Template Loader verschoben -->
   <!-- ✅ CSS wurde nach template/assets/css/page-styles.css ausgelagert -->
@@ -291,19 +311,30 @@
 
   <meta name="generator" content="cmsGO! 2.4.8">
   <script src="template/inc_js/frontend.js"></script>
-  <!--[if lt IE 9]><script src="template/lib/html5shiv/html5shiv.min.js"></script><![endif]-->
-  <script src="template/lib/respond/respond.min.js"></script>
   <![endif]-->
-  <script>
 
-      window.cookieconsent_options={"message":"Diese Website verwendet Cookies, um Ihnen die bestmögliche Benutzererfahrung zu bieten und die Funktionalität der Webseite sicherzustellen. 🍪 <a href='datenschutz.html' target='_blank'>Weitere Informationen</a>","dismiss":"Verstanden!","link":null,"learnMore":null,"theme":"template\/lib\/cookieconsent2\/neonmurer-cookie.css?v=4"};
 
-  </script>
-  <script src="template/lib/cookieconsent2/cookieconsent.min.js"></script>
 
   <!-- ========== TEMPLATE SYSTEM ========== -->
-  <script src="template/assets/js/templates.js"></script>
-  <script src="template/assets/js/simple-template-loader.js"></script>
+  <!-- Simple Template Loader bereits im Head geladen -->
+  <!-- Usage Statistics -->
+  <script src="template/assets/js/neon-usage-stats.js"></script>
+  
+  <!-- Privacy Manager -->
+  <script src="template/assets/js/neon-privacy-manager.js"></script>
+  
+  <!-- Initialize Analytics -->
+  <script>
+    // Initialize Analytics Tracker after DOM is loaded
+    document.addEventListener('DOMContentLoaded', function() {
+      if (typeof NeonAnalyticsTracker !== 'undefined') {
+        window.neonAnalyticsTracker = new NeonAnalyticsTracker();
+        console.error('📊 Analytics Tracker initialized on', window.location.pathname);
+      } else {
+        console.error('❌ NeonAnalyticsTracker not found');
+      }
+    });
+  </script>
 
   <!-- Page Specific CSS -->
   <link rel="stylesheet" href="template/assets/css/index.css">
@@ -325,18 +356,30 @@
 <section class="modern-hero">
   <!-- Background Images -->
   <div class="hero-background">
-    <img src="content/images/d9d29858b07515d903822ee7b5b76494.jpg" 
+    <picture>
+  <source data-srcset="content/images-optimized/d9d29858b07515d903822ee7b5b76494.webp" type="image/webp">
+  <source data-srcset="content/images-optimized/d9d29858b07515d903822ee7b5b76494-optimized.jpg" type="image/jpeg">
+  <img src="content/images/d9d29858b07515d903822ee7b5b76494.jpg" 
          alt="Neon Murer Lichtwerbung" 
          class="hero-bg-image active" 
          data-slide="0">
-    <img src="content/images/a16b3822a2a16cdbbe78ab7213a2a198.jpg" 
+</picture>
+    <picture>
+  <source data-srcset="content/images-optimized/a16b3822a2a16cdbbe78ab7213a2a198.webp" type="image/webp">
+  <source data-srcset="content/images-optimized/a16b3822a2a16cdbbe78ab7213a2a198-optimized.jpg" type="image/jpeg">
+  <img src="content/images/a16b3822a2a16cdbbe78ab7213a2a198.jpg" 
          alt="Professionelle Beschriftungen" 
          class="hero-bg-image" 
          data-slide="1">
-    <img src="content/images/f4c31de2a867772abdb61cf539a7eaed.jpg" 
+</picture>
+    <picture>
+  <source data-srcset="content/images-optimized/f4c31de2a867772abdb61cf539a7eaed.webp" type="image/webp">
+  <source data-srcset="content/images-optimized/f4c31de2a867772abdb61cf539a7eaed-optimized.jpg" type="image/jpeg">
+  <img src="content/images/f4c31de2a867772abdb61cf539a7eaed.jpg" 
          alt="Digital Signage Lösungen" 
          class="hero-bg-image" 
          data-slide="2">
+</picture>
   </div>
   
   <!-- Overlay -->
@@ -507,7 +550,7 @@
             </div>
             <h1 class="attention-title mb-3">
               <span class="title-highlight">Ihre Marke</span> 
-              <span class="title-main">verdient es, zu strahlen!</span>
+              <span class="title-main">verdient es, zu <span class="title-glow">strahlen!</span></span>
             </h1>
             <p class="attention-subtitle">
               Warum sich mit gewöhnlicher Werbung zufriedengeben? Von <span style="color: #ffd401; font-weight: bold;">strahlender Lichtwerbung</span> über professionelle <span style="color: #ffd401; font-weight: bold;">Beschriftungen</span> bis zu modernem <span style="color: #ffd401; font-weight: bold;">Digital Signage</span> – wir machen Ihre Vision sichtbar!
@@ -682,7 +725,7 @@
                     <i class="fa-solid fa-phone me-2"></i>
                     Jetzt anrufen
                   </a>
-                  <a href="#" class="btn-action btn-secondary">
+                  <a href="mailto:neon@neonmurer.ch" class="btn-action btn-secondary">
                     <i class="fa-solid fa-calendar me-2"></i>
                     Beratung buchen
                   </a>
@@ -1029,126 +1072,146 @@
 
       <div class="slide">
         <div class="card bg-lightgrey border-0 h-100">
-          <div class="card-body py-0 d-flex align-items-center"><img src="content/images/rexroth.png" data-image-ext="png" data-image-id="1" data-image-hash="rexroth" width="900" alt="Rexroth" class="image-thumb img-fluid" loading="lazy"></div>
+          <div class="card-body py-0 d-flex align-items-center"><picture>
+  <source data-srcset="content/images-optimized/rexroth.webp" type="image/webp">
+  <source data-srcset="content/images-optimized/rexroth-optimized.png" type="image/png">
+  <img data-src="content/images/rexroth.png" loading="lazy" class="lazy-image" loading="lazy" data-image-ext="png" data-image-id="1" data-image-hash="rexroth" width="900" alt="Rexroth" class="image-thumb img-fluid" loading="lazy">
+</picture></div>
         </div>
       </div>
 
 
       <div class="slide">
         <div class="card bg-lightgrey border-0 h-100">
-          <div class="card-body py-0 d-flex align-items-center"><img src="content/images/Lindt.png" data-image-ext="png" data-image-id="2" data-image-hash="lindt" width="900" alt="Lindt" class="image-thumb img-fluid" loading="lazy"></div>
+          <div class="card-body py-0 d-flex align-items-center"><picture>
+  <source data-srcset="content/images-optimized/Lindt.webp" type="image/webp">
+  <source data-srcset="content/images-optimized/Lindt-optimized.png" type="image/png">
+  <img data-src="content/images/Lindt.png" loading="lazy" class="lazy-image" loading="lazy" data-image-ext="png" data-image-id="2" data-image-hash="lindt" width="900" alt="Lindt" class="image-thumb img-fluid" loading="lazy">
+</picture></div>
         </div>
       </div>
 
 
       <div class="slide">
         <div class="card bg-lightgrey border-0 h-100">
-          <div class="card-body py-0 d-flex align-items-center"><img src="content/images/McDonalds.png" data-image-ext="png" data-image-id="3" data-image-hash="mcdonalds" width="900" alt="McDonalds" class="image-thumb img-fluid" loading="lazy"></div>
+          <div class="card-body py-0 d-flex align-items-center"><picture>
+  <source data-srcset="content/images-optimized/McDonalds.webp" type="image/webp">
+  <source data-srcset="content/images-optimized/McDonalds-optimized.png" type="image/png">
+  <img data-src="content/images/McDonalds.png" loading="lazy" class="lazy-image" loading="lazy" data-image-ext="png" data-image-id="3" data-image-hash="mcdonalds" width="900" alt="McDonalds" class="image-thumb img-fluid" loading="lazy">
+</picture></div>
         </div>
       </div>
 
 
       <div class="slide">
         <div class="card bg-lightgrey border-0 h-100">
-          <div class="card-body py-0 d-flex align-items-center"><img src="content/images/Agrola.png" data-image-ext="png" data-image-id="4" data-image-hash="agrola" width="900" alt="Agrola" class="image-thumb img-fluid" loading="lazy"></div>
+          <div class="card-body py-0 d-flex align-items-center"><picture>
+  <source data-srcset="content/images-optimized/Agrola.webp" type="image/webp">
+  <source data-srcset="content/images-optimized/Agrola-optimized.png" type="image/png">
+  <img data-src="content/images/Agrola.png" loading="lazy" class="lazy-image" loading="lazy" data-image-ext="png" data-image-id="4" data-image-hash="agrola" width="900" alt="Agrola" class="image-thumb img-fluid" loading="lazy">
+</picture></div>
         </div>
       </div>
 
 
       <div class="slide">
         <div class="card bg-lightgrey border-0 h-100">
-          <div class="card-body py-0 d-flex align-items-center"><img src="content/images/dieci.png" data-image-ext="png" data-image-id="5" data-image-hash="dieci" width="900" alt="Dieci" class="image-thumb img-fluid" loading="lazy"></div>
+          <div class="card-body py-0 d-flex align-items-center"><picture>
+  <source data-srcset="content/images-optimized/dieci.webp" type="image/webp">
+  <source data-srcset="content/images-optimized/dieci-optimized.png" type="image/png">
+  <img data-src="content/images/dieci.png" loading="lazy" class="lazy-image" loading="lazy" data-image-ext="png" data-image-id="5" data-image-hash="dieci" width="900" alt="Dieci" class="image-thumb img-fluid" loading="lazy">
+</picture></div>
         </div>
       </div>
 
 
       <div class="slide">
         <div class="card bg-lightgrey border-0 h-100">
-          <div class="card-body py-0 d-flex align-items-center"><img src="content/images/Avia.svg" data-image-ext="svg" data-image-id="6" data-image-hash="avia" width="900" alt="Avia" class="image-thumb img-fluid" loading="lazy"></div>
+          <div class="card-body py-0 d-flex align-items-center"><img data-src="content/images/Avia.svg" loading="lazy" data-image-ext="svg" data-image-id="6" data-image-hash="avia" width="900" alt="Avia" class="image-thumb img-fluid" loading="lazy"></div>
         </div>
       </div>
 
 
       <div class="slide">
         <div class="card bg-lightgrey border-0 h-100">
-          <div class="card-body py-0 d-flex align-items-center"><img src="content/images/Baloise.svg" data-image-ext="svg" data-image-id="7" data-image-hash="baloise" width="900" alt="Baloise" class="image-thumb img-fluid" loading="lazy"></div>
+          <div class="card-body py-0 d-flex align-items-center"><img data-src="content/images/Baloise.svg" loading="lazy" data-image-ext="svg" data-image-id="7" data-image-hash="baloise" width="900" alt="Baloise" class="image-thumb img-fluid" loading="lazy"></div>
         </div>
       </div>
 
 
       <div class="slide">
         <div class="card bg-lightgrey border-0 h-100">
-          <div class="card-body py-0 d-flex align-items-center"><img src="content/images/Bayard.svg" data-image-ext="svg" data-image-id="8" data-image-hash="bayard" width="900" alt="Bayard" class="image-thumb img-fluid" loading="lazy"></div>
+          <div class="card-body py-0 d-flex align-items-center"><img data-src="content/images/Bayard.svg" loading="lazy" data-image-ext="svg" data-image-id="8" data-image-hash="bayard" width="900" alt="Bayard" class="image-thumb img-fluid" loading="lazy"></div>
         </div>
       </div>
 
 
       <div class="slide">
         <div class="card bg-lightgrey border-0 h-100">
-          <div class="card-body py-0 d-flex align-items-center"><img src="content/images/Feldschlösschen.svg" data-image-ext="svg" data-image-id="106" data-image-hash="6d5fd419a586b900c839e2c76b5e5eea" width="900" alt="Feldschlösschen.svg" class="image-thumb img-fluid" loading="lazy"></div>
+          <div class="card-body py-0 d-flex align-items-center"><img data-src="content/images/Feldschlösschen.svg" loading="lazy" data-image-ext="svg" data-image-id="106" data-image-hash="6d5fd419a586b900c839e2c76b5e5eea" width="900" alt="Feldschlösschen.svg" class="image-thumb img-fluid" loading="lazy"></div>
         </div>
       </div>
 
 
       <div class="slide">
         <div class="card bg-lightgrey border-0 h-100">
-          <div class="card-body py-0 d-flex align-items-center"><img src="content/images/LäderachSwitzerland.svg" data-image-ext="svg" data-image-id="107" data-image-hash="8c809e2fb0a1ef73b51af66e1113b165" width="900" alt="LäderachSwitzerland.svg" class="image-thumb img-fluid" loading="lazy"></div>
+          <div class="card-body py-0 d-flex align-items-center"><img data-src="content/images/LäderachSwitzerland.svg" loading="lazy" data-image-ext="svg" data-image-id="107" data-image-hash="8c809e2fb0a1ef73b51af66e1113b165" width="900" alt="LäderachSwitzerland.svg" class="image-thumb img-fluid" loading="lazy"></div>
         </div>
       </div>
 
 
       <div class="slide">
         <div class="card bg-lightgrey border-0 h-100">
-          <div class="card-body py-0 d-flex align-items-center"><img src="content/images/LLB.svg" data-image-ext="svg" data-image-id="11" data-image-hash="llb" width="900" alt="LLB" class="image-thumb img-fluid" loading="lazy"></div>
+          <div class="card-body py-0 d-flex align-items-center"><img data-src="content/images/LLB.svg" loading="lazy" data-image-ext="svg" data-image-id="11" data-image-hash="llb" width="900" alt="LLB" class="image-thumb img-fluid" loading="lazy"></div>
         </div>
       </div>
 
 
       <div class="slide">
         <div class="card bg-lightgrey border-0 h-100">
-          <div class="card-body py-0 d-flex align-items-center"><img src="content/images/Ottos.svg" data-image-ext="svg" data-image-id="12" data-image-hash="ottos" width="900" alt="Ottos" class="image-thumb img-fluid" loading="lazy"></div>
+          <div class="card-body py-0 d-flex align-items-center"><img data-src="content/images/Ottos.svg" loading="lazy" data-image-ext="svg" data-image-id="12" data-image-hash="ottos" width="900" alt="Ottos" class="image-thumb img-fluid" loading="lazy"></div>
         </div>
       </div>
 
 
       <div class="slide">
         <div class="card bg-lightgrey border-0 h-100">
-          <div class="card-body py-0 d-flex align-items-center"><img src="content/images/Vaudoise.svg" data-image-ext="svg" data-image-id="13" data-image-hash="vaudoise" width="900" alt="Vaudoise" class="image-thumb img-fluid" loading="lazy"></div>
+          <div class="card-body py-0 d-flex align-items-center"><img data-src="content/images/Vaudoise.svg" loading="lazy" data-image-ext="svg" data-image-id="13" data-image-hash="vaudoise" width="900" alt="Vaudoise" class="image-thumb img-fluid" loading="lazy"></div>
         </div>
       </div>
 
 
       <div class="slide">
         <div class="card bg-lightgrey border-0 h-100">
-          <div class="card-body py-0 d-flex align-items-center"><img src="content/images/BoschService.svg" data-image-ext="svg" data-image-id="14" data-image-hash="boschservice" width="900" alt="Bosch Service" class="image-thumb img-fluid" loading="lazy"></div>
+          <div class="card-body py-0 d-flex align-items-center"><img data-src="content/images/BoschService.svg" loading="lazy" data-image-ext="svg" data-image-id="14" data-image-hash="boschservice" width="900" alt="Bosch Service" class="image-thumb img-fluid" loading="lazy"></div>
         </div>
       </div>
 
 
       <div class="slide">
         <div class="card bg-lightgrey border-0 h-100">
-          <div class="card-body py-0 d-flex align-items-center"><img src="content/images/Carglass.svg" data-image-ext="svg" data-image-id="15" data-image-hash="carglass" width="900" alt="Carglass" class="image-thumb img-fluid" loading="lazy"></div>
+          <div class="card-body py-0 d-flex align-items-center"><img data-src="content/images/Carglass.svg" loading="lazy" data-image-ext="svg" data-image-id="15" data-image-hash="carglass" width="900" alt="Carglass" class="image-thumb img-fluid" loading="lazy"></div>
         </div>
       </div>
 
 
       <div class="slide">
         <div class="card bg-lightgrey border-0 h-100">
-          <div class="card-body py-0 d-flex align-items-center"><img src="content/images/Helvetia.svg" data-image-ext="svg" data-image-id="16" data-image-hash="helvetia" width="900" alt="Helvetia" class="image-thumb img-fluid" loading="lazy"></div>
+          <div class="card-body py-0 d-flex align-items-center"><img data-src="content/images/Helvetia.svg" loading="lazy" data-image-ext="svg" data-image-id="16" data-image-hash="helvetia" width="900" alt="Helvetia" class="image-thumb img-fluid" loading="lazy"></div>
         </div>
       </div>
 
 
       <div class="slide">
         <div class="card bg-lightgrey border-0 h-100">
-          <div class="card-body py-0 d-flex align-items-center"><img src="content/images/SGKB.svg" data-image-ext="svg" data-image-id="17" data-image-hash="sgkb" width="900" alt="SGKB" class="image-thumb img-fluid" loading="lazy"></div>
+          <div class="card-body py-0 d-flex align-items-center"><img data-src="content/images/SGKB.svg" loading="lazy" data-image-ext="svg" data-image-id="17" data-image-hash="sgkb" width="900" alt="SGKB" class="image-thumb img-fluid" loading="lazy"></div>
         </div>
       </div>
 
 
       <div class="slide">
         <div class="card bg-lightgrey border-0 h-100">
-          <div class="card-body py-0 d-flex align-items-center"><img src="content/images/SparExpress.svg" data-image-ext="svg" data-image-id="18" data-image-hash="sparexpress" width="900" alt="Spar Express" class="image-thumb img-fluid" loading="lazy"></div>
+          <div class="card-body py-0 d-flex align-items-center"><img data-src="content/images/SparExpress.svg" loading="lazy" data-image-ext="svg" data-image-id="18" data-image-hash="sparexpress" width="900" alt="Spar Express" class="image-thumb img-fluid" loading="lazy"></div>
         </div>
       </div>
 
@@ -1160,16 +1223,12 @@
   </div>
 </section>
 
-
-
 <!-- ========== FOOTER PLACEHOLDER ========== -->
 <div id="footer-placeholder">
   <!-- Footer wird automatisch vom Template Loader geladen -->
-  <div class="text-center py-4">
-    <div class="spinner-border text-primary" role="status">
-      <span class="visually-hidden">Footer wird geladen...</span>
-    </div>
-  </div>
 </div>
+
+
+<script src="template/assets/js/lazy-loading.js"></script>
 </body>
 </html>

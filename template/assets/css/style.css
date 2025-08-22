@@ -27,8 +27,8 @@
   font-family: 'DM Sans';
   font-style: normal;
   font-weight: 900;
-  src: url('../webfonts/dm-sans-v15-latin-900.woff2') format('woff2'),
-       url('../webfonts/dm-sans-v15-latin-900.ttf') format('truetype');
+  /* Font 900 weight entfernt - defekte Datei */
+  src: url('../webfonts/dm-sans-v15-latin-600.woff2') format('woff2');
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -356,9 +356,9 @@ footer ul {
 footer li {
   padding-left: 0
 }
-footer li:before {
+footer ul li:before {
   content: "\f105";
-  font-family: "Font Awesome 5 Pro";
+  font-family: "Font Awesome 6 Free";
   display: inline-block;
   margin-left: -1em;
   width: 1em
@@ -366,6 +366,22 @@ footer li:before {
 footer a {
   color: #fff;
   text-decoration: none
+}
+footer a i,
+footer .contact-item i,
+footer .contact-item i.fas,
+footer .contact-item i.fa-phone,
+footer .contact-item i.fa-envelope,
+footer a[href^="tel:"] i,
+footer a[href^="mailto:"] i,
+footer a[onclick*="mailtoLink"] i {
+  color: #ffd401 !important;
+  font-family: "Font Awesome 6 Free" !important;
+  font-weight: 900 !important;
+  display: inline-block !important;
+  font-style: normal !important;
+  text-rendering: auto !important;
+  line-height: 1 !important;
 }
 footer a:hover, footer a:active {
   color: #ffd401;

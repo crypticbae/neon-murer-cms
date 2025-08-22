@@ -1,42 +1,53 @@
 <!DOCTYPE html>
 <html lang="de" id="www-neonmurer-ch">
 <head>
+  <!-- CDN Preloads für bessere Performance -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="preconnect" href="https://code.jquery.com" crossorigin>
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
 
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Pylonen - Neon Murer AG</title>
+  <title>Pylonen - Neon Murer</title>
   <link rel="stylesheet" type="text/css" href="../template/inc_css/include.css">
   <!-- Font Awesome CDN für Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" crossorigin="anonymous">
   <!-- ✅ CSS wurde nach ../template/assets/css/page-styles.css ausgelagert -->
   <!-- Page Specific CSS - Updated Hero Design -->
   <link rel="stylesheet" href="../template/assets/css/pylonen.css">
-<link rel="icon" type="image/png" href="https://www.neonmurer.ch/favicon/favicon-96x96.png" sizes="96x96" />
-  <link rel="icon" type="image/svg+xml" href="https://www.neonmurer.ch/favicon/favicon.svg" />
-  <link rel="shortcut icon" href="https://www.neonmurer.ch/favicon/favicon.ico" />
-  <link rel="apple-touch-icon" sizes="180x180" href="https://www.neonmurer.ch/favicon/apple-touch-icon.png" />
+<link rel="icon" type="image/png" href="../favicon/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="../favicon/favicon.svg" />
+  <link rel="shortcut icon" href="../favicon/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="../favicon/apple-touch-icon.png" />
   <meta name="apple-mobile-web-app-title" content="Neon Murer" />
-  <link rel="manifest" href="https://www.neonmurer.ch/favicon/site.webmanifest" />
+  <link rel="manifest" href="../favicon/site.webmanifest" />
   
-      <!--[if lt IE 9]><script src="../template/lib/jquery/jquery-1.12.4.min.js"></script><![endif]-->
-    <!--[if gte IE 9]><!--><script src="../template/lib/jquery/jquery-3.7.1.min.js"></script><!--<![endif]-->
+      <!--[if lt IE 9]><script src="https://code.jquery.com/jquery-3.7.1.min.js" crossorigin="anonymous"></script><![endif]-->
+    <!--[if gte IE 9]><!--><script src="https://code.jquery.com/jquery-3.7.1.min.js" crossorigin="anonymous"></script><!--<![endif]-->
     
-  <meta name="description" content="Hochwertige Pylonen von Neon Murer - repräsentative Leuchtpylonen und LED-Displays für maximale Sichtbarkeit und effektive Aussenwerbung.">
+  <meta name="description" content="Professionelle Pylonen und Werbetürme.">
   <meta name="keywords" content="Pylonen, Leuchtpylonen, LED-Displays, Werbepylonen, Aussenwerbung, Neon Murer">
   <link rel="canonical" href="https://www.neonmurer.ch/lichtwerbung/pylonen.html">
-    <script src="../template/assets/js/jquery.easing.min.js"></script>
-    <script src="../template/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="../template/assets/js/slick.min.js"></script>
-    <script src="../template/assets/js/search.js"></script>
+    
     <script src="../template/inc_js/frontend.js"></script>
   
   <!-- Dropdown JavaScript wurde in Template Loader verschoben -->
 
   <!-- ========== TEMPLATE SYSTEM ========== -->
   <script src="../template/assets/js/templates.js"></script>
-  <script src="../template/assets/js/simple-template-loader.js"></script>
+  <script src="../template/assets/js/simple-template-loader.js"></script>  
+  <!-- Usage Statistics -->
+  <script src="../template/assets/js/neon-usage-stats.js"></script>
+  
+  <!-- Privacy Manager -->
+  <script src="../template/assets/js/neon-privacy-manager.js"></script>
 </head>
 
 <body class="custom">
@@ -56,10 +67,8 @@
     <div class="container-fluid maxwidth">
       <div class="hero-content">
         <h1 class="hero-title">Pylonen</h1>
-        <p class="hero-subtitle">Hochwertige LED-Displays und repräsentative Leuchtpylonen für maximale Sichtbarkeit</p>
-        <p class="hero-description">
-          Wir bieten Ihnen hochwertige LED-Displays für den Innen- und Aussenbereich an. Ob Temperatur-, Datum- und Uhrzeitanzeigen oder programmierbare LED-Laufschriften – unsere Displays sind vielseitig einsetzbar und ideal für Ihre Bedürfnisse. Sie können bequem über den PC programmiert werden, und unsere Spezialisten führen Sie in die benutzerfreundliche Software ein. Die LED-Displays sind sowohl als eigenständige Module als auch integriert in Leuchttransparente erhältlich, um Ihre Botschaften optimal in Szene zu setzen.
-        </p>
+        <p class="hero-subtitle">Werbetürme die weithin sichtbar sind</p>
+        <p class="hero-description">Professionelle Pylonen und Werbetürme für maximale Fernwirkung.</p>
       </div>
     </div>
   </section>
@@ -93,7 +102,7 @@
           <div class="modern-project-gallery">
             <div class="project-card" onclick="openLightbox(0)">
               <div class="project-image-wrapper">
-                <img src="../content/images/pylonen-1.jpg" alt="Agrola Tankstelle, Rüti" class="project-image">
+                <img src="../content/images/pylonen-1.jpg" alt="Tankstellen Pylon" class="project-image">
                 <div class="project-overlay">
                   <div class="project-icon">
                     <i class="fa-solid fa-play"></i>
@@ -101,13 +110,13 @@
                 </div>
               </div>
               <div class="project-content">
-                <h3 class="project-name">Agrola Tankstelle, Rüti</h3>
+                <h3 class="project-name">Tankstellen Pylon</h3>
               </div>
             </div>
             
             <div class="project-card" onclick="openLightbox(1)">
               <div class="project-image-wrapper">
-                <img src="../content/images/pylonen-2.jpg" alt="Albuville, Rapperswil" class="project-image">
+                <img src="../content/images/pylonen-2.jpg" alt="Einkaufszentrum Turm" class="project-image">
                 <div class="project-overlay">
                   <div class="project-icon">
                     <i class="fa-solid fa-play"></i>
@@ -115,13 +124,13 @@
                 </div>
               </div>
               <div class="project-content">
-                <h3 class="project-name">Albuville, Rapperswil</h3>
+                <h3 class="project-name">Einkaufszentrum Turm</h3>
               </div>
             </div>
             
             <div class="project-card" onclick="openLightbox(2)">
               <div class="project-image-wrapper">
-                <img src="../content/images/pylonen-3.jpg" alt="AVIA Tankstelle, Wädenswil" class="project-image">
+                <img src="../content/images/pylonen-3.jpg" alt="Autohaus Pylon" class="project-image">
                 <div class="project-overlay">
                   <div class="project-icon">
                     <i class="fa-solid fa-play"></i>
@@ -129,13 +138,13 @@
                 </div>
               </div>
               <div class="project-content">
-                <h3 class="project-name">AVIA Tankstelle, Wädenswil</h3>
+                <h3 class="project-name">Autohaus Pylon</h3>
               </div>
             </div>
             
             <div class="project-card" onclick="openLightbox(3)">
               <div class="project-image-wrapper">
-                <img src="../content/images/pylonen-4.jpg" alt="McDonalds, Schafisheim" class="project-image">
+                <img src="../content/images/pylonen-4.jpg" alt="Hotel Werbeturm" class="project-image">
                 <div class="project-overlay">
                   <div class="project-icon">
                     <i class="fa-solid fa-play"></i>
@@ -143,13 +152,13 @@
                 </div>
               </div>
               <div class="project-content">
-                <h3 class="project-name">McDonalds, Schafisheim</h3>
+                <h3 class="project-name">Hotel Werbeturm</h3>
               </div>
             </div>
             
             <div class="project-card" onclick="openLightbox(4)">
               <div class="project-image-wrapper">
-                <img src="../content/images/pylonen-5.jpg" alt="Spurt Tankstelle" class="project-image">
+                <img src="../content/images/pylonen-5.jpg" alt="Industrie Pylon" class="project-image">
                 <div class="project-overlay">
                   <div class="project-icon">
                     <i class="fa-solid fa-play"></i>
@@ -157,13 +166,13 @@
                 </div>
               </div>
               <div class="project-content">
-                <h3 class="project-name">Spurt Tankstelle</h3>
+                <h3 class="project-name">Industrie Pylon</h3>
               </div>
             </div>
             
             <div class="project-card" onclick="openLightbox(5)">
               <div class="project-image-wrapper">
-                <img src="../content/images/pylonen-6.jpg" alt="Zentrum Joweid, Rüti" class="project-image">
+                <img src="../content/images/pylonen-6.jpg" alt="Restaurant Turm" class="project-image">
                 <div class="project-overlay">
                   <div class="project-icon">
                     <i class="fa-solid fa-play"></i>
@@ -171,14 +180,28 @@
                 </div>
               </div>
               <div class="project-content">
-                <h3 class="project-name">Zentrum Joweid, Rüti</h3>
+                <h3 class="project-name">Restaurant Turm</h3>
+              </div>
+            </div>
+            
+            <div class="project-card" onclick="openLightbox(6)">
+              <div class="project-image-wrapper">
+                <img src="/content/images/McDonalds.png" alt="McDonalds" class="project-image">
+                <div class="project-overlay">
+                  <div class="project-icon">
+                    <i class="fa-solid fa-play"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="project-content">
+                <h3 class="project-name">McDonalds</h3>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    
+
     <!-- Decorative Elements -->
     <div class="projects-decorations">
       <div class="deco-circle deco-1"></div>
@@ -311,12 +334,13 @@
 // Modern Lightbox Gallery JavaScript
 let currentProjectIndex = 0;
 const projects = [
-  { name: 'Agrola Tankstelle, Rüti', image: '../content/images/pylonen-1.jpg' },
-  { name: 'Albuville, Rapperswil', image: '../content/images/pylonen-2.jpg' },
-  { name: 'AVIA Tankstelle, Wädenswil', image: '../content/images/pylonen-3.jpg' },
-  { name: 'McDonalds, Schafisheim', image: '../content/images/pylonen-4.jpg' },
-  { name: 'Spurt Tankstelle', image: '../content/images/pylonen-5.jpg' },
-  { name: 'Zentrum Joweid, Rüti', image: '../content/images/pylonen-6.jpg' }
+  { name: 'Tankstellen Pylon', image: '../content/images/pylonen-1.jpg' },
+  { name: 'Einkaufszentrum Turm', image: '../content/images/pylonen-2.jpg' },
+  { name: 'Autohaus Pylon', image: '../content/images/pylonen-3.jpg' },
+  { name: 'Hotel Werbeturm', image: '../content/images/pylonen-4.jpg' },
+  { name: 'Industrie Pylon', image: '../content/images/pylonen-5.jpg' },
+  { name: 'Restaurant Turm', image: '../content/images/pylonen-6.jpg' },
+  { name: 'McDonalds', image: '/content/images/McDonalds.png' }
 ];
 
 function openLightbox(index) {
@@ -430,5 +454,6 @@ function preloadImages() {
 document.addEventListener('DOMContentLoaded', preloadImages);
 </script>
 
+  <script src="../template/assets/js/lazy-loading.js"></script>
 </body>
 </html> 

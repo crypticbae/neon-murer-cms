@@ -1,0 +1,39 @@
+name: neon-murer-cms
+services:
+- name: web
+  source_dir: /
+  github:
+    repo: YOUR_USERNAME/neon-murer-cms
+    branch: main
+    deploy_on_push: true
+  run_command: npm start
+  build_command: npm ci && npm run generate && npm run migrate:deploy
+  environment_slug: node-js
+  instance_count: 1
+  instance_size_slug: basic-xxs
+  health_check:
+    http_path: /api/health
+  envs:
+  - key: NODE_ENV
+    value: production
+  - key: PORT
+    value: "8080"
+  - key: DATABASE_URL
+    value: ${neon-murer-db.DATABASE_URL}
+  - key: JWT_SECRET
+    value: YOUR_JWT_SECRET_HERE
+  - key: BCRYPT_ROUNDS
+    value: "12"
+  - key: MAX_FILE_SIZE
+    value: 10mb
+  - key: ANALYTICS_ENABLED
+    value: "true"
+  - key: LOG_LEVEL
+    value: info
+
+databases:
+- name: neon-murer-db
+  engine: PG
+  version: "15"
+  size: basic
+  num_nodes: 1

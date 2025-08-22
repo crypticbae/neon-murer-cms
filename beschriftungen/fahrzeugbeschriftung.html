@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="de" id="www-neonmurer-ch">
 <head>
+  <!-- CDN Preloads für bessere Performance -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="preconnect" href="https://code.jquery.com" crossorigin>
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
 
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta charset="utf-8">
@@ -10,7 +16,7 @@
   <link rel="stylesheet" type="text/css" href="../template/inc_css/include.css">
   
   <!-- Font Awesome CDN für Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" crossorigin="anonymous">
   <!-- ✅ CSS wurde nach ../template/assets/css/page-styles.css ausgelagert -->
   <!-- Page Specific CSS - Updated Hero Design -->
   <link rel="stylesheet" href="../template/assets/css/fahrzeugbeschriftung.css">
@@ -21,23 +27,28 @@
   <meta name="apple-mobile-web-app-title" content="Neon Murer" />
   <link rel="manifest" href="../favicon/site.webmanifest" />
   
-  <!--[if lt IE 9]><script src="../template/lib/jquery/jquery-1.12.4.min.js"></script><![endif]-->
-  <!--[if gte IE 9]><!--><script src="../template/lib/jquery/jquery-3.7.1.min.js"></script><!--<![endif]-->
+  <!--[if lt IE 9]><script src="https://code.jquery.com/jquery-3.7.1.min.js" crossorigin="anonymous"></script><![endif]-->
+  <!--[if gte IE 9]><!--><script src="https://code.jquery.com/jquery-3.7.1.min.js" crossorigin="anonymous"></script><!--<![endif]-->
   
   <meta name="description" content="Professionelle Fahrzeugbeschriftung von Neon Murer - individuelle Folierungen für Autos, LKW und Busse. Mobile Werbung, die auffällt!">
   <meta name="keywords" content="Fahrzeugbeschriftung, Autofolierung, LKW Beschriftung, Bus Werbung, Fahrzeugwerbung, Folierung, Neon Murer">
   <link rel="canonical" href="https://www.neonmurer.ch/fahrzeugbeschriftung.html">
-  <script src="../template/assets/js/jquery.easing.min.js"></script>
-  <script src="../template/assets/js/bootstrap.bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
       <script src="../template/assets/js/slick.min.js"></script>
-    <script src="../template/assets/js/search.js"></script>
+    
     <script src="../template/assets/js/custom.js"></script>
   
   <!-- Dropdown JavaScript wurde in Template Loader verschoben -->
 
   <!-- ========== TEMPLATE SYSTEM ========== -->
   <script src="../template/assets/js/templates.js"></script>
-  <script src="../template/assets/js/simple-template-loader.js"></script>
+  <script src="../template/assets/js/simple-template-loader.js"></script>  
+  <!-- Usage Statistics -->
+  <script src="../template/assets/js/neon-usage-stats.js"></script>
+  
+  <!-- Privacy Manager -->
+  <script src="../template/assets/js/neon-privacy-manager.js"></script>
 </head>
 
 <body class="custom">
@@ -94,7 +105,11 @@
           <div class="modern-project-gallery">
             <div class="project-card" onclick="openLightbox(0)">
               <div class="project-image-wrapper">
-                <img src="../content/images/fahrzeugbeschriftung-1.jpg" alt="Blöchlinger Informatik, Eschenbach" class="project-image">
+                <picture>
+  <source data-srcset="../content/images-optimized/fahrzeugbeschriftung-1.webp" type="image/webp">
+  <source data-srcset="../content/images-optimized/fahrzeugbeschriftung-1-optimized.jpg" type="image/jpeg">
+  <img src="../content/images/fahrzeugbeschriftung-1.jpg" alt="Blöchlinger Informatik, Eschenbach" class="project-image" loading="lazy">
+</picture>
                 <div class="project-overlay">
                   <div class="project-icon">
                     <i class="fa-solid fa-play"></i>
@@ -108,7 +123,11 @@
             
             <div class="project-card" onclick="openLightbox(1)">
               <div class="project-image-wrapper">
-                <img src="../content/images/fahrzeugbeschriftung-2.jpg" alt="Schindler & Scheibling" class="project-image">
+                <picture>
+  <source data-srcset="../content/images-optimized/fahrzeugbeschriftung-2.webp" type="image/webp">
+  <source data-srcset="../content/images-optimized/fahrzeugbeschriftung-2-optimized.jpg" type="image/jpeg">
+  <img src="../content/images/fahrzeugbeschriftung-2.jpg" alt="Schindler & Scheibling" class="project-image" loading="lazy">
+</picture>
                 <div class="project-overlay">
                   <div class="project-icon">
                     <i class="fa-solid fa-play"></i>
@@ -122,7 +141,11 @@
             
             <div class="project-card" onclick="openLightbox(2)">
               <div class="project-image-wrapper">
-                <img src="../content/images/fahrzeugbeschriftung-3.jpg" alt="Med Action, Rapperswil" class="project-image">
+                <picture>
+  <source data-srcset="../content/images-optimized/fahrzeugbeschriftung-3.webp" type="image/webp">
+  <source data-srcset="../content/images-optimized/fahrzeugbeschriftung-3-optimized.jpg" type="image/jpeg">
+  <img src="../content/images/fahrzeugbeschriftung-3.jpg" alt="Med Action, Rapperswil" class="project-image" loading="lazy">
+</picture>
                 <div class="project-overlay">
                   <div class="project-icon">
                     <i class="fa-solid fa-play"></i>
@@ -136,7 +159,11 @@
             
             <div class="project-card" onclick="openLightbox(3)">
               <div class="project-image-wrapper">
-                <img src="../content/images/fahrzeugbeschriftung-4.jpg" alt="Schindler & Scheibling" class="project-image">
+                <picture>
+  <source data-srcset="../content/images-optimized/fahrzeugbeschriftung-4.webp" type="image/webp">
+  <source data-srcset="../content/images-optimized/fahrzeugbeschriftung-4-optimized.jpg" type="image/jpeg">
+  <img src="../content/images/fahrzeugbeschriftung-4.jpg" alt="Schindler & Scheibling" class="project-image" loading="lazy">
+</picture>
                 <div class="project-overlay">
                   <div class="project-icon">
                     <i class="fa-solid fa-play"></i>
@@ -401,5 +428,6 @@ document.addEventListener('DOMContentLoaded', preloadImages);
   </div>
 </div>
 
+  <script src="../template/assets/js/lazy-loading.js"></script>
 </body>
 </html> 

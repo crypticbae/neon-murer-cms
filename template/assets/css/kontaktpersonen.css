@@ -16,7 +16,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: url('../../content/images/team-gruppenfoto.jpg') center/cover;
+  background: url('../../../content/images/team-gruppenfoto.jpg') center/cover;
   opacity: 0.15;
 }
 
@@ -53,7 +53,7 @@
 
 /* Basis Container und Layout */
 
-/* Team Grid - Sicherstellen dass es sichtbar ist */
+/* Team Grid - Maximal 3 Spalten */
 .team-grid {
   display: grid !important;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)) !important;
@@ -61,6 +61,27 @@
   padding: 2rem 0 !important;
   opacity: 1 !important;
   visibility: visible !important;
+}
+
+/* Responsive Grid - Maximal 3 Spalten */
+@media (min-width: 992px) {
+  .team-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .team-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .team-grid {
+    grid-template-columns: 1fr !important;
+  }
 }
 
 /* Team Member Cards - Force Visibility */
@@ -77,7 +98,7 @@
   padding: 1.5rem !important;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1) !important;
   transition: all 0.3s ease !important;
-  height: 520px !important;
+  height: 720px !important;
   display: flex !important;
   flex-direction: column !important;
 }
@@ -85,7 +106,7 @@
 .member-image-wrapper {
   position: relative !important;
   width: 100% !important;
-  height: 200px !important;
+  height: 400px !important;
   border-radius: 15px !important;
   overflow: hidden !important;
   margin-bottom: 1rem !important;

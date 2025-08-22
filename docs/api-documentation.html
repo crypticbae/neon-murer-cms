@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neon Murer CMS - API Dokumentation</title>
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/swagger-ui-dist@5.11.0/swagger-ui.css" />
+    <style>
+        html {
+            box-sizing: border-box;
+            overflow: -moz-scrollbars-vertical;
+            overflow-y: scroll;
+        }
+        
+        *, *:before, *:after {
+            box-sizing: inherit;
+        }
+
+        body {
+            margin: 0;
+            background: #fafafa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .header {
+            background: #112357;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 28px;
+            font-weight: 600;
+        }
+        
+        .header p {
+            margin: 10px 0 0 0;
+            opacity: 0.9;
+            font-size: 16px;
+        }
+        
+        .nav-tabs {
+            background: white;
+            border-bottom: 1px solid #e3e3e3;
+            padding: 0 20px;
+            display: flex;
+            gap: 0;
+        }
+        
+        .nav-tab {
+            padding: 15px 25px;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            color: #666;
+            transition: all 0.2s;
+        }
+        
+        .nav-tab.active {
+            color: #112357;
+            border-bottom-color: #112357;
+            background: #f8f9fa;
+        }
+        
+        .nav-tab:hover {
+            color: #112357;
+            background: #f8f9fa;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        #swagger-ui {
+            padding: 0;
+        }
+        
+        .content-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px;
+            background: white;
+            margin-top: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .content-section h2 {
+            color: #112357;
+            border-bottom: 2px solid #e3e3e3;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .content-section h3 {
+            color: #112357;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+        
+        .code-block {
+            background: #f8f9fa;
+            border: 1px solid #e3e3e3;
+            border-radius: 4px;
+            padding: 15px;
+            margin: 15px 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+        }
+        
+        .warning-box {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 4px;
+            padding: 15px;
+            margin: 15px 0;
+            border-left: 4px solid #f39c12;
+        }
+        
+        .success-box {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            border-radius: 4px;
+            padding: 15px;
+            margin: 15px 0;
+            border-left: 4px solid #28a745;
+        }
+        
+        .info-box {
+            background: #d6eaf8;
+            border: 1px solid #aed6f1;
+            border-radius: 4px;
+            padding: 15px;
+            margin: 15px 0;
+            border-left: 4px solid #3498db;
+        }
+        
+        ul li {
+            margin-bottom: 8px;
+        }
+        
+        .step-list {
+            counter-reset: step-counter;
+            padding-left: 0;
+        }
+        
+        .step-list li {
+            counter-increment: step-counter;
+            margin-bottom: 20px;
+            padding-left: 40px;
+            position: relative;
+        }
+        
+        .step-list li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: #112357;
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 12px;
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin: 20px 0;
+            color: #112357;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+  <!-- Usage Statistics -->
+  <script src="template/assets/js/neon-usage-stats.js"></script>
+  
+  <!-- Privacy Manager -->
+  <script src="template/assets/js/neon-privacy-manager.js"></script>
+
+</head>
+<body>
+    <div class="header">
+        <h1>🚀 Neon Murer CMS - Entwicklerdokumentation</h1>
+        <p>Vollständige API-Referenz, Deployment-Guide und Admin-Manual</p>
+    </div>
+    
+    <div class="nav-tabs">
+        <button class="nav-tab active" onclick="showTab('api')">📚 API-Referenz</button>
+        <button class="nav-tab" onclick="showTab('deployment')">🚀 Deployment-Guide</button>
+        <button class="nav-tab" onclick="showTab('admin')">⚙️ Admin-Manual</button>
+        <button class="nav-tab" onclick="showTab('troubleshooting')">🔧 Troubleshooting</button>
+    </div>
+    
+    <!-- API Reference Tab -->
+    <div id="api-tab" class="tab-content active">
+        <div id="swagger-ui"></div>
+    </div>
+    
+    <!-- Deployment Guide Tab -->
+    <div id="deployment-tab" class="tab-content">
+        <div class="content-section">
+            <a href="javascript:void(0)" onclick="window.location.href='/cms-admin/index.html'" class="back-link">← Zurück zum CMS</a>
+            
+            <h2>🚀 Deployment-Guide</h2>
+            
+            <div class="info-box">
+                <strong>📋 Überblick:</strong> Diese Anleitung führt durch den kompletten Deployment-Prozess für das Neon Murer CMS von der lokalen Entwicklung bis zur Produktionsumgebung.
+            </div>
+            
+            <h3>🔧 Voraussetzungen</h3>
+            <ul>
+                <li><strong>Node.js:</strong> Version 18.x oder höher</li>
+                <li><strong>PostgreSQL:</strong> Version 14.x oder höher</li>
+                <li><strong>npm/yarn:</strong> Paketmanager</li>
+                <li><strong>Git:</strong> Versionskontrolle</li>
+                <li><strong>PM2:</strong> Process Manager (empfohlen für Production)</li>
+            </ul>
+            
+            <h3>📦 1. Produktions-Setup</h3>
+            <ol class="step-list">
+                <li>
+                    <strong>Repository klonen:</strong>
+                    <div class="code-block">git clone https://github.com/neonmurer/cms.git
+cd cms</div>
+                </li>
+                
+                <li>
+                    <strong>Dependencies installieren:</strong>
+                    <div class="code-block">npm install --production</div>
+                </li>
+                
+                <li>
+                    <strong>Environment-Konfiguration:</strong>
+                    <div class="code-block">cp .env.production.template .env
+nano .env</div>
+                    <div class="warning-box">
+                        <strong>⚠️ Wichtig:</strong> Alle Secrets und Passwörter müssen für Production geändert werden!
+                    </div>
+                </li>
+                
+                <li>
+                    <strong>Datenbank-Setup:</strong>
+                    <div class="code-block"># PostgreSQL-Datenbank erstellen
+createdb neon_murer_cms
+
+# Prisma-Migrationen ausführen
+npx prisma migrate deploy
+
+# Seed-Daten laden (optional)
+npm run seed</div>
+                </li>
+                
+                <li>
+                    <strong>SSL-Zertifikate einrichten:</strong>
+                    <div class="code-block"># Let's Encrypt mit Certbot
+sudo apt install certbot
+sudo certbot certonly --standalone -d cms.neonmurer.ch</div>
+                </li>
+            </ol>
+            
+            <h3>🔄 2. PM2 Process Manager</h3>
+            <div class="code-block"># PM2 global installieren
+npm install -g pm2
+
+# Anwendung starten
+pm2 start ecosystem.config.js
+
+# PM2 beim Boot starten
+pm2 startup
+pm2 save</div>
+            
+            <h3>🌐 3. Nginx Reverse Proxy</h3>
+            <div class="code-block"># Nginx-Konfiguration (/etc/nginx/sites-available/neonmurer-cms)
+server {
+    listen 80;
+    server_name cms.neonmurer.ch;
+    return 301 https://$server_name$request_uri;
+}
+
+server {
+    listen 443 ssl http2;
+    server_name cms.neonmurer.ch;
+    
+    ssl_certificate /etc/letsencrypt/live/cms.neonmurer.ch/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/cms.neonmurer.ch/privkey.pem;
+    
+    location / {
+        proxy_pass http://localhost:3001;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_cache_bypass $http_upgrade;
+    }
+    
+    # Static files caching
+    location ~* \.(js|css|png|jpg|jpeg|gif|ico|svg)$ {
+        expires 1y;
+        add_header Cache-Control "public, immutable";
+    }
+}</div>
+            
+            <h3>🔐 4. Sicherheits-Checkliste</h3>
+            <ul>
+                <li>✅ Alle Standard-Passwörter geändert</li>
+                <li>✅ JWT-Secrets generiert (mindestens 64 Zeichen)</li>
+                <li>✅ Database-Passwort sicher</li>
+                <li>✅ HTTPS aktiviert</li>
+                <li>✅ Firewall konfiguriert (nur Port 80, 443, 22)</li>
+                <li>✅ Automatische Updates aktiviert</li>
+                <li>✅ Backup-Strategie implementiert</li>
+            </ul>
+            
+            <h3>💾 5. Backup-Strategie</h3>
+            <div class="code-block"># Automatisches tägliches Backup (Crontab)
+0 2 * * * /usr/local/bin/backup-script.sh
+
+# Backup-Script Inhalt:
+#!/bin/bash
+DATE=$(date +%Y%m%d_%H%M%S)
+pg_dump neon_murer_cms > /backups/db_backup_$DATE.sql
+tar -czf /backups/files_backup_$DATE.tar.gz /var/www/neonmurer-cms/content
+find /backups -name "*.sql" -mtime +7 -delete
+find /backups -name "*.tar.gz" -mtime +7 -delete</div>
+            
+            <div class="success-box">
+                <strong>🎉 Deployment erfolgreich!</strong> Das CMS läuft jetzt unter <code>https://cms.neonmurer.ch</code>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Admin Manual Tab -->
+    <div id="admin-tab" class="tab-content">
+        <div class="content-section">
+            <a href="javascript:void(0)" onclick="window.location.href='/cms-admin/index.html'" class="back-link">← Zurück zum CMS</a>
+            
+            <h2>⚙️ Admin-Manual</h2>
+            
+            <div class="info-box">
+                <strong>👨‍💻 Für wen:</strong> Dieses Manual richtet sich an Administratoren und Content-Manager, die das Neon Murer CMS täglich verwenden.
+            </div>
+            
+            <h3>🔐 1. Erste Schritte</h3>
+            <ol class="step-list">
+                <li>
+                    <strong>Admin-Zugang:</strong>
+                    <p>Öffnen Sie <code>https://cms.neonmurer.ch</code> und melden Sie sich mit Ihren Administrator-Zugangsdaten an.</p>
+                </li>
+                
+                <li>
+                    <strong>Dashboard-Überblick:</strong>
+                    <p>Nach dem Login sehen Sie das Dashboard mit KPIs, Analytics und schnellem Zugriff auf alle Module.</p>
+                </li>
+            </ol>
+            
+            <h3>📊 2. Analytics & Monitoring</h3>
+            <p>Das Analytics-System bietet Einblicke in die Website-Performance:</p>
+            <ul>
+                <li><strong>Seitenaufrufe:</strong> Tägliche und monatliche Statistiken</li>
+                <li><strong>Traffic-Quellen:</strong> Woher kommen die Besucher?</li>
+                <li><strong>Geräte-Analyse:</strong> Desktop vs. Mobile Traffic</li>
+                <li><strong>Top-Seiten:</strong> Welche Inhalte sind am beliebtesten?</li>
+            </ul>
+            
+            <div class="warning-box">
+                <strong>💡 Tipp:</strong> Nutzen Sie die Zeitraum-Filter (Tag/Woche/Monat) für detaillierte Analysen.
+            </div>
+            
+            <h3>👥 3. Kundenverwaltung</h3>
+            <p>Zentrale Verwaltung aller Kundeninformationen:</p>
+            
+            <h4>Neuen Kunden anlegen:</h4>
+            <ol class="step-list">
+                <li>Gehen Sie zu "Kunden" → "Neuer Kunde"</li>
+                <li>Füllen Sie alle relevanten Felder aus</li>
+                <li>Fügen Sie Kontaktpersonen hinzu</li>
+                <li>Speichern Sie den Datensatz</li>
+            </ol>
+            
+            <h4>Export-Funktionen:</h4>
+            <ul>
+                <li><strong>Excel (.xlsx):</strong> Vollständiger Export mit Formatierung</li>
+                <li><strong>CSV:</strong> Für Datenanalyse und Import in andere Systeme</li>
+                <li><strong>JSON:</strong> Für technische Integrationen</li>
+            </ul>
+            
+            <h3>📁 4. Medienverwaltung</h3>
+            <p>Upload und Verwaltung aller Website-Medien:</p>
+            
+            <h4>Dateien hochladen:</h4>
+            <ol class="step-list">
+                <li>Klicken Sie auf "Dateien hochladen"</li>
+                <li>Ziehen Sie Bilder per Drag & Drop oder wählen Sie sie aus</li>
+                <li>Die Bilder werden automatisch optimiert (WebP/JPEG)</li>
+                <li>Vergeben Sie Alt-Texte und Beschreibungen</li>
+            </ol>
+            
+            <div class="success-box">
+                <strong>🎯 Automatische Optimierung:</strong> Alle Bilder werden automatisch komprimiert und in optimalen Formaten gespeichert.
+            </div>
+            
+            <h3>⚙️ 5. System-Einstellungen</h3>
+            
+            <h4>Allgemeine Einstellungen:</h4>
+            <ul>
+                <li><strong>Site-Name:</strong> Name der Website</li>
+                <li><strong>Kontakt-Info:</strong> E-Mail und Telefon</li>
+                <li><strong>Meta-Tags:</strong> SEO-Einstellungen</li>
+            </ul>
+            
+            <h4>E-Mail-Konfiguration:</h4>
+            <p>Konfigurieren Sie SMTP-Einstellungen für Benachrichtigungen:</p>
+            <div class="code-block">SMTP-Server: mail.neonmurer.ch
+Port: 587 (STARTTLS)
+Authentifizierung: Ja</div>
+            
+            <h4>Backup-Management:</h4>
+            <ul>
+                <li><strong>Manueller Backup:</strong> Erstellen Sie sofortige Backups</li>
+                <li><strong>Download:</strong> Laden Sie Backup-Archive herunter</li>
+                <li><strong>Automatisch:</strong> Tägliche Backups um 02:00 Uhr</li>
+            </ul>
+            
+            <h3>🔧 6. Wartung & Pflege</h3>
+            
+            <h4>Regelmäßige Aufgaben:</h4>
+            <ul>
+                <li><strong>Wöchentlich:</strong> Analytics überprüfen</li>
+                <li><strong>Monatlich:</strong> Kundendaten aktualisieren</li>
+                <li><strong>Quartalsweise:</strong> Media-Bibliothek aufräumen</li>
+                <li><strong>Jährlich:</strong> Passwörter ändern</li>
+            </ul>
+            
+            <div class="warning-box">
+                <strong>⚠️ Wichtig:</strong> Führen Sie vor größeren Änderungen immer ein Backup durch!
+            </div>
+        </div>
+    </div>
+    
+    <!-- Troubleshooting Tab -->
+    <div id="troubleshooting-tab" class="tab-content">
+        <div class="content-section">
+            <a href="javascript:void(0)" onclick="window.location.href='/cms-admin/index.html'" class="back-link">← Zurück zum CMS</a>
+            
+            <h2>🔧 Troubleshooting</h2>
+            
+            <h3>🚨 Häufige Probleme</h3>
+            
+            <h4>1. Login-Probleme</h4>
+            <div class="warning-box">
+                <strong>Problem:</strong> "Anmeldung fehlgeschlagen" Fehlermeldung
+            </div>
+            <p><strong>Lösungen:</strong></p>
+            <ul>
+                <li>Überprüfen Sie E-Mail und Passwort auf Tippfehler</li>
+                <li>Löschen Sie Browser-Cache und Cookies</li>
+                <li>Versuchen Sie einen Inkognito-/Private-Modus</li>
+                <li>Kontaktieren Sie den Administrator für Passwort-Reset</li>
+            </ul>
+            
+            <h4>2. Upload-Probleme</h4>
+            <div class="warning-box">
+                <strong>Problem:</strong> Dateien können nicht hochgeladen werden
+            </div>
+            <p><strong>Lösungen:</strong></p>
+            <ul>
+                <li>Überprüfen Sie die Dateigröße (Max: 10MB)</li>
+                <li>Unterstützte Formate: JPG, PNG, GIF, WebP</li>
+                <li>Stellen Sie sicher, dass Sie angemeldet sind</li>
+                <li>Prüfen Sie Ihre Internetverbindung</li>
+            </ul>
+            
+            <h4>3. Performance-Probleme</h4>
+            <div class="warning-box">
+                <strong>Problem:</strong> CMS lädt langsam
+            </div>
+            <p><strong>Lösungen:</strong></p>
+            <ul>
+                <li>Überprüfen Sie Ihre Internetgeschwindigkeit</li>
+                <li>Löschen Sie Browser-Cache</li>
+                <li>Verwenden Sie einen modernen Browser (Chrome, Firefox, Safari)</li>
+                <li>Deaktivieren Sie Browser-Erweiterungen temporär</li>
+            </ul>
+            
+            <h3>🔍 System-Checks</h3>
+            
+            <h4>Health-Check URLs:</h4>
+            <div class="code-block"># Allgemeine Systemgesundheit
+GET /api/health
+
+# Datenbank-Status  
+GET /api/health/database
+
+# API-Status
+GET /api/health/api</div>
+            
+            <h4>Log-Dateien:</h4>
+            <ul>
+                <li><strong>Application Logs:</strong> <code>/var/log/neonmurer-cms/app.log</code></li>
+                <li><strong>Error Logs:</strong> <code>/var/log/neonmurer-cms/error.log</code></li>
+                <li><strong>Access Logs:</strong> <code>/var/log/nginx/access.log</code></li>
+            </ul>
+            
+            <h3>📞 Support</h3>
+            
+            <div class="info-box">
+                <strong>🆘 Brauchen Sie Hilfe?</strong>
+                <p>Bei technischen Problemen wenden Sie sich an:</p>
+                <ul>
+                    <li><strong>E-Mail:</strong> support@neonmurer.ch</li>
+                    <li><strong>Telefon:</strong> +41 XX XXX XX XX</li>
+                    <li><strong>Notfall:</strong> +41 XX XXX XX XX (24/7)</li>
+                </ul>
+            </div>
+            
+            <h4>Informationen für Support:</h4>
+            <ul>
+                <li>Browser und Version</li>
+                <li>Betriebssystem</li>
+                <li>Fehlermeldung (Screenshot)</li>
+                <li>Schritte zur Reproduktion</li>
+                <li>Zeitpunkt des Auftretens</li>
+            </ul>
+        </div>
+    </div>
+    
+    <script src="https://unpkg.com/swagger-ui-dist@5.11.0/swagger-ui-bundle.js"></script>
+    <script src="https://unpkg.com/swagger-ui-dist@5.11.0/swagger-ui-standalone-preset.js"></script>
+    <script>
+        function showTab(tabName) {
+            // Hide all tabs
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            // Remove active from all nav tabs
+            const navTabs = document.querySelectorAll('.nav-tab');
+            navTabs.forEach(tab => tab.classList.remove('active'));
+            
+            // Show selected tab
+            document.getElementById(tabName + '-tab').classList.add('active');
+            
+            // Add active to clicked nav tab
+            event.target.classList.add('active');
+        }
+        
+        // Initialize Swagger UI
+        window.onload = function() {
+            const ui = SwaggerUIBundle({
+                url: '/docs/api-spec.yaml',
+                dom_id: '#swagger-ui',
+                deepLinking: true,
+                presets: [
+                    SwaggerUIBundle.presets.apis,
+                    SwaggerUIStandalonePreset
+                ],
+                plugins: [
+                    SwaggerUIBundle.plugins.DownloadUrl
+                ],
+                layout: "StandaloneLayout",
+                defaultModelsExpandDepth: 1,
+                defaultModelExpandDepth: 1,
+                tryItOutEnabled: true,
+                filter: true,
+                validatorUrl: null,
+                supportedSubmitMethods: ['get', 'post', 'put', 'delete', 'patch'],
+                requestInterceptor: function(request) {
+                    // Add auth token if available
+                    const token = localStorage.getItem('token') || localStorage.getItem('accessToken') || localStorage.getItem('authToken');
+                    if (token && !request.headers.Authorization) {
+                        request.headers.Authorization = `Bearer ${token}`;
+                    }
+                    return request;
+                }
+            });
+        };
+    </script>
+</body>
+</html>

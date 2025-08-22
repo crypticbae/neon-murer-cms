@@ -33,11 +33,11 @@ class SimpleTemplateLoader {
         const currentFolder = segments[segments.length - 2]; // Vorletztes Segment (Ordnername)
         
         if (subfolders.includes(currentFolder)) {
-            console.log(`📁 Unterordner erkannt: ${currentFolder} - verwende ../ Präfix`);
+            neonLog(`📁 Unterordner erkannt: ${currentFolder} - verwende ../ Präfix`);
             return '../';
         }
         
-        console.log('🏠 Root-Verzeichnis erkannt - verwende direkten Pfad');
+        neonLog('🏠 Root-Verzeichnis erkannt - verwende direkten Pfad');
         return '';
     }
 
@@ -70,7 +70,7 @@ class SimpleTemplateLoader {
      */
     loadTemplates() {
         try {
-            console.log('🔧 Simple Template Loader: Lade Header und Footer...');
+            neonLog('🔧 Simple Template Loader: Lade Header und Footer...');
             
             // Prüfe ob Template-Strings verfügbar sind
             if (!window.EmbeddedTemplates) {
@@ -83,10 +83,10 @@ class SimpleTemplateLoader {
             // Header laden mit angepassten Pfaden
             const headerPlaceholder = document.getElementById('header-placeholder');
             if (headerPlaceholder) {
-                console.log('📍 Header-Platzhalter gefunden');
+                neonLog('📍 Header-Platzhalter gefunden');
                 const adjustedHeader = this.adjustTemplatePaths(window.EmbeddedTemplates.header, pathPrefix);
                 headerPlaceholder.outerHTML = adjustedHeader;
-                console.log('✅ Header Template geladen mit korrigierten Pfaden');
+                neonLog('✅ Header Template geladen mit korrigierten Pfaden');
             } else {
                 console.warn('⚠️ Header-Platzhalter nicht gefunden');
             }
@@ -94,15 +94,15 @@ class SimpleTemplateLoader {
             // Footer laden mit angepassten Pfaden
             const footerPlaceholder = document.getElementById('footer-placeholder');
             if (footerPlaceholder) {
-                console.log('📍 Footer-Platzhalter gefunden');
+                neonLog('📍 Footer-Platzhalter gefunden');
                 const adjustedFooter = this.adjustTemplatePaths(window.EmbeddedTemplates.footer, pathPrefix);
                 footerPlaceholder.outerHTML = adjustedFooter;
-                console.log('✅ Footer Template geladen');
+                neonLog('✅ Footer Template geladen');
             } else {
                 console.warn('⚠️ Footer-Platzhalter nicht gefunden');
             }
             
-            console.log('✅ Simple Template Loader: Alle Templates erfolgreich geladen');
+            neonLog('✅ Simple Template Loader: Alle Templates erfolgreich geladen');
             
             // Nach dem Laden: Events initialisieren
             this.initializeEvents();
@@ -131,15 +131,19 @@ class SimpleTemplateLoader {
             // Mobile Navigation Events
             this.initializeMobileNavigation();
             
-            console.log('✅ Template Events initialisiert');
+
+            
+            neonLog('✅ Template Events initialisiert');
         }, 100);
     }
+
+
 
         /**
      * Einfache Dropdown-Initialisierung
      */
     initializeDropdowns() {
-        console.log('🔧 Initialisiere einfache Dropdowns...');
+        neonLog('🔧 Initialisiere einfache Dropdowns...');
         
         // Nur für Mobile: Klick-Verhalten für Dropdowns
         if (window.innerWidth < 992) {
@@ -174,7 +178,7 @@ class SimpleTemplateLoader {
             });
         }
         
-        console.log('✅ Einfache Dropdowns initialisiert');
+        neonLog('✅ Einfache Dropdowns initialisiert');
     }
 
     /**
@@ -239,7 +243,7 @@ class SimpleTemplateLoader {
             }
         });
         document.dispatchEvent(event);
-        console.log('📢 Templates-Loaded Event ausgelöst');
+        neonLog('📢 Templates-Loaded Event ausgelöst');
     }
 
     /**
@@ -272,11 +276,120 @@ class SimpleTemplateLoader {
     }
 }
 
-// Simple Template Loader automatisch starten
-window.simpleTemplateLoader = new SimpleTemplateLoader();
+// Simple Template Loader automatisch starten (entfernt - wird unten initialisiert)
 
-// Für Debugging
-if (window.location.search.includes('debug=true')) {
-    console.log('🔍 Simple Template Loader Debug Mode aktiv');
+// Load Analytics Tracker
+function loadAnalyticsTracker() {
+    // Check if script already loaded
+    if (document.querySelector('script[src*="neon-usage-stats.js"]')) {
+        // Script already loaded, just initialize
+        setTimeout(initAnalyticsTracker, 100);
+        return;
+    }
+    
+    // Try different paths based on current location
+    const possiblePaths = [
+        '../template/assets/js/neon-usage-stats.js',  // Subfolder level (like neon-murer/)
+        'template/assets/js/neon-usage-stats.js'      // Root level
+    ];
+    
+    function tryNextPath(pathIndex = 0) {
+        if (pathIndex >= possiblePaths.length) {
+            console.warn('📊 Failed to load analytics tracker from all paths');
+            return;
+        }
+        
+        const script = document.createElement('script');
+        script.src = possiblePaths[pathIndex];
+        script.async = true;
+        script.onload = function() {
+            neonLog('📊 Analytics tracker loaded successfully from: ' + possiblePaths[pathIndex]);
+            // Initialize analytics after loading
+            setTimeout(initAnalyticsTracker, 100);
+        };
+        script.onerror = function() {
+            // Try next path
+            tryNextPath(pathIndex + 1);
+        };
+        document.head.appendChild(script);
+    }
+    
+    tryNextPath();
+}
+
+// Load analytics after DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadAnalyticsTracker);
+} else {
+    loadAnalyticsTracker();
+}
+
+// Load Search Function
+function loadSearchSystem() {
+    // Check if script already loaded
+    if (document.querySelector('script[src*="modern-search.js"]')) {
+        // Script already loaded, just initialize if needed
+        setTimeout(initSearchSystem, 100);
+        return;
+    }
+    
+    // Try different paths based on current location
+    const possiblePaths = [
+        '../template/assets/js/modern-search.js',  // Subfolder level (like neon-murer/)
+        'template/assets/js/modern-search.js'      // Root level
+    ];
+    
+    function tryNextPath(pathIndex = 0) {
+        if (pathIndex >= possiblePaths.length) {
+            console.warn('🔍 Failed to load search system from all paths');
+            return;
+        }
+        
+        const script = document.createElement('script');
+        script.src = possiblePaths[pathIndex];
+        script.async = true;
+        script.onload = function() {
+            neonLog('🔍 Search system loaded successfully from: ' + possiblePaths[pathIndex]);
+            // Initialize search after loading
+            setTimeout(initSearchSystem, 100);
+        };
+        script.onerror = function() {
+            // Try next path
+            tryNextPath(pathIndex + 1);
+        };
+        document.head.appendChild(script);
+    }
+    
+    tryNextPath();
+}
+
+function initSearchSystem() {
+    if (typeof ModernNeonSearch !== 'undefined' && !window.modernNeonSearch) {
+        window.modernNeonSearch = new ModernNeonSearch();
+        neonLog('🔍 Search system initialized on', window.location.pathname);
+    } else if (window.modernNeonSearch) {
+        neonLog('🔍 Search system already initialized');
+    } else {
+        console.warn('🔍 ModernNeonSearch not found - script may not be loaded');
+    }
+}
+
+// Load search after DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadSearchSystem);
+} else {
+    loadSearchSystem();
+}
+
+// Template Loader initialisieren (nur wenn noch nicht vorhanden)
+if (!window.simpleTemplateLoader) {
+    window.simpleTemplateLoader = new SimpleTemplateLoader();
+}
+
+
+
+// Legacy debug support (neonLog ist bereits in templates.js definiert)
+if (window.NEON_DEBUG) {
+    neonLog('🔍 Simple Template Loader Debug Mode aktiv');
     window.simpleTemplateLoader.debug = true;
 } 

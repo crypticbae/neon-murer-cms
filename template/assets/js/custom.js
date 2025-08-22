@@ -5,7 +5,7 @@ function setCarouselHeight() {
   
   // Prüfe ob Elemente existieren (könnten noch nicht geladen sein)
   if (!topElement || !headerElement) {
-    console.log('⏳ Header-Elemente noch nicht geladen - warte...');
+    neonLog('⏳ Header-Elemente noch nicht geladen - warte...');
     return;
   }
   
@@ -16,12 +16,14 @@ function setCarouselHeight() {
   document.documentElement.style.setProperty('--top-height', `${topHeight}px`);
   document.documentElement.style.setProperty('--header-height', `${headerHeight}px`);
   
-  console.log('✅ Carousel-Höhen gesetzt:', { topHeight, headerHeight });
+          // Carousel-Höhen gesetzt
 }
 
 // Ruft die Funktion auf und aktualisiert die Höhe beim Ändern der Fenstergröße
-window.addEventListener('load', setCarouselHeight);
-window.addEventListener('resize', setCarouselHeight);
+if (window && typeof window.addEventListener === 'function') {
+    window.addEventListener('load', setCarouselHeight);
+    window.addEventListener('resize', setCarouselHeight);
+}
 
 // Event-Listener für Template-Loading
 document.addEventListener('templatesLoaded', setCarouselHeight);
@@ -45,7 +47,7 @@ function initializeNavigation() {
 
   // Prüfe ob Elemente existieren
   if (!mobileMenuBg || !navBarTop || !navBarLogo) {
-    console.log('⏳ Navigation-Elemente noch nicht geladen - warte...');
+    neonLog('⏳ Navigation-Elemente noch nicht geladen - warte...');
     return;
   }
 
@@ -56,7 +58,7 @@ function initializeNavigation() {
     document.getElementById('navbar_top').classList.remove('bg_active');
   });
   
-  console.log('✅ Navigation initialisiert');
+      // Navigation initialisiert
 
   window.addEventListener('scroll', function() {
     if (window.scrollY > headerScrollTop) {
@@ -106,9 +108,14 @@ var breakpoint = {
   xl: 1200
 };
 
-// slick slider
+// slick slider - warte auf Template Load
 $(document).ready(function(){
-  $('#slick').slick({
+  // Warte auf Template System
+  function initSlick() {
+    const slickElement = $('#slick');
+    if (slickElement.length && !slickElement.hasClass('slick-initialized')) {
+      try {
+        slickElement.slick({
     autoplay: true,
     autoplaySpeed: 3000,
     draggable: true,
@@ -148,7 +155,21 @@ $(document).ready(function(){
         }
       }
     ]
-  });
+        });
+      } catch (error) {
+        console.warn('Slick Carousel konnte nicht initialisiert werden:', error);
+      }
+    }
+  }
+  
+  // Sofort versuchen
+  initSlick();
+  
+  // Falls Template-System später lädt
+  document.addEventListener('templates-loaded', initSlick);
+  
+  // Fallback nach Timeout
+  setTimeout(initSlick, 1000);
 });
 
 document.addEventListener('DOMContentLoaded', () => {

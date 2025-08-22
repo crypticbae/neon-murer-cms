@@ -1,0 +1,49 @@
+{
+  "testCustomer": {
+    "company": "Fixture Test AG",
+    "firstName": "Test",
+    "lastName": "User",
+    "email": "fixture@test.ch",
+    "phone": "+41 44 123 45 67",
+    "city": "Zürich",
+    "zipCode": "8001",
+    "industry": "IT",
+    "status": "active",
+    "notes": "Test customer created from fixture"
+  },
+  "customerList": [
+    {
+      "company": "Alpha Solutions GmbH",
+      "firstName": "Anna",
+      "lastName": "Alpha",
+      "email": "anna@alpha.ch",
+      "phone": "+41 44 111 11 11",
+      "city": "Zürich",
+      "zipCode": "8001",
+      "industry": "IT",
+      "status": "active"
+    },
+    {
+      "company": "Beta Services AG",
+      "firstName": "Bruno",
+      "lastName": "Beta",
+      "email": "bruno@beta.ch",
+      "phone": "+41 44 222 22 22",
+      "city": "Basel",
+      "zipCode": "4001",
+      "industry": "Consulting",
+      "status": "prospect"
+    },
+    {
+      "company": "Gamma Industries",
+      "firstName": "Clara",
+      "lastName": "Gamma",
+      "email": "clara@gamma.ch",
+      "phone": "+41 44 333 33 33",
+      "city": "Bern",
+      "zipCode": "3001",
+      "industry": "Manufacturing",
+      "status": "inactive"
+    }
+  ]
+}

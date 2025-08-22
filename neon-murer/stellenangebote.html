@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="de" id="www-neonmurer-ch">
 <head>
+  <!-- CDN Preloads für bessere Performance -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="preconnect" href="https://code.jquery.com" crossorigin>
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
 
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta charset="utf-8">
@@ -10,30 +16,36 @@
   <link rel="stylesheet" type="text/css" href="../template/inc_css/include.css">
   
   <!-- Font Awesome CDN für Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" crossorigin="anonymous">
   
-<link rel="icon" type="image/png" href="https://www.neonmurer.ch/favicon/favicon-96x96.png" sizes="96x96" />
-  <link rel="icon" type="image/svg+xml" href="https://www.neonmurer.ch/favicon/favicon.svg" />
-  <link rel="shortcut icon" href="https://www.neonmurer.ch/favicon/favicon.ico" />
-  <link rel="apple-touch-icon" sizes="180x180" href="https://www.neonmurer.ch/favicon/apple-touch-icon.png" />
+<link rel="icon" type="image/png" href="../favicon/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="../favicon/favicon.svg" />
+  <link rel="shortcut icon" href="../favicon/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="../favicon/apple-touch-icon.png" />
   <meta name="apple-mobile-web-app-title" content="Neon Murer" />
-  <link rel="manifest" href="https://www.neonmurer.ch/favicon/site.webmanifest" />
+  <link rel="manifest" href="../favicon/site.webmanifest" />
   
-  <!--[if lt IE 9]><script src="https://www.neonmurer.ch/template/lib/jquery/jquery-1.12.4.min.js"></script><![endif]-->
-  <!--[if gte IE 9]><!--><script src="https://www.neonmurer.ch/template/lib/jquery/jquery-3.7.1.min.js"></script><!--<![endif]-->
+  <!--[if lt IE 9]><script src="https://code.jquery.com/jquery-3.7.1.min.js" crossorigin="anonymous"></script><![endif]-->
+  <!--[if gte IE 9]><!--><script src="https://code.jquery.com/jquery-3.7.1.min.js" crossorigin="anonymous"></script><!--<![endif]-->
   
   <meta name="description" content="Karriere bei Neon Murer AG - Aktuelle Stellenangebote in der Werbetechnik. Werden Sie Teil unseres Teams mit 75 Jahren Erfahrung.">
   <meta name="keywords" content="Stellenangebote, Karriere, Jobs, Werbetechnik, Neon Murer, Ausbildung, Vollzeit, Teilzeit">
   <link rel="canonical" href="https://www.neonmurer.ch/stellenangebote.html">
-  <script src="https://www.neonmurer.ch/template/assets/js/jquery.easing.min.js"></script>
-  <script src="https://www.neonmurer.ch/template/assets/js/bootstrap.bundle.min.js"></script>
-  <script src="https://www.neonmurer.ch/template/assets/js/slick.min.js"></script>
-  <script src="../template/assets/js/search.js"></script>
-  <script src="https://www.neonmurer.ch/template/assets/js/custom.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+  <script src="../template/assets/js/slick.min.js"></script>
+  
+  <script src="../template/assets/js/custom.js"></script>
 
   <!-- ========== TEMPLATE SYSTEM ========== -->
   <script src="../template/assets/js/templates.js"></script>
   <script src="../template/assets/js/simple-template-loader.js"></script>
+  
+  <!-- Usage Statistics -->
+  <script src="../template/assets/js/neon-usage-stats.js"></script>
+  
+  <!-- Privacy Manager -->
+  <script src="../template/assets/js/neon-privacy-manager.js"></script>
   
   <!-- Page Specific CSS -->
   <link rel="stylesheet" href="../template/assets/css/stellenangebote.css">
@@ -86,75 +98,13 @@
             <h3 class="column-title">Offene Stellen</h3>
             <p class="column-subtitle">Für erfahrene Fachkräfte</p>
           </div>
-          <div class="jobs-container regular-jobs">
-        <!-- Job 1: Polymechaniker -->
-        <div class="job-card" onclick="openJobModal('polymechaniker')">
-          <div class="job-header">
-            <div style="display: flex; align-items: flex-start;">
-              <div class="job-icon">
-                <i class="fa-solid fa-cog"></i>
-              </div>
-              <div>
-                <h3 class="job-title">Polymechaniker/in EFZ</h3>
-                <span class="job-department">Produktion & Fertigung</span>
+          <div class="jobs-container regular-jobs" id="regular-jobs-container">
+            <!-- Jobs werden hier dynamisch geladen -->
+            <div class="loading-spinner">
+              <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Jobs werden geladen...</span>
               </div>
             </div>
-          </div>
-          
-          <div class="job-details">
-            <div class="job-detail-item">
-              <i class="fa-solid fa-map-marker-alt"></i>
-              <span>Rapperswil-Jona</span>
-            </div>
-            <div class="job-detail-item">
-              <i class="fa-solid fa-clock"></i>
-              <span>Vollzeit</span>
-            </div>
-            <div class="job-detail-item">
-              <i class="fa-solid fa-calendar"></i>
-              <span>Per sofort</span>
-            </div>
-          </div>
-          
-          <div class="job-action">
-            <button class="job-btn">Details ansehen</button>
-          </div>
-        </div>
-
-        <!-- Job 2: Grafiker -->
-        <div class="job-card" onclick="openJobModal('grafiker')">
-          <div class="job-header">
-            <div style="display: flex; align-items: flex-start;">
-              <div class="job-icon">
-                <i class="fa-solid fa-palette"></i>
-              </div>
-              <div>
-                <h3 class="job-title">Grafiker/in EFZ</h3>
-                <span class="job-department">Design & Kreation</span>
-              </div>
-            </div>
-          </div>
-          
-          <div class="job-details">
-            <div class="job-detail-item">
-              <i class="fa-solid fa-map-marker-alt"></i>
-              <span>Rapperswil-Jona</span>
-            </div>
-            <div class="job-detail-item">
-              <i class="fa-solid fa-clock"></i>
-              <span>Vollzeit</span>
-            </div>
-            <div class="job-detail-item">
-              <i class="fa-solid fa-calendar"></i>
-              <span>Per 1. März 2024</span>
-            </div>
-          </div>
-          
-          <div class="job-action">
-            <button class="job-btn">Details ansehen</button>
-          </div>
-          </div>
-
           </div>
         </div>
 
@@ -164,38 +114,11 @@
             <h3 class="column-title">Lehrstellen</h3>
             <p class="column-subtitle">Für angehende Fachkräfte</p>
           </div>
-          <div class="jobs-container apprentice-jobs">
-            <!-- Job 3: Lernender -->
-            <div class="job-card" onclick="openJobModal('lernender')">
-              <div class="job-header">
-                <div style="display: flex; align-items: flex-start;">
-                  <div class="job-icon">
-                    <i class="fa-solid fa-graduation-cap"></i>
-                  </div>
-                  <div>
-                    <h3 class="job-title">Lernende/r Polymechaniker/in EFZ</h3>
-                    <span class="job-department">Ausbildung</span>
-                  </div>
-                </div>
-              </div>
-              
-              <div class="job-details">
-                <div class="job-detail-item">
-                  <i class="fa-solid fa-map-marker-alt"></i>
-                  <span>Rapperswil-Jona</span>
-                </div>
-                <div class="job-detail-item">
-                  <i class="fa-solid fa-clock"></i>
-                  <span>Lehre (4 Jahre)</span>
-                </div>
-                <div class="job-detail-item">
-                  <i class="fa-solid fa-calendar"></i>
-                  <span>August 2024</span>
-                </div>
-              </div>
-              
-              <div class="job-action">
-                <button class="job-btn">Details ansehen</button>
+          <div class="jobs-container apprentice-jobs" id="apprentice-jobs-container">
+            <!-- Lehrstellen werden hier dynamisch geladen -->
+            <div class="loading-spinner">
+              <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Lehrstellen werden geladen...</span>
               </div>
             </div>
           </div>
@@ -206,281 +129,20 @@
 </main>
 
 <!-- Job Modals -->
-<!-- Polymechaniker Modal -->
-<div id="modal-polymechaniker" class="job-modal">
+<!-- Dynamisches Job Modal -->
+<div id="job-modal" class="job-modal">
   <div class="modal-content">
     <div class="modal-header">
       <button class="modal-close" onclick="closeJobModal()">&times;</button>
-      <h2 class="modal-job-title">Polymechaniker/in EFZ</h2>
+      <h2 class="modal-job-title" id="modal-job-title">Job Titel</h2>
     </div>
     
-    <div class="modal-body">
-      <div class="modal-section">
-        <h3 class="modal-section-title">
-          <i class="fa-solid fa-bullseye"></i>
-          Ihre Aufgaben
-        </h3>
-        <ul class="modal-list">
-          <li>CNC-Bearbeitung von Metallkomponenten für Werbeträger</li>
-          <li>Fertigung und Montage von Konstruktionen nach technischen Zeichnungen</li>
-          <li>Qualitätskontrolle und Endkontrolle der produzierten Teile</li>
-          <li>Wartung und Pflege der Produktionsmaschinen</li>
-          <li>Zusammenarbeit mit dem Produktionsteam und anderen Abteilungen</li>
-          <li>Einhaltung der Sicherheits- und Qualitätsstandards</li>
-        </ul>
-      </div>
-      
-      <div class="modal-section">
-        <h3 class="modal-section-title">
-          <i class="fa-solid fa-user-check"></i>
-          Ihr Profil
-        </h3>
-        <ul class="modal-list">
-          <li>Abgeschlossene Ausbildung als Polymechaniker/in EFZ</li>
-          <li>Mehrjährige Berufserfahrung in der Metallbearbeitung</li>
-          <li>Erfahrung mit CNC-Maschinen (Drehen und Fräsen)</li>
-          <li>Präzise und sorgfältige Arbeitsweise</li>
-          <li>Teamfähigkeit und Zuverlässigkeit</li>
-          <li>Deutschkenntnisse in Wort und Schrift</li>
-        </ul>
-      </div>
-      
-      <div class="modal-section">
-        <h3 class="modal-section-title">
-          <i class="fa-solid fa-star"></i>
-          Wir bieten
-        </h3>
-        <ul class="modal-list">
-          <li>Abwechslungsreiche Tätigkeit in einem innovativen Umfeld</li>
-          <li>Moderne Arbeitsplätze und hochwertige Maschinen</li>
-          <li>Familiäres Arbeitsklima in einem erfahrenen Team</li>
-          <li>Weiterbildungsmöglichkeiten und persönliche Entwicklung</li>
-          <li>Attraktive Anstellungsbedingungen und Sozialleistungen</li>
-          <li>Flexible Arbeitszeiten und Work-Life-Balance</li>
-        </ul>
-      </div>
-      
-      <div class="modal-section">
-        <h3 class="modal-section-title">
-          <i class="fa-solid fa-user-tie"></i>
-          Ihr Ansprechpartner
-        </h3>
-        <div class="contact-person">
-          <div class="contact-header">
-            <div class="contact-avatar">
-              <i class="fa-solid fa-user"></i>
-            </div>
-            <div class="contact-info">
-              <h4>Thomas Murer</h4>
-              <p>Geschäftsführer & Produktionsleiter</p>
-            </div>
-          </div>
-          <div class="contact-details">
-            <div class="contact-item">
-              <i class="fa-solid fa-phone"></i>
-              <span>+41 55 211 30 00</span>
-            </div>
-            <div class="contact-item">
-              <i class="fa-solid fa-envelope"></i>
-              <span>thomas.murer@neonmurer.ch</span>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="modal-body" id="modal-job-body">
+      <!-- Content wird dynamisch geladen -->
     </div>
     
-    <div class="apply-section">
-      <h3>Interessiert?</h3>
-      <p>Senden Sie uns Ihre vollständigen Bewerbungsunterlagen per E-Mail oder Post.</p>
-      <button class="apply-btn" onclick="window.location.href='mailto:thomas.murer@neonmurer.ch?subject=Bewerbung%20Polymechaniker'">
-        Jetzt bewerben
-      </button>
-    </div>
-  </div>
-</div>
-
-<!-- Grafiker Modal -->
-<div id="modal-grafiker" class="job-modal">
-  <div class="modal-content">
-    <div class="modal-header">
-      <button class="modal-close" onclick="closeJobModal()">&times;</button>
-      <h2 class="modal-job-title">Grafiker/in EFZ</h2>
-    </div>
-    
-    <div class="modal-body">
-      <div class="modal-section">
-        <h3 class="modal-section-title">
-          <i class="fa-solid fa-bullseye"></i>
-          Ihre Aufgaben
-        </h3>
-        <ul class="modal-list">
-          <li>Gestaltung von Werbeträgern von der Idee bis zur Umsetzung</li>
-          <li>Kundenberatung und Präsentation von Designkonzepten</li>
-          <li>Erstellung von Druckvorlagen und technischen Zeichnungen</li>
-          <li>Zusammenarbeit mit Produktion und Montage</li>
-          <li>Pflege und Weiterentwicklung des Corporate Designs</li>
-          <li>Digitale Bildbearbeitung und Retusche</li>
-        </ul>
-      </div>
-      
-      <div class="modal-section">
-        <h3 class="modal-section-title">
-          <i class="fa-solid fa-user-check"></i>
-          Ihr Profil
-        </h3>
-        <ul class="modal-list">
-          <li>Abgeschlossene Ausbildung als Grafiker/in EFZ oder vergleichbar</li>
-          <li>Sehr gute Kenntnisse in Adobe Creative Suite (Illustrator, Photoshop, InDesign)</li>
-          <li>Erfahrung in der Gestaltung von Werbemitteln</li>
-          <li>Kreativität und Gespür für Trends und Design</li>
-          <li>Kundenorientierte und kommunikative Persönlichkeit</li>
-          <li>Selbständige und strukturierte Arbeitsweise</li>
-        </ul>
-      </div>
-      
-      <div class="modal-section">
-        <h3 class="modal-section-title">
-          <i class="fa-solid fa-star"></i>
-          Wir bieten
-        </h3>
-        <ul class="modal-list">
-          <li>Vielseitige und kreative Projekte für namhafte Kunden</li>
-          <li>Moderne Arbeitsplätze mit aktueller Software und Hardware</li>
-          <li>Raum für eigene Ideen und kreative Entfaltung</li>
-          <li>Weiterbildungsmöglichkeiten in Design und Technik</li>
-          <li>Kollegiales Team und offene Kommunikation</li>
-          <li>Zentrale Lage mit guter Erreichbarkeit</li>
-        </ul>
-      </div>
-      
-      <div class="modal-section">
-        <h3 class="modal-section-title">
-          <i class="fa-solid fa-user-tie"></i>
-          Ihre Ansprechpartnerin
-        </h3>
-        <div class="contact-person">
-          <div class="contact-header">
-            <div class="contact-avatar">
-              <i class="fa-solid fa-user"></i>
-            </div>
-            <div class="contact-info">
-              <h4>Sandra Murer</h4>
-              <p>Kreativdirektorin & Kundenberatung</p>
-            </div>
-          </div>
-          <div class="contact-details">
-            <div class="contact-item">
-              <i class="fa-solid fa-phone"></i>
-              <span>+41 55 211 30 00</span>
-            </div>
-            <div class="contact-item">
-              <i class="fa-solid fa-envelope"></i>
-              <span>sandra.murer@neonmurer.ch</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <div class="apply-section">
-      <h3>Interessiert?</h3>
-      <p>Wir freuen uns auf Ihre Bewerbung mit Arbeitsproben und Portfolio.</p>
-      <button class="apply-btn" onclick="window.location.href='mailto:sandra.murer@neonmurer.ch?subject=Bewerbung%20Grafiker'">
-        Jetzt bewerben
-      </button>
-    </div>
-  </div>
-</div>
-
-<!-- Lernender Modal -->
-<div id="modal-lernender" class="job-modal">
-  <div class="modal-content">
-    <div class="modal-header">
-      <button class="modal-close" onclick="closeJobModal()">&times;</button>
-      <h2 class="modal-job-title">Lernende/r Polymechaniker/in EFZ</h2>
-    </div>
-    
-    <div class="modal-body">
-      <div class="modal-section">
-        <h3 class="modal-section-title">
-          <i class="fa-solid fa-bullseye"></i>
-          Das erwartet Sie
-        </h3>
-        <ul class="modal-list">
-          <li>Fundierte 4-jährige Ausbildung zum Polymechaniker/in EFZ</li>
-          <li>Erlernen aller Grundlagen der Metallbearbeitung</li>
-          <li>Arbeit mit modernsten CNC-Maschinen und Werkzeugen</li>
-          <li>Rotation durch verschiedene Abteilungen</li>
-          <li>Betreuung durch erfahrene Berufsbildner</li>
-          <li>Unterstützung bei schulischen Herausforderungen</li>
-        </ul>
-      </div>
-      
-      <div class="modal-section">
-        <h3 class="modal-section-title">
-          <i class="fa-solid fa-user-check"></i>
-          Das bringen Sie mit
-        </h3>
-        <ul class="modal-list">
-          <li>Abgeschlossene Sekundarschule (Niveau A oder B)</li>
-          <li>Interesse an Technik und handwerklicher Arbeit</li>
-          <li>Gute Leistungen in Mathematik und Physik</li>
-          <li>Zuverlässigkeit und Lernbereitschaft</li>
-          <li>Teamfähigkeit und positive Einstellung</li>
-          <li>Erste Erfahrungen im Werken oder Praktika von Vorteil</li>
-        </ul>
-      </div>
-      
-      <div class="modal-section">
-        <h3 class="modal-section-title">
-          <i class="fa-solid fa-star"></i>
-          Wir bieten
-        </h3>
-        <ul class="modal-list">
-          <li>Attraktiver Lehrlingslohn und jährliche Anpassung</li>
-          <li>Moderne Ausbildungsplätze und neueste Technologie</li>
-          <li>Persönliche Betreuung und individuelle Förderung</li>
-          <li>Übernahmechancen nach erfolgreichem Abschluss</li>
-          <li>Zusätzliche Kurse und Weiterbildungsmöglichkeiten</li>
-          <li>Betriebsausflüge und Teamevents für Lernende</li>
-        </ul>
-      </div>
-      
-      <div class="modal-section">
-        <h3 class="modal-section-title">
-          <i class="fa-solid fa-user-tie"></i>
-          Ihr Ansprechpartner
-        </h3>
-        <div class="contact-person">
-          <div class="contact-header">
-            <div class="contact-avatar">
-              <i class="fa-solid fa-user"></i>
-            </div>
-            <div class="contact-info">
-              <h4>Thomas Murer</h4>
-              <p>Geschäftsführer & Ausbildungsleiter</p>
-            </div>
-          </div>
-          <div class="contact-details">
-            <div class="contact-item">
-              <i class="fa-solid fa-phone"></i>
-              <span>+41 55 211 30 00</span>
-            </div>
-            <div class="contact-item">
-              <i class="fa-solid fa-envelope"></i>
-              <span>thomas.murer@neonmurer.ch</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <div class="apply-section">
-      <h3>Bereit für den Start?</h3>
-      <p>Senden Sie uns Ihre Bewerbung mit Schulzeugnissen und Schnupperberichten.</p>
-      <button class="apply-btn" onclick="window.location.href='mailto:thomas.murer@neonmurer.ch?subject=Bewerbung%20Lehrstelle%20Polymechaniker'">
-        Jetzt bewerben
-      </button>
+    <div class="apply-section" id="modal-apply-section">
+      <!-- Apply section wird dynamisch geladen -->
     </div>
   </div>
 </div>
@@ -496,21 +158,246 @@
 </div>
 
 <script>
-// Job Modal Functionality
-function openJobModal(jobId) {
-  const modal = document.getElementById('modal-' + jobId);
-  if (modal) {
-    modal.classList.add('active');
-    document.body.style.overflow = 'hidden';
+// Global variables
+let allJobs = [];
+
+// Load jobs when page loads
+document.addEventListener('DOMContentLoaded', function() {
+  loadJobs();
+  
+  // Smooth scrolling for anchor links
+  const anchors = document.querySelectorAll('a[href^="#"]');
+  anchors.forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    });
+  });
+});
+
+// Load jobs from API
+async function loadJobs() {
+  try {
+    const response = await fetch('/api/jobs/active');
+    const data = await response.json();
+    allJobs = data.jobs || [];
+    
+    renderJobs();
+  } catch (error) {
+    console.error('Fehler beim Laden der Jobs:', error);
+    showErrorMessage();
   }
 }
 
+// Render jobs in both columns
+function renderJobs() {
+  const regularJobsContainer = document.getElementById('regular-jobs-container');
+  const apprenticeJobsContainer = document.getElementById('apprentice-jobs-container');
+  
+  // Clear loading spinners
+  regularJobsContainer.innerHTML = '';
+  apprenticeJobsContainer.innerHTML = '';
+  
+  if (allJobs.length === 0) {
+    showNoJobsMessage();
+    return;
+  }
+  
+  // Separate jobs by type
+  const regularJobs = allJobs.filter(job => job.jobType !== 'lehrstelle');
+  const apprenticeJobs = allJobs.filter(job => job.jobType === 'lehrstelle');
+  
+  // Render regular jobs
+  if (regularJobs.length > 0) {
+    regularJobs.forEach(job => {
+      regularJobsContainer.appendChild(createJobCard(job));
+    });
+  } else {
+    regularJobsContainer.innerHTML = '<p class="no-jobs-message">Derzeit keine offenen Stellen verfügbar.</p>';
+  }
+  
+  // Render apprentice jobs
+  if (apprenticeJobs.length > 0) {
+    apprenticeJobs.forEach(job => {
+      apprenticeJobsContainer.appendChild(createJobCard(job));
+    });
+  } else {
+    apprenticeJobsContainer.innerHTML = '<p class="no-jobs-message">Derzeit keine Lehrstellen verfügbar.</p>';
+  }
+}
+
+// Create job card element
+function createJobCard(job) {
+  const card = document.createElement('div');
+  card.className = 'job-card';
+  card.onclick = () => openJobModal(job.id);
+  
+  // Map department to German
+  const departmentMap = {
+    'produktion': 'Produktion & Fertigung',
+    'grafik': 'Design & Kreation',
+    'montage': 'Montage & Installation',
+    'administration': 'Administration',
+    'verkauf': 'Verkauf & Beratung'
+  };
+  
+  // Map job type to German
+  const jobTypeMap = {
+    'vollzeit': 'Vollzeit',
+    'teilzeit': 'Teilzeit',
+    'lehrstelle': 'Lehre',
+    'praktikum': 'Praktikum',
+    'temporaer': 'Temporär'
+  };
+  
+  // Map location to German
+  const locationMap = {
+    'neuhaus': 'Neuhaus',
+    'uznach': 'Uznach',
+    'beide': 'Neuhaus & Uznach'
+  };
+  
+  // Choose icon based on department
+  const iconMap = {
+    'produktion': 'fa-cog',
+    'grafik': 'fa-palette',
+    'montage': 'fa-tools',
+    'administration': 'fa-building',
+    'verkauf': 'fa-handshake'
+  };
+  
+  const icon = iconMap[job.department] || 'fa-briefcase';
+  
+  card.innerHTML = `
+    <div class="job-header">
+      <div style="display: flex; align-items: flex-start;">
+        <div class="job-icon">
+          <i class="fa-solid ${icon}"></i>
+        </div>
+        <div>
+          <h3 class="job-title">${job.title}</h3>
+          <span class="job-department">${departmentMap[job.department] || job.department}</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="job-details">
+      <div class="job-detail-item">
+        <i class="fa-solid fa-map-marker-alt"></i>
+        <span>${locationMap[job.location] || job.location}</span>
+      </div>
+      <div class="job-detail-item">
+        <i class="fa-solid fa-clock"></i>
+        <span>${jobTypeMap[job.jobType] || job.jobType}</span>
+      </div>
+      <div class="job-detail-item">
+        <i class="fa-solid fa-calendar"></i>
+        <span>Per sofort</span>
+      </div>
+    </div>
+    
+    <div class="job-action">
+      <button class="job-btn">Details ansehen</button>
+    </div>
+  `;
+  
+  return card;
+}
+
+// Open job modal with dynamic content
+function openJobModal(jobId) {
+  const job = allJobs.find(j => j.id === jobId);
+  if (!job) return;
+  
+  const modal = document.getElementById('job-modal');
+  const modalTitle = document.getElementById('modal-job-title');
+  const modalBody = document.getElementById('modal-job-body');
+  const modalApplySection = document.getElementById('modal-apply-section');
+  
+  // Set title
+  modalTitle.textContent = job.title;
+  
+  // Set body content
+  modalBody.innerHTML = `
+    <div class="modal-section">
+      <h3 class="modal-section-title">
+        <i class="fa-solid fa-info-circle"></i>
+        Stellenbeschreibung
+      </h3>
+      <div class="job-content">
+        ${job.content || job.description || '<p>Keine detaillierte Beschreibung verfügbar.</p>'}
+      </div>
+    </div>
+    
+    ${job.requirements && job.requirements.length > 0 ? `
+    <div class="modal-section">
+      <h3 class="modal-section-title">
+        <i class="fa-solid fa-list-check"></i>
+        Anforderungen
+      </h3>
+      <ul class="modal-list">
+        ${job.requirements.map(req => `<li>${req.text}</li>`).join('')}
+      </ul>
+    </div>
+    ` : ''}
+    
+    ${job.benefits ? `
+    <div class="modal-section">
+      <h3 class="modal-section-title">
+        <i class="fa-solid fa-star"></i>
+        Wir bieten
+      </h3>
+      <div class="job-benefits">
+        ${job.benefits}
+      </div>
+    </div>
+    ` : ''}
+  `;
+  
+  // Set apply section
+  modalApplySection.innerHTML = `
+    <h3>Interessiert?</h3>
+    <p>Senden Sie uns Ihre vollständigen Bewerbungsunterlagen per E-Mail.</p>
+    <button class="apply-btn" onclick="window.location.href='mailto:info@neonmurer.ch?subject=Bewerbung%20${encodeURIComponent(job.title)}'">
+      Jetzt bewerben
+    </button>
+  `;
+  
+  // Show modal
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+// Close job modal
 function closeJobModal() {
-  const modals = document.querySelectorAll('.job-modal');
-  modals.forEach(modal => {
-    modal.classList.remove('active');
-  });
+  const modal = document.getElementById('job-modal');
+  modal.classList.remove('active');
   document.body.style.overflow = '';
+}
+
+// Show error message
+function showErrorMessage() {
+  const regularJobsContainer = document.getElementById('regular-jobs-container');
+  const apprenticeJobsContainer = document.getElementById('apprentice-jobs-container');
+  
+  const errorMessage = '<p class="error-message">Fehler beim Laden der Stellenangebote. Bitte versuchen Sie es später erneut.</p>';
+  regularJobsContainer.innerHTML = errorMessage;
+  apprenticeJobsContainer.innerHTML = errorMessage;
+}
+
+// Show no jobs message
+function showNoJobsMessage() {
+  const regularJobsContainer = document.getElementById('regular-jobs-container');
+  const apprenticeJobsContainer = document.getElementById('apprentice-jobs-container');
+  
+  regularJobsContainer.innerHTML = '<p class="no-jobs-message">Derzeit keine offenen Stellen verfügbar.</p>';
+  apprenticeJobsContainer.innerHTML = '<p class="no-jobs-message">Derzeit keine Lehrstellen verfügbar.</p>';
 }
 
 // Close modal when clicking outside
@@ -526,24 +413,8 @@ document.addEventListener('keydown', function(e) {
     closeJobModal();
   }
 });
-
-// Smooth scrolling for anchor links
-document.addEventListener('DOMContentLoaded', function() {
-  const anchors = document.querySelectorAll('a[href^="#"]');
-  anchors.forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-      e.preventDefault();
-      const target = document.querySelector(this.getAttribute('href'));
-      if (target) {
-        target.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
-        });
-      }
-    });
-  });
-});
 </script>
 
+  <script src="../template/assets/js/lazy-loading.js"></script>
 </body>
 </html> 

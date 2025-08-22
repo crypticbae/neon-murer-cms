@@ -16,7 +16,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: url('../../content/images/team-gruppenfoto.jpg') center/cover;
+  background: url('../../../content/images/team-gruppenfoto.jpg') center/cover;
   opacity: 0.15;
 }
 
@@ -200,7 +200,7 @@
   gap: 0.4rem;
 }
 
-.job-detail-item {
+.job-card .job-detail-item {
   display: flex;
   align-items: center;
   color: #6c757d;
@@ -210,7 +210,7 @@
   border-radius: 8px;
 }
 
-.job-detail-item i {
+.job-card .job-detail-item i {
   color: #112357;
   width: 14px;
   margin-right: 0.6rem;
@@ -448,7 +448,7 @@
   gap: 1rem;
 }
 
-.contact-item {
+.contact-person .contact-item {
   display: flex;
   align-items: center;
   color: white;
@@ -461,13 +461,13 @@
   text-decoration: none;
 }
 
-.contact-item:hover {
+.contact-person .contact-item:hover {
   background: rgba(255, 255, 255, 0.15);
   color: #ffd401;
   transform: translateY(-1px);
 }
 
-.contact-item i {
+.contact-person .contact-item i {
   background: #ffd401;
   color: #112357;
   width: 28px;
@@ -650,12 +650,150 @@
   }
 }
 
-/* Footer Override - Ensure normal font weight */
-#footer-placeholder p,
-#footer-placeholder span,
-#footer-placeholder div,
-.footer p,
-.footer span,
-.footer div {
-  font-weight: normal !important;
+/* ========== STELLENANGEBOTE SPECIFIC SCOPING ========== */
+/* Scope page-styles.css card rules to NOT affect stellenangebote page */
+
+/* Override zu breite .col .card Selektoren aus page-styles.css */
+.stellenangebote-hero ~ * .col .card {
+  /* Reset styles that could bleed from page-styles.css */
+  background: initial !important;
+  border: initial !important;
+  box-shadow: initial !important;
+}
+
+/* ✅ PROBLEM GELÖST: .contact-item war zu global */
+/* Job-Modal contact-item Regeln sind jetzt auf .contact-person beschränkt */ 
+
+/* Dynamic Job Loading */
+.loading-spinner {
+  text-align: center;
+  padding: 2rem;
+}
+
+.no-jobs-message {
+  text-align: center;
+  padding: 2rem;
+  color: #666;
+  font-style: italic;
+}
+
+.error-message {
+  text-align: center;
+  padding: 2rem;
+  color: #dc3545;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  border-radius: 0.375rem;
+  margin: 1rem 0;
+}
+
+/* Job Content Styling */
+.job-content {
+  line-height: 1.6;
+}
+
+.job-content p {
+  margin-bottom: 1rem;
+}
+
+.job-benefits {
+  line-height: 1.6;
+}
+
+.job-benefits ul {
+  margin: 0;
+  padding-left: 1.5rem;
+}
+
+.job-benefits li {
+  margin-bottom: 0.5rem;
+}
+
+/* Modal Responsive Improvements */
+@media (max-width: 768px) {
+  .modal-content {
+    margin: 1rem;
+    max-height: calc(100vh - 2rem);
+    overflow-y: auto;
+  }
+  
+  .modal-section {
+    padding: 1rem;
+  }
+  
+  .modal-list {
+    padding-left: 1rem;
+  }
+}
+
+/* Job Card Hover Effects */
+.job-card {
+  transition: all 0.3s ease;
+}
+
+.job-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.job-btn {
+  transition: all 0.3s ease;
+}
+
+.job-btn:hover {
+  background-color: #0056b3;
+  transform: translateY(-1px);
+}
+
+/* Loading Animation */
+.loading-spinner .spinner-border {
+  width: 3rem;
+  height: 3rem;
+}
+
+/* Empty State Styling */
+.no-jobs-message {
+  background-color: #f8f9fa;
+  border: 2px dashed #dee2e6;
+  border-radius: 0.5rem;
+  color: #6c757d;
+  font-size: 1.1rem;
+}
+
+/* Job Department Color Coding */
+.job-department {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Dynamic Icon Styling */
+.job-icon i.fa-cog {
+  color: #28a745;
+}
+
+.job-icon i.fa-palette {
+  color: #6f42c1;
+}
+
+.job-icon i.fa-tools {
+  color: #fd7e14;
+}
+
+.job-icon i.fa-building {
+  color: #17a2b8;
+}
+
+.job-icon i.fa-handshake {
+  color: #ffc107;
+}
+
+.job-icon i.fa-briefcase {
+  color: #007bff;
+}
+
+.job-icon i.fa-graduation-cap {
+  color: #20c997;
 } 
