@@ -8,32 +8,83 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Serve static files
-app.use(express.static(path.join(__dirname, '..')));
-
-// Basic route for testing
-app.get('/', (req, res) => {
-  try {
-    res.sendFile(path.join(__dirname, '../index.html'));
-  } catch (error) {
-    res.status(500).send(`Error: ${error.message}`);
-  }
-});
+// Static file serving with correct MIME types
+app.use('/template', express.static(path.join(__dirname, '../template')));
+app.use('/assets', express.static(path.join(__dirname, '../assets')));
+app.use('/content', express.static(path.join(__dirname, '../content')));
+app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
+app.use('/cms-admin', express.static(path.join(__dirname, '../cms-admin')));
 
 // Health check
 app.get('/api/health', (req, res) => {
   res.json({ status: 'OK', timestamp: new Date().toISOString() });
 });
 
-// Catch all other routes
+// Homepage
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '../index.html'));
+});
+
+// Static HTML pages
+const staticPages = [
+  'beschriftungen',
+  'lichtwerbung', 
+  'digital-signage',
+  'dienstleistungen',
+  'newsletter-anmeldung',
+  'datenschutz',
+  'impressum',
+  'geschaeftsbedingungen'
+];
+
+staticPages.forEach(page => {
+  app.get(`/${page}`, (req, res) => {
+    res.sendFile(path.join(__dirname, `../${page}.html`));
+  });
+});
+
+// Subpage routes
+const subpageRoutes = {
+  'beschriftungen': [
+    'blachen-fahnen',
+    'fahrzeugbeschriftung', 
+    'fensterbeschriftung',
+    'grossformatdruck',
+    'signaletik',
+    'tafelbeschriftung'
+  ],
+  'lichtwerbung': [
+    'halbrelief-plattenschriften',
+    'leuchtschriften',
+    'leuchttransparente', 
+    'neon-led-technik',
+    'pylonen'
+  ],
+  'neon-murer': [
+    'fachkompetenzen',
+    'firmengeschichte',
+    'kontaktpersonen',
+    'news',
+    'stellenangebote'
+  ]
+};
+
+Object.entries(subpageRoutes).forEach(([category, pages]) => {
+  pages.forEach(page => {
+    app.get(`/${category}/${page}`, (req, res) => {
+      res.sendFile(path.join(__dirname, `../${category}/${page}.html`));
+    });
+  });
+});
+
+// CMS Admin
+app.get('/cms-admin', (req, res) => {
+  res.sendFile(path.join(__dirname, '../cms-admin/index.html'));
+});
+
+// 404 fallback
 app.get('*', (req, res) => {
-  try {
-    // Try to serve the requested file
-    const filePath = path.join(__dirname, '..', req.path);
-    res.sendFile(filePath);
-  } catch (error) {
-    res.status(404).send('Page not found');
-  }
+  res.status(404).send('Page not found');
 });
 
 module.exports = app;
