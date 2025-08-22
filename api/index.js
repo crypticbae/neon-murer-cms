@@ -214,7 +214,7 @@ if (sentryInitialized) {
   app.use(sentryErrorHandler());
 }
 
-// Initialize database connection for Vercel
+// Initialize database connection for Vercel (lazy loading)
 let dbConnected = false;
 
 const initializeDatabase = async () => {
@@ -226,19 +226,13 @@ const initializeDatabase = async () => {
     dbConnected = true;
   } catch (error) {
     serverLogger.error('Database connection failed', { error: error.message });
-    throw error;
+    // Don't throw error - let routes handle DB issues gracefully
+    console.warn('⚠️ Database connection failed, some features may not work:', error.message);
   }
 };
 
-// Middleware to ensure DB connection
-app.use(async (req, res, next) => {
-  try {
-    await initializeDatabase();
-    next();
-  } catch (error) {
-    next(error);
-  }
-});
+// Initialize DB connection on startup (but don't block)
+initializeDatabase().catch(console.warn);
 
 // Export for Vercel
 module.exports = app;
