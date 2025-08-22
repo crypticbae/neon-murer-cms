@@ -1,12 +1,34 @@
 // Vercel Serverless Function Handler
+require('dotenv').config();
+
 const express = require('express');
 const path = require('path');
+const { PrismaClient } = require('@prisma/client');
 
 const app = express();
+const prisma = new PrismaClient();
 
 // Basic middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Initialize database connection
+let dbConnected = false;
+
+const initializeDatabase = async () => {
+  if (dbConnected) return;
+  
+  try {
+    await prisma.$connect();
+    console.log('✅ Database connected successfully');
+    dbConnected = true;
+  } catch (error) {
+    console.warn('⚠️ Database connection failed:', error.message);
+  }
+};
+
+// Initialize DB on startup
+initializeDatabase();
 
 // Static file serving with correct MIME types
 app.use('/template', express.static(path.join(__dirname, '../template')));
@@ -17,7 +39,26 @@ app.use('/cms-admin', express.static(path.join(__dirname, '../cms-admin')));
 
 // Health check
 app.get('/api/health', (req, res) => {
-  res.json({ status: 'OK', timestamp: new Date().toISOString() });
+  res.json({ 
+    status: 'OK', 
+    timestamp: new Date().toISOString(),
+    database: dbConnected ? 'Connected' : 'Disconnected'
+  });
+});
+
+// Basic API Routes (add main routes back)
+app.use('/api/auth', require('../routes/auth'));
+app.use('/api/analytics', require('../routes/analytics'));
+
+// Test DB route
+app.get('/api/test-db', async (req, res) => {
+  try {
+    await initializeDatabase();
+    const result = await prisma.$queryRaw`SELECT 1 as test`;
+    res.json({ success: true, dbTest: result, connected: dbConnected });
+  } catch (error) {
+    res.json({ success: false, error: error.message });
+  }
 });
 
 // Homepage
