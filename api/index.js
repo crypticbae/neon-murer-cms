@@ -9,8 +9,17 @@ const app = express();
 const prisma = new PrismaClient();
 
 // Basic middleware
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+
+// CORS for API requests
+const cors = require('cors');
+app.use(cors({
+  origin: true,
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'Accept']
+}));
 
 // Initialize database connection
 let dbConnected = false;
@@ -49,6 +58,26 @@ app.get('/api/health', (req, res) => {
 // Basic API Routes (add main routes back)
 app.use('/api/auth', require('../routes/auth'));
 app.use('/api/analytics', require('../routes/analytics'));
+
+// CMS Data Routes
+app.use('/api/customers', require('../routes/customers'));
+app.use('/api/team-members', require('../routes/team-members'));
+app.use('/api/jobs', require('../routes/jobs'));
+app.use('/api/news', require('../routes/news'));
+app.use('/api/company-history', require('../routes/company-history'));
+app.use('/api/fachkompetenzen', require('../routes/fachkompetenzen'));
+app.use('/api/settings', require('../routes/settings'));
+app.use('/api/dienstleistungen', require('../routes/dienstleistungen'));
+app.use('/api/newsletter', require('../routes/newsletter'));
+app.use('/api/agb', require('../routes/agb'));
+app.use('/api/datenschutz', require('../routes/datenschutz'));
+app.use('/api/media', require('../routes/media'));
+app.use('/api/pages', require('../routes/pages'));
+app.use('/api/legal', require('../routes/legal'));
+app.use('/api/search', require('../routes/search'));
+app.use('/api/docs', require('../routes/docs'));
+app.use('/api/category-cards', require('../routes/category-cards'));
+app.use('/api/analytics-stats', require('../routes/analytics-stats'));
 
 // Test DB route
 app.get('/api/test-db', async (req, res) => {
