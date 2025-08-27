@@ -21,14 +21,14 @@ RUN addgroup --system --gid 1001 nodejs && \
 # Copy package files
 COPY package*.json ./
 
-# Install all dependencies
+# Copy prisma schema first (required for postinstall)
+COPY prisma/schema.prisma prisma/schema.prisma
+
+# Install all dependencies (postinstall will run prisma generate)
 RUN npm install && npm cache clean --force
 
-# Copy all source code (including prisma/schema.prisma)
+# Copy all remaining source code
 COPY . .
-
-# Generate Prisma client (schema is now available)
-RUN npx prisma generate
 
 # Remove dev dependencies to save space
 RUN npm prune --omit=dev
