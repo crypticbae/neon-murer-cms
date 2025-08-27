@@ -14,9 +14,9 @@ WORKDIR /app
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nodejs
 
-# Copy package files and install ALL dependencies (needed for Prisma)
+# Copy package files and install dependencies
 COPY package.json package-lock.json* ./
-RUN npm ci && npm cache clean --force
+RUN if [ -f package-lock.json ]; then npm ci; else npm install; fi && npm cache clean --force
 
 # Copy application code
 COPY . .
@@ -35,8 +35,8 @@ USER nodejs
 
 EXPOSE 3835
 
-ENV NODE_ENV production
-ENV PORT 3835
+ENV NODE_ENV=production
+ENV PORT=3835
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=10s --start-period=10s --retries=3 \

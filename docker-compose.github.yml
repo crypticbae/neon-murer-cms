@@ -10,8 +10,10 @@ services:
   # =====================================
   # MAIN APPLICATION
   # =====================================
-  app:
-    image: ghcr.io/crypticbae/neon-murer-cms:latest
+    app:
+    build:
+      context: https://github.com/crypticbae/neon-murer-cms.git#main
+      dockerfile: Dockerfile.github
     container_name: neon-murer-cms
     ports:
       - "3835:3835"
@@ -249,8 +251,10 @@ services:
   # =====================================
   # DATABASE INITIALIZATION
   # =====================================
-  db-init:
-    image: ghcr.io/crypticbae/neon-murer-cms:latest
+    db-init:
+    build:
+      context: https://github.com/crypticbae/neon-murer-cms.git#main
+      dockerfile: Dockerfile.github
     container_name: neon-murer-init
     environment:
       - NODE_ENV=production

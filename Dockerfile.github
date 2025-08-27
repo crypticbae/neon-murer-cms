@@ -1,0 +1,68 @@
+# Multi-stage build for GitHub Actions optimized production image
+FROM node:18-alpine AS dependencies
+
+# Install system dependencies
+RUN apk add --no-cache \
+    libc6-compat \
+    openssl \
+    curl \
+    git \
+    python3 \
+    make \
+    g++ \
+    && rm -rf /var/cache/apk/*
+
+WORKDIR /app
+
+# Copy package files
+COPY package*.json ./
+
+# Install all dependencies (including dev for Prisma)
+RUN npm install && npm cache clean --force
+
+# Copy source code
+COPY . .
+
+# Generate Prisma client
+RUN npx prisma generate
+
+# Production stage
+FROM node:18-alpine AS production
+
+# Install runtime dependencies only
+RUN apk add --no-cache \
+    libc6-compat \
+    openssl \
+    curl \
+    && rm -rf /var/cache/apk/*
+
+WORKDIR /app
+
+# Create app user
+RUN addgroup --system --gid 1001 nodejs && \
+    adduser --system --uid 1001 nodejs
+
+# Copy package files and install production dependencies
+COPY package*.json ./
+RUN npm ci --omit=dev && npm cache clean --force
+
+# Copy built application from dependencies stage
+COPY --from=dependencies --chown=nodejs:nodejs /app/node_modules/.prisma ./node_modules/.prisma
+COPY --chown=nodejs:nodejs . .
+
+# Create necessary directories
+RUN mkdir -p content/images uploads logs && \
+    chown -R nodejs:nodejs . content uploads logs
+
+USER nodejs
+
+EXPOSE 3835
+
+ENV NODE_ENV=production \
+    PORT=3835
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=10s --retries=3 \
+    CMD curl -f http://localhost:3835/api/health || exit 1
+
+CMD ["npm", "start"]
