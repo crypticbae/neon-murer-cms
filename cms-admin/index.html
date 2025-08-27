@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Neon Murer - Admin Dashboard</title>
     
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg">
     
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -216,7 +219,7 @@
                 <div class="collapse" id="contentSubmenu">
                     <ul class="nav flex-column ms-3">
                         <li class="nav-item">
-                            <a class="nav-link" href="javascript:void(0)" onclick="showSection('content-section'); return false;">
+                            <a class="nav-link" href="javascript:void(0)" onclick="tempShowSection('content-section'); return false;">
                                 <i class="fas fa-file-alt"></i>
                                 <span>Seiten</span>
                             </a>
@@ -286,19 +289,19 @@
             </li>
             
             <li class="nav-item">
-                <a class="nav-link" href="javascript:void(0)" onclick="showSection('media-section'); return false;">
+                <a class="nav-link" href="javascript:void(0)" onclick="tempShowSection('media-section'); return false;">
                     <i class="fas fa-images"></i>
                     <span>Medien</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="javascript:void(0)" onclick="showSection('team-section'); return false;">
+                <a class="nav-link" href="javascript:void(0)" onclick="tempShowSection('team-section'); return false;">
                     <i class="fas fa-users"></i>
                     <span>Team</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="javascript:void(0)" onclick="showSection('customers-section'); return false;">
+                <a class="nav-link" href="javascript:void(0)" onclick="tempShowSection('customers-section'); return false;">
                     <i class="fas fa-users"></i>
                     <span>Kunden</span>
                 </a>
@@ -306,7 +309,7 @@
             
             <!-- Newsletter Menü -->
             <li class="nav-item">
-                <a class="nav-link" href="javascript:void(0)" onclick="showSection('newsletter-section'); return false;">
+                <a class="nav-link" href="javascript:void(0)" onclick="tempShowSection('newsletter-section'); return false;">
                     <i class="fas fa-envelope"></i>
                     <span>Newsletter</span>
                 </a>
@@ -327,7 +330,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="javascript:void(0)" onclick="showSection('settings-section'); return false;">
+                <a class="nav-link" href="javascript:void(0)" onclick="tempShowSection('settings-section'); return false;">
                     <i class="fas fa-cog"></i>
                     <span>Einstellungen</span>
                 </a>
@@ -346,7 +349,7 @@
         <div class="sidebar-footer">
             <div class="user-info">
                 <i class="fas fa-user-circle"></i>
-                <span>Administrator</span>
+                <span id="sidebar-user-name">Administrator</span>
             </div>
             <a href="#" class="btn btn-outline-light btn-sm">
                 <i class="fas fa-sign-out-alt"></i>
@@ -357,29 +360,84 @@
 
     <!-- Main Content -->
     <main id="main-content" class="main-content">
-        <!-- Header -->
+        <!-- Enhanced Header -->
         <header class="header">
             <div class="d-flex justify-content-between align-items-center">
-                <div>
+                <div class="d-flex align-items-center">
                     <button class="btn btn-outline-secondary d-lg-none" id="sidebar-toggle">
                         <i class="fas fa-bars"></i>
                     </button>
-                    <h1 class="h3 mb-0">Dashboard</h1>
                 </div>
-                <div class="header-actions">
-                    <button class="btn btn-outline-primary me-2">
-                        <i class="fas fa-plus"></i>
-                        Neu erstellen
-                    </button>
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                            <i class="fas fa-user"></i>
+                
+                <!-- Center Info -->
+                <div class="header-center d-none d-md-flex align-items-center">
+                    <div class="status-indicator me-4">
+                        <span class="badge bg-success">
+                            <i class="fas fa-circle me-1" style="font-size: 0.6rem;"></i>
+                            Server Online
+                        </span>
+                    </div>
+                    <div class="current-time me-4">
+                        <small class="text-muted">
+                            <i class="far fa-clock me-1"></i>
+                            <span id="current-time"></span>
+                        </small>
+                    </div>
+                </div>
+
+                <!-- Header Actions -->
+                <div class="header-actions d-flex align-items-center">
+
+                    
+                    <!-- Quick Create -->
+                    <div class="dropdown me-2">
+                        <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" id="quick-create-btn">
+                            <i class="fas fa-plus me-1"></i>
+                            Neu erstellen
                         </button>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Profil</a></li>
-                            <li><a class="dropdown-item" href="#">Einstellungen</a></li>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><h6 class="dropdown-header">Inhalte erstellen</h6></li>
+                            <li><a class="dropdown-item" href="#" onclick="createNewCustomer()">
+                                <i class="fas fa-user-plus me-2"></i>Neuer Kunde
+                            </a></li>
+                            <li><a class="dropdown-item" href="#" onclick="createNewJob()">
+                                <i class="fas fa-briefcase me-2"></i>Stellenanzeige
+                            </a></li>
+                            <li><a class="dropdown-item" href="#" onclick="createNewNews()">
+                                <i class="fas fa-newspaper me-2"></i>News-Artikel
+                            </a></li>
+                            <li><a class="dropdown-item" href="#" onclick="createNewNewsletter()">
+                                <i class="fas fa-envelope me-2"></i>Newsletter
+                            </a></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">Abmelden</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="showSection('media-section')">
+                                <i class="fas fa-upload me-2"></i>Medien hochladen
+                            </a></li>
+                        </ul>
+                    </div>
+                    
+                    <!-- User Menu -->
+                    <div class="dropdown">
+                        <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" id="user-menu-btn">
+                            <i class="fas fa-user me-1"></i>
+                            <span id="current-user-name">Admin</span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><h6 class="dropdown-header" id="user-info">Angemeldet als Admin</h6></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#" onclick="showPasswordChangeModal()">
+                                <i class="fas fa-key me-2"></i>Passwort ändern
+                            </a></li>
+                            <li><a class="dropdown-item" href="#" onclick="showSection('settings-section')">
+                                <i class="fas fa-cog me-2"></i>Einstellungen
+                            </a></li>
+                            <li><a class="dropdown-item" href="#" onclick="showSection('analytics-section')">
+                                <i class="fas fa-chart-bar me-2"></i>Analytics
+                            </a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item text-danger" href="#" onclick="confirmLogout()">
+                                <i class="fas fa-sign-out-alt me-2"></i>Abmelden
+                            </a></li>
                         </ul>
                     </div>
                 </div>
@@ -426,7 +484,7 @@
                     <div class="card-body">
                         <div class="row g-3">
                             <div class="col-lg-3 col-md-6">
-                                <button class="btn btn-outline-primary w-100 h-100 py-3" onclick="showSection('content-section')">
+                                <button class="btn btn-outline-primary w-100 h-100 py-3" onclick="tempShowSection('content-section')">
                                     <i class="fas fa-file-alt fa-2x mb-2"></i>
                                     <div>Inhalte bearbeiten</div>
                                     <small class="text-muted">Seiten & Texte verwalten</small>
@@ -572,7 +630,7 @@
                                 </button>
                             </div>
                             <div class="col-lg-3 col-md-6">
-                                <button class="btn btn-outline-secondary w-100 py-3" onclick="showSection('settings-section')">
+                                <button class="btn btn-outline-secondary w-100 py-3" onclick="tempShowSection('settings-section')">
                                     <i class="fas fa-cog fa-lg mb-2"></i>
                                     <div>Einstellungen</div>
                                 </button>
@@ -3022,11 +3080,11 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label class="form-label">Benutzername</label>
-                                                    <input type="text" class="form-control" id="smtpUsername" placeholder="info@neonmurer.ch">
+                                                    <input type="text" class="form-control" id="smtpUsername" placeholder="info@neonmurer.ch" autocomplete="username">
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label class="form-label">Passwort</label>
-                                                    <input type="password" class="form-control" id="smtpPassword" placeholder="••••••••">
+                                                    <input type="password" class="form-control" id="smtpPassword" placeholder="••••••••" autocomplete="current-password">
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label class="form-label">Verschlüsselung</label>
@@ -3103,10 +3161,12 @@
                                     </div>
                                     <div class="card-body">
                                         <form id="changePasswordForm">
+                                            <!-- Hidden username field for accessibility and password managers -->
+                                            <input type="text" name="username" autocomplete="username" style="display: none;" readonly>
                                             <div class="mb-3">
                                                 <label for="currentPassword" class="form-label">Aktuelles Passwort</label>
                                                 <div class="input-group">
-                                                    <input type="password" class="form-control" id="currentPassword" required>
+                                                    <input type="password" class="form-control" id="currentPassword" required autocomplete="current-password">
                                                     <button class="btn btn-outline-secondary" type="button" onclick="togglePasswordVisibility('currentPassword')">
                                                         <i class="fas fa-eye"></i>
                                                     </button>
@@ -3115,7 +3175,7 @@
                                             <div class="mb-3">
                                                 <label for="newPassword" class="form-label">Neues Passwort</label>
                                                 <div class="input-group">
-                                                    <input type="password" class="form-control" id="newPassword" required minlength="8">
+                                                    <input type="password" class="form-control" id="newPassword" required minlength="8" autocomplete="new-password">
                                                     <button class="btn btn-outline-secondary" type="button" onclick="togglePasswordVisibility('newPassword')">
                                                         <i class="fas fa-eye"></i>
                                                     </button>
@@ -3125,7 +3185,7 @@
                                             <div class="mb-3">
                                                 <label for="confirmPassword" class="form-label">Passwort bestätigen</label>
                                                 <div class="input-group">
-                                                    <input type="password" class="form-control" id="confirmPassword" required minlength="8">
+                                                    <input type="password" class="form-control" id="confirmPassword" required minlength="8" autocomplete="new-password">
                                                     <button class="btn btn-outline-secondary" type="button" onclick="togglePasswordVisibility('confirmPassword')">
                                                         <i class="fas fa-eye"></i>
                                                     </button>
@@ -4926,6 +4986,360 @@
     
     <!-- Custom JS -->
     <script src="/cms-admin/assets/js/admin.js"></script>
+    
+    <!-- Enhanced Header Functions -->
+    <script>
+        // Enhanced Header Functionality
+        class HeaderManager {
+            constructor() {
+                this.init();
+            }
+
+            init() {
+                this.updateCurrentTime();
+                // Delay user info loading to avoid rate limiting
+                setTimeout(() => this.loadUserInfo(), 2000);
+                // Delay server status check
+                setTimeout(() => this.checkServerStatus(), 1000);
+                
+                // Update time every minute
+                setInterval(() => this.updateCurrentTime(), 60000);
+                
+                // Update server status every 2 minutes (reduced frequency)
+                setInterval(() => this.checkServerStatus(), 120000);
+                
+                // Retry user info every 5 minutes if we have a token but shows "Nicht angemeldet"
+                setInterval(() => {
+                    const authToken = localStorage.getItem('accessToken');
+                    const currentText = document.getElementById('current-user-name').textContent;
+                    if (authToken && (currentText === 'Nicht angemeldet' || currentText === 'Admin')) {
+                        this.loadUserInfo();
+                    }
+                }, 5 * 60 * 1000);
+            }
+
+            updateCurrentTime() {
+                const now = new Date();
+                const timeString = now.toLocaleString('de-DE', {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    day: '2-digit',
+                    month: '2-digit',
+                    year: 'numeric'
+                });
+                document.getElementById('current-time').textContent = timeString;
+            }
+
+            async loadUserInfo() {
+                // Check if user info is already cached in sessionStorage
+                const cachedUserInfo = sessionStorage.getItem('headerUserInfo');
+                if (cachedUserInfo) {
+                    try {
+                        const data = JSON.parse(cachedUserInfo);
+                        const userName = data.name || 'Admin';
+                        document.getElementById('current-user-name').textContent = userName;
+                        document.getElementById('user-info').textContent = `Angemeldet als ${userName}`;
+                        document.getElementById('sidebar-user-name').textContent = userName;
+                        return;
+                    } catch (e) {
+                        // Clear invalid cache
+                        sessionStorage.removeItem('headerUserInfo');
+                    }
+                }
+
+                try {
+                    // Get auth token from localStorage (same as admin.js)
+                    const authToken = localStorage.getItem('accessToken');
+                    const headers = {
+                        'Content-Type': 'application/json'
+                    };
+                    
+                    if (authToken) {
+                        headers['Authorization'] = `Bearer ${authToken}`;
+                    }
+                    
+                    const response = await fetch('/api/auth/session-info', {
+                        credentials: 'include',
+                        headers: headers
+                    });
+                    
+                    if (response.ok) {
+                        const data = await response.json();
+                        if (data.user) {
+                            const userName = data.user.name || 'Admin';
+                            document.getElementById('current-user-name').textContent = userName;
+                            document.getElementById('user-info').textContent = `Angemeldet als ${userName}`;
+                            document.getElementById('sidebar-user-name').textContent = userName;
+                            
+                            // Cache user info for 10 minutes
+                            sessionStorage.setItem('headerUserInfo', JSON.stringify(data.user));
+                            setTimeout(() => {
+                                sessionStorage.removeItem('headerUserInfo');
+                            }, 10 * 60 * 1000);
+                        }
+                    } else if (response.status === 429) {
+                        console.warn('Rate limited - using default user name');
+                        document.getElementById('current-user-name').textContent = 'Admin';
+                        document.getElementById('user-info').textContent = 'Angemeldet als Admin';
+                        document.getElementById('sidebar-user-name').textContent = 'Admin';
+                    } else if (response.status === 401) {
+                        // Check if we have a token but it's invalid
+                        if (authToken) {
+                            console.warn('Auth token invalid or expired');
+                            // Remove invalid token
+                            localStorage.removeItem('accessToken');
+                        }
+                        document.getElementById('current-user-name').textContent = 'Nicht angemeldet';
+                        document.getElementById('user-info').textContent = 'Bitte anmelden';
+                        document.getElementById('sidebar-user-name').textContent = 'Nicht angemeldet';
+                        // Clear cached user info if unauthorized
+                        sessionStorage.removeItem('headerUserInfo');
+                    }
+                } catch (error) {
+                    console.error('Error loading user info:', error);
+                    // Fallback to default
+                    document.getElementById('current-user-name').textContent = 'Admin';
+                    document.getElementById('user-info').textContent = 'Angemeldet als Admin';
+                    document.getElementById('sidebar-user-name').textContent = 'Admin';
+                }
+            }
+
+            async checkServerStatus() {
+                try {
+                    // Use shorter timeout for health check
+                    const controller = new AbortController();
+                    const timeoutId = setTimeout(() => controller.abort(), 5000);
+                    
+                    const response = await fetch('/api/health', {
+                        signal: controller.signal,
+                        cache: 'no-cache'
+                    });
+                    
+                    clearTimeout(timeoutId);
+                    const statusIndicator = document.querySelector('.status-indicator .badge');
+                    
+                    if (response.ok) {
+                        statusIndicator.className = 'badge bg-success';
+                        statusIndicator.innerHTML = '<i class="fas fa-circle me-1" style="font-size: 0.6rem;"></i>Server Online';
+                    } else if (response.status === 429) {
+                        statusIndicator.className = 'badge bg-warning';
+                        statusIndicator.innerHTML = '<i class="fas fa-clock me-1" style="font-size: 0.6rem;"></i>Rate Limited';
+                    } else {
+                        statusIndicator.className = 'badge bg-warning';
+                        statusIndicator.innerHTML = '<i class="fas fa-exclamation-triangle me-1" style="font-size: 0.6rem;"></i>Server Warnung';
+                    }
+                } catch (error) {
+                    const statusIndicator = document.querySelector('.status-indicator .badge');
+                    if (error.name === 'AbortError') {
+                        statusIndicator.className = 'badge bg-warning';
+                        statusIndicator.innerHTML = '<i class="fas fa-clock me-1" style="font-size: 0.6rem;"></i>Timeout';
+                    } else {
+                        statusIndicator.className = 'badge bg-danger';
+                        statusIndicator.innerHTML = '<i class="fas fa-times me-1" style="font-size: 0.6rem;"></i>Server Offline';
+                    }
+                }
+            }
+
+
+
+
+
+            // Force refresh user info (called after login)
+            refreshUserInfo() {
+                sessionStorage.removeItem('headerUserInfo');
+                this.loadUserInfo();
+            }
+        }
+
+        // Quick Create Functions
+        function createNewCustomer() {
+
+            showSection('customers-section');
+            // Trigger new customer modal
+            setTimeout(() => {
+                if (typeof showCustomerModal === 'function') {
+                    showCustomerModal();
+                }
+            }, 100);
+        }
+
+        function createNewJob() {
+
+            showSection('special-pages-section');
+            // Focus on jobs tab
+            setTimeout(() => {
+                const jobsTab = document.getElementById('jobs-tab');
+                if (jobsTab) {
+                    jobsTab.click();
+                    setTimeout(() => {
+                        if (typeof showSpecialPageModal === 'function') {
+                            showSpecialPageModal('job');
+                        }
+                    }, 100);
+                }
+            }, 100);
+        }
+
+        function createNewNews() {
+
+            showSection('special-pages-section');
+            // Focus on news tab
+            setTimeout(() => {
+                const newsTab = document.getElementById('news-tab');
+                if (newsTab) {
+                    newsTab.click();
+                    setTimeout(() => {
+                        if (typeof showSpecialPageModal === 'function') {
+                            showSpecialPageModal('news');
+                        }
+                    }, 100);
+                }
+            }, 100);
+        }
+
+        function createNewNewsletter() {
+
+            showSection('newsletter-section');
+            // Focus on templates
+            setTimeout(() => {
+                const templatesTab = document.querySelector('[data-bs-target="#newsletter-templates"]');
+                if (templatesTab) {
+                    templatesTab.click();
+                }
+            }, 100);
+        }
+
+        function showPasswordChangeModal() {
+
+            // Trigger password change modal
+            if (typeof showPasswordModal === 'function') {
+                showPasswordModal();
+            } else {
+                // Fallback - show in settings
+                showSection('settings-section');
+                setTimeout(() => {
+                    const securityTab = document.querySelector('[href="#security-settings"]');
+                    if (securityTab) {
+                        securityTab.click();
+                    }
+                }, 100);
+            }
+        }
+
+        function confirmLogout() {
+            if (confirm('Möchten Sie sich wirklich abmelden?')) {
+                // Clear section persistence and perform logout
+                localStorage.removeItem('currentCMSSection');
+                localStorage.removeItem('adminLoggedIn');
+                localStorage.removeItem('adminEmail');
+                
+                setTimeout(() => {
+                    window.location.href = '/cms-admin/login.html';
+                }, 1000);
+            }
+        }
+
+        // Temporary showSection wrapper to ensure localStorage is saved
+        window.tempShowSection = function(sectionName) {
+            console.log(`🔄 tempShowSection called with: ${sectionName}`);
+            localStorage.setItem('currentCMSSection', sectionName);
+            console.log(`💾 Saved to localStorage: ${sectionName}`);
+            
+            if (typeof window.showSection === 'function') {
+                console.log(`✅ Delegating to real showSection: ${sectionName}`);
+                window.showSection(sectionName);
+                // Ensure localStorage is still correct after showSection call
+                setTimeout(() => {
+                    const current = localStorage.getItem('currentCMSSection');
+                    if (current !== sectionName) {
+                        console.log(`🔄 Re-correcting localStorage: ${current} → ${sectionName}`);
+                        localStorage.setItem('currentCMSSection', sectionName);
+                    }
+                }, 10);
+            } else {
+                console.log(`⏳ Real showSection not ready, will try later...`);
+                // Try again in a moment
+                setTimeout(() => {
+                    if (typeof window.showSection === 'function') {
+                        console.log(`✅ Delayed call to showSection: ${sectionName}`);
+                        window.showSection(sectionName);
+                        // Ensure localStorage is still correct after delayed call
+                        setTimeout(() => {
+                            const current = localStorage.getItem('currentCMSSection');
+                            if (current !== sectionName) {
+                                console.log(`🔄 Re-correcting localStorage after delay: ${current} → ${sectionName}`);
+                                localStorage.setItem('currentCMSSection', sectionName);
+                            }
+                        }, 10);
+                    }
+                }, 100);
+            }
+        };
+
+        // Page Persistence - Restore last section after refresh
+        function initPagePersistence() {
+            console.log('🔧 Initializing page persistence...');
+            
+            let attempts = 0;
+            const maxAttempts = 20;
+            
+            function tryRestore() {
+                attempts++;
+                console.log(`🔍 Persistence attempt ${attempts}: checking showSection availability`);
+                
+                if (typeof window.showSection === 'function') {
+                    const savedSection = localStorage.getItem('currentCMSSection');
+                    console.log(`📱 Retrieved saved section: ${savedSection}`);
+                    
+                    if (savedSection && savedSection !== 'dashboard-section') {
+                        const element = document.getElementById(savedSection);
+                        if (element) {
+                            console.log(`✅ Restoring to: ${savedSection}`);
+                            window.showSection(savedSection);
+                            return;
+                        } else {
+                            console.warn(`❌ Element not found for: ${savedSection}`);
+                        }
+                    }
+                    
+                    console.log('📋 Defaulting to dashboard');
+                    window.showSection('dashboard-section');
+                } else if (attempts < maxAttempts) {
+                    console.log(`⏳ showSection not ready, retrying in 100ms (${attempts}/${maxAttempts})`);
+                    setTimeout(tryRestore, 100);
+                } else {
+                    console.error('❌ showSection never became available after 2 seconds');
+                }
+            }
+            
+            // Start after a delay to ensure all scripts are loaded
+            setTimeout(tryRestore, 300);
+        }
+
+        // Initialize header manager
+        let headerManager;
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('🚀 Index.html DOMContentLoaded fired');
+            headerManager = new HeaderManager();
+            
+            // Initialize page persistence
+            initPagePersistence();
+            
+            // Test: Manually check localStorage for debugging
+            console.log('🧪 DEBUG: localStorage content:', localStorage.getItem('currentCMSSection'));
+            
+            // Add localStorage monitoring
+            setTimeout(() => {
+                console.log('🔍 localStorage check after 1 second:', localStorage.getItem('currentCMSSection'));
+            }, 1000);
+            
+            setTimeout(() => {
+                console.log('🔍 localStorage check after 2 seconds:', localStorage.getItem('currentCMSSection'));
+            }, 2000);
+            
+            // Page title observer removed - sections manage their own titles
+        });
+    </script>
     
     <!-- Media Picker -->
     <script src="/cms-admin/assets/js/media-picker.js"></script>

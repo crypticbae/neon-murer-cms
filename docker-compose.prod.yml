@@ -1,0 +1,205 @@
+version: '3.8'
+
+# =====================================
+# NEON MURER CMS - PRODUCTION DEPLOYMENT
+# =====================================
+# Vollständige Docker-Compose-Konfiguration für Production
+# mit PostgreSQL, Redis, Backups und Monitoring
+
+services:
+  # =====================================
+  # MAIN APPLICATION SERVICE
+  # =====================================
+  app:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    container_name: neon-murer-cms
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=postgresql://neon_user:${POSTGRES_PASSWORD}@db:5432/neon_murer_cms
+      - REDIS_URL=redis://redis:6379
+      - JWT_SECRET=${JWT_SECRET}
+      - ADMIN_EMAIL=${ADMIN_EMAIL}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD}
+      - FRONTEND_URL=${FRONTEND_URL}
+      - SMTP_HOST=${SMTP_HOST}
+      - SMTP_PORT=${SMTP_PORT}
+      - SMTP_USER=${SMTP_USER}
+      - SMTP_PASS=${SMTP_PASS}
+      - SENTRY_DSN=${SENTRY_DSN}
+      - PORT=3001
+      - BCRYPT_ROUNDS=12
+      - MAX_FILE_SIZE=50mb
+      - ANALYTICS_ENABLED=true
+      - LOG_LEVEL=info
+      - LOG_TO_FILE=true
+      - HTTPS_ENABLED=false  # Set to true if using HTTPS
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    volumes:
+      - ./content:/app/content:rw
+      - ./uploads:/app/uploads:rw
+      - ./logs:/app/logs:rw
+      - ./backups:/app/backups:rw
+    networks:
+      - neon-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3001/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # =====================================
+  # POSTGRESQL DATABASE
+  # =====================================
+  db:
+    image: postgres:15-alpine
+    container_name: neon-murer-db
+    environment:
+      POSTGRES_DB: neon_murer_cms
+      POSTGRES_USER: neon_user
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_INITDB_ARGS: "--encoding=UTF8 --locale=C"
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/init:/docker-entrypoint-initdb.d:ro
+      - ./backups/db:/backups:rw
+    networks:
+      - neon-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U neon_user -d neon_murer_cms"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    command: >
+      postgres 
+      -c shared_preload_libraries=pg_stat_statements
+      -c pg_stat_statements.max=10000
+      -c pg_stat_statements.track=all
+      -c max_connections=200
+      -c shared_buffers=256MB
+      -c effective_cache_size=1GB
+      -c work_mem=16MB
+      -c maintenance_work_mem=64MB
+
+  # =====================================
+  # REDIS CACHE
+  # =====================================
+  redis:
+    image: redis:7-alpine
+    container_name: neon-murer-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+      - ./config/redis.conf:/usr/local/etc/redis/redis.conf:ro
+    networks:
+      - neon-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+    command: redis-server /usr/local/etc/redis/redis.conf
+
+  # =====================================
+  # NGINX REVERSE PROXY (Optional)
+  # =====================================
+  nginx:
+    image: nginx:alpine
+    container_name: neon-murer-nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/ssl:/etc/nginx/ssl:ro
+      - ./content:/usr/share/nginx/html/content:ro
+      - ./uploads:/usr/share/nginx/html/uploads:ro
+    depends_on:
+      - app
+    networks:
+      - neon-network
+    restart: unless-stopped
+
+  # =====================================
+  # DATABASE BACKUP SERVICE
+  # =====================================
+  db-backup:
+    image: postgres:15-alpine
+    container_name: neon-murer-backup
+    environment:
+      PGPASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - ./backups/db:/backups:rw
+      - ./scripts/backup.sh:/backup.sh:ro
+    depends_on:
+      - db
+    networks:
+      - neon-network
+    restart: "no"
+    command: >
+      sh -c "
+      while true; do
+        echo 'Creating database backup...'
+        pg_dump -h db -U neon_user -d neon_murer_cms > /backups/backup_$(date +%Y%m%d_%H%M%S).sql
+        echo 'Backup completed'
+        # Keep only last 30 backups
+        cd /backups && ls -t *.sql | tail -n +31 | xargs rm -f
+        sleep 86400  # Wait 24 hours
+      done
+      "
+
+  # =====================================
+  # MONITORING & HEALTH CHECK
+  # =====================================
+  healthcheck:
+    image: curlimages/curl:latest
+    container_name: neon-murer-healthcheck
+    depends_on:
+      - app
+      - db
+      - redis
+    networks:
+      - neon-network
+    restart: "no"
+    command: >
+      sh -c "
+      while true; do
+        echo 'Running health checks...'
+        curl -f http://app:3001/api/health || echo 'App health check failed'
+        sleep 300  # Check every 5 minutes
+      done
+      "
+
+# =====================================
+# NETWORKS
+# =====================================
+networks:
+  neon-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+
+# =====================================
+# VOLUMES
+# =====================================
+volumes:
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local

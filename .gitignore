@@ -247,3 +247,4 @@ cypress/videos/
 cypress/screenshots/
 test-results/
 coverage/
+.vercel

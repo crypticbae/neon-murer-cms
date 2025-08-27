@@ -98,7 +98,7 @@ function getHelmetConfig() {
       policy: isDevelopment ? "unsafe-none" : "require-corp"
     },
     crossOriginOpenerPolicy: {
-      policy: "same-origin"
+      policy: isDevelopment ? "unsafe-none" : "same-origin"
     },
     crossOriginResourcePolicy: {
       policy: isDevelopment ? "cross-origin" : "same-origin"
@@ -119,7 +119,7 @@ function getHelmetConfig() {
     } : false,
     ieNoOpen: true,
     noSniff: true,
-    originAgentCluster: true,
+    originAgentCluster: !isDevelopment,
     permittedCrossDomainPolicies: false,
     referrerPolicy: {
       policy: "strict-origin-when-cross-origin"
@@ -151,13 +151,13 @@ const rateLimiters = {
     }
   }),
 
-  // Strict rate limiting for authentication
+  // Rate limiting for authentication (relaxed in development)
   auth: rateLimit({
-    windowMs: 15 * 60 * 1000, // 15 minutes
-    max: parseInt(process.env.AUTH_RATE_LIMIT_MAX) || 5, // 5 attempts per IP
+    windowMs: isDevelopment ? 5 * 60 * 1000 : 15 * 60 * 1000, // 5 min dev, 15 min prod
+    max: isDevelopment ? 50 : (parseInt(process.env.AUTH_RATE_LIMIT_MAX) || 5), // 50 dev, 5 prod
     message: {
       error: 'Zu viele Login-Versuche. Account temporär gesperrt.',
-      retryAfter: '15 Minuten'
+      retryAfter: isDevelopment ? '5 Minuten' : '15 Minuten'
     },
     standardHeaders: true,
     legacyHeaders: false,
@@ -246,8 +246,8 @@ function configureTrust(app) {
     // Trust first proxy (load balancer, CloudFlare, etc.)
     app.set('trust proxy', 1);
   } else {
-    // Development: trust localhost
-    app.set('trust proxy', 'loopback');
+    // Development: trust localhost and local network
+    app.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal']);
   }
 }
 
@@ -259,6 +259,8 @@ function getCorsConfig() {
     frontendUrl,
     'http://localhost:3000',
     'http://localhost:3001',
+    'http://192.168.13.111:3001',
+    'http://192.168.10.88:3001',
     'https://neonmurer.ch',
     'https://www.neonmurer.ch',
     'https://cms.neonmurer.ch'
@@ -269,11 +271,29 @@ function getCorsConfig() {
       // Allow requests with no origin (mobile apps, etc.)
       if (!origin) return callback(null, true);
       
-      if (allowedOrigins.includes(origin) || isDevelopment) {
-        callback(null, true);
-      } else {
-        callback(new Error('Not allowed by CORS policy'));
+      // Check allowed origins
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
       }
+      
+      // In development, allow all local network IPs
+      if (isDevelopment) {
+        // Allow localhost variations
+        if (origin.includes('localhost') || origin.includes('127.0.0.1')) {
+          return callback(null, true);
+        }
+        
+        // Allow local network IPs (192.168.x.x, 10.x.x.x, 172.16-31.x.x)
+        const localIPPattern = /^http:\/\/(192\.168\.\d{1,3}\.\d{1,3}|10\.\d{1,3}\.\d{1,3}\.\d{1,3}|172\.(1[6-9]|2\d|3[01])\.\d{1,3}\.\d{1,3}):\d+$/;
+        if (localIPPattern.test(origin)) {
+          return callback(null, true);
+        }
+        
+        // Allow any other origin in development
+        return callback(null, true);
+      }
+      
+      callback(new Error('Not allowed by CORS policy'));
     },
     credentials: true,
     optionsSuccessStatus: 200, // For legacy browser support
@@ -302,10 +322,10 @@ function logSecurityEvent(type, req, details = {}) {
   const securityLog = {
     timestamp: new Date().toISOString(),
     type: type,
-    ip: req.ip || req.connection.remoteAddress,
-    userAgent: req.get('User-Agent'),
-    url: req.url,
-    method: req.method,
+    ip: req.ip || req.socket?.remoteAddress || req.connection?.remoteAddress || 'unknown',
+    userAgent: req.get('User-Agent') || 'unknown',
+    url: req.url || 'unknown',
+    method: req.method || 'unknown',
     ...details
   };
   

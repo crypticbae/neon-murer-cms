@@ -5,6 +5,39 @@ if (localStorage.getItem('adminLoggedIn') !== 'true') {
     window.location.href = 'login.html';
 }
 
+// Restore last active section on page load
+function restoreLastSection() {
+    const lastSection = localStorage.getItem('currentCMSSection');
+    console.log(`🔍 Checking for saved section: ${lastSection}`);
+    
+    if (lastSection && lastSection !== 'dashboard-section') {
+        // Check if the section element exists
+        const sectionElement = document.getElementById(lastSection);
+        if (sectionElement) {
+            console.log(`🔄 Restoring last section: ${lastSection}`);
+            // Check if showSection function is available
+            if (typeof window.showSection === 'function') {
+                window.showSection(lastSection);
+                return true;
+            } else {
+                console.warn('⚠️ showSection function not yet available, retrying...');
+                setTimeout(() => restoreLastSection(), 100);
+                return false;
+            }
+        } else {
+            console.warn(`⚠️ Section element not found: ${lastSection}`);
+        }
+    }
+    // Default to dashboard if no valid section found
+    console.log('📋 Defaulting to dashboard section');
+    if (typeof window.showSection === 'function') {
+        window.showSection('dashboard-section');
+    } else {
+        console.warn('⚠️ showSection function not available for dashboard');
+    }
+    return false;
+}
+
 document.addEventListener('DOMContentLoaded', async function() {
     // Update user info in sidebar if available
     const userEmail = localStorage.getItem('adminEmail');
@@ -25,6 +58,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         setTimeout(() => {
                     localStorage.removeItem('adminLoggedIn');
                     localStorage.removeItem('adminEmail');
+                    localStorage.removeItem('currentCMSSection'); // Clear section persistence on logout
                     window.location.href = 'login.html';
         }, 500);
             });
@@ -68,11 +102,45 @@ document.addEventListener('DOMContentLoaded', async function() {
         // loadBackupHistory(); // Disabled - DOM elements don't exist
     }, 100);
     
-    // Initialize dashboard first
-    setTimeout(() => {
-        showSection('dashboard-section');
-        updateHeaderTitle('Dashboard');
-    }, 50);
+    // Set up section restoration with multiple checks
+    let restoreAttempts = 0;
+    const maxAttempts = 10;
+    
+    function attemptRestore() {
+        restoreAttempts++;
+        console.log(`🔍 Restore attempt ${restoreAttempts}: checking for showSection and saved section`);
+        
+        if (typeof window.showSection === 'function') {
+            const lastSection = localStorage.getItem('currentCMSSection');
+            console.log(`📱 Found saved section: ${lastSection}`);
+            
+            if (lastSection && lastSection !== 'dashboard-section') {
+                const sectionElement = document.getElementById(lastSection);
+                if (sectionElement) {
+                    console.log(`✅ Restoring section: ${lastSection}`);
+                    window.showSection(lastSection);
+                    return true;
+                } else {
+                    console.warn(`❌ Section element not found: ${lastSection}`);
+                }
+            }
+            
+            console.log('📋 Showing dashboard as fallback');
+            window.showSection('dashboard-section');
+            return true;
+        } else {
+            console.warn(`⏳ showSection not ready yet (attempt ${restoreAttempts}/${maxAttempts})`);
+            if (restoreAttempts < maxAttempts) {
+                setTimeout(attemptRestore, 100);
+            } else {
+                console.error('❌ showSection never became available');
+            }
+            return false;
+        }
+    }
+    
+    // Start restore attempts
+    setTimeout(attemptRestore, 100);
     
             // Load Chart.js and then initialize dashboard
         loadChartJS().then(() => {
@@ -434,11 +502,14 @@ window.showPageSEO = (pageId) => {
 
 
 function initDashboard() {
-    // Set initial active section
-    showSection('dashboard-section');
+    // Don't automatically show dashboard - let page persistence handle it
+    console.log('📊 Dashboard initialized, not forcing section change');
     
-    // Update header title
-    updateHeaderTitle('Dashboard');
+    // Update header title only if we're actually on dashboard
+    const currentSection = localStorage.getItem('currentCMSSection');
+    if (!currentSection || currentSection === 'dashboard-section') {
+        updateHeaderTitle('Dashboard');
+    }
     
     // Initialize dashboard charts and metrics (only if Chart.js is loaded)
     if (typeof Chart !== 'undefined') {
@@ -475,6 +546,9 @@ function initNavigation() {
 // Make showSection globally available
 window.showSection = async function(sectionName) {
     try {
+        // Save current section to localStorage for persistence
+        localStorage.setItem('currentCMSSection', sectionName);
+        
         // Hide all sections
         const sections = document.querySelectorAll('.content-section');
         sections.forEach(section => {

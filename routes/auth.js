@@ -477,7 +477,7 @@ router.post('/change-password', authenticateToken, [
     // Verify current password
     const isCurrentPasswordValid = await bcrypt.compare(currentPassword, user.password);
     if (!isCurrentPasswordValid) {
-      logSecurityEvent(req, 'password_change_failed', 'invalid_current_password', { userId });
+      logSecurityEvent('password_change_failed', req, { reason: 'invalid_current_password', userId });
       return res.status(400).json({
         success: false,
         error: 'Aktuelles Passwort ist falsch'
@@ -507,7 +507,7 @@ router.post('/change-password', authenticateToken, [
     });
 
     // Log security event
-    logSecurityEvent(req, 'password_changed', 'success', { userId });
+    logSecurityEvent('password_changed', req, { result: 'success', userId });
 
     res.json({
       success: true,
@@ -516,7 +516,7 @@ router.post('/change-password', authenticateToken, [
 
   } catch (error) {
     console.error('Password change error:', error);
-    logSecurityEvent(req, 'password_change_failed', 'server_error', { error: error.message });
+    logSecurityEvent('password_change_failed', req, { reason: 'server_error', error: error.message });
     
     res.status(500).json({
       success: false,
@@ -567,7 +567,7 @@ router.post('/logout-all', authenticateToken, async (req, res) => {
 
     // In a real implementation, you would maintain a blacklist of tokens
     // or use a token versioning system. For now, we'll just log the event
-    logSecurityEvent(req, 'logout_all_sessions', 'success', { userId });
+    logSecurityEvent('logout_all_sessions', req, { result: 'success', userId });
 
     res.json({
       success: true,

@@ -17,7 +17,7 @@ Nach dem Erstellen des GitHub Repositories:
 
 ```bash
 # Repository URL (ersetze USERNAME mit deinem GitHub Username)
-git remote add origin https://github.com/USERNAME/neon-murer-cms.git
+git remote add origin https://github.com/crypticbae/neon-murer-cms.git
 
 # Branch umbenennen (optional)
 git branch -M main

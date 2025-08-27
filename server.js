@@ -296,7 +296,7 @@ process.on('unhandledRejection', (reason, promise) => {
 // START SERVER
 // =====================================
 
-const server = app.listen(PORT, async () => {
+const server = app.listen(PORT, '0.0.0.0', async () => {
   // Log application startup
   logAppStart();
   
@@ -310,6 +310,7 @@ const server = app.listen(PORT, async () => {
   });
   
   console.log(`🚀 Neon Murer CMS Server running on port ${PORT}`);
+  console.log(`🌐 Network: Available on all interfaces (0.0.0.0:${PORT})`);
   console.log(`📊 Environment: ${process.env.NODE_ENV || 'development'}`);
   console.log(`📁 Uploads directory: ${path.join(__dirname, 'uploads')}`);
   console.log(`🔒 Security: ${sentryInitialized ? 'Enhanced' : 'Basic'} monitoring enabled`);
