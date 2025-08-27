@@ -84,8 +84,10 @@ services:
       - |
         echo "🔧 Database Setup Starting..."
         sleep 10
-        echo "🗄️ Running Prisma migrations..."
-        npx prisma migrate deploy || echo "Migration failed, continuing..."
+        echo "🗄️ Creating database schema..."
+        npx prisma db push --force-reset --accept-data-loss || echo "Schema creation failed"
+        echo "📋 Running any pending migrations..."
+        npx prisma migrate deploy || echo "No migrations to deploy"
         echo "⚙️ Generating Prisma client..."
         npx prisma generate || echo "Generate failed, continuing..."
         echo "🌱 Seeding database..."
