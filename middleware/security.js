@@ -9,6 +9,7 @@ const rateLimit = require('express-rate-limit');
 // Environment-based configuration
 const isProduction = process.env.NODE_ENV === 'production';
 const isDevelopment = process.env.NODE_ENV === 'development';
+const isStaging = process.env.NODE_ENV === 'staging';
 const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:3000';
 
 /**
@@ -20,8 +21,8 @@ const contentSecurityPolicy = {
     defaultSrc: ["'self'"],
     scriptSrc: [
       "'self'",
-      // Development: Allow inline scripts and eval for hot reloading
-      ...(isDevelopment ? ["'unsafe-inline'", "'unsafe-eval'"] : []),
+      // Development/Staging: Allow inline scripts and eval for hot reloading
+      ...((isDevelopment || isStaging) ? ["'unsafe-inline'", "'unsafe-eval'"] : []),
       // CDN sources for libraries
       "https://cdn.jsdelivr.net",
       "https://cdnjs.cloudflare.com", 
@@ -34,7 +35,7 @@ const contentSecurityPolicy = {
       "https://ssl.google-analytics.com"
     ],
     scriptSrcAttr: [
-      ...(isDevelopment ? ["'unsafe-inline'"] : []),
+      ...((isDevelopment || isStaging) ? ["'unsafe-inline'"] : []),
       "'unsafe-hashes'"
     ],
     styleSrc: [
@@ -82,7 +83,7 @@ const contentSecurityPolicy = {
     formAction: ["'self'"],
     ...(isProduction && { upgradeInsecureRequests: [] })
   },
-  reportOnly: isDevelopment
+  reportOnly: (isDevelopment || isStaging)
 };
 
 /**
@@ -95,13 +96,13 @@ function getHelmetConfig() {
     
     // Cross-Origin Policies
     crossOriginEmbedderPolicy: {
-      policy: isDevelopment ? "unsafe-none" : "require-corp"
+      policy: (isDevelopment || isStaging) ? "unsafe-none" : "require-corp"
     },
     crossOriginOpenerPolicy: {
-      policy: isDevelopment ? "unsafe-none" : "same-origin"
+      policy: (isDevelopment || isStaging) ? "unsafe-none" : "same-origin"
     },
     crossOriginResourcePolicy: {
-      policy: isDevelopment ? "cross-origin" : "same-origin"
+      policy: (isDevelopment || isStaging) ? "cross-origin" : "same-origin"
     },
     
     // Security Headers
