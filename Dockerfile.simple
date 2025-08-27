@@ -1,0 +1,48 @@
+# Simple, robust Dockerfile for direct GitHub deployment
+FROM node:18-alpine
+
+# Install system dependencies
+RUN apk add --no-cache \
+    libc6-compat \
+    openssl \
+    curl \
+    git \
+    && rm -rf /var/cache/apk/*
+
+WORKDIR /app
+
+# Create app user
+RUN addgroup --system --gid 1001 nodejs && \
+    adduser --system --uid 1001 nodejs
+
+# Copy package files first
+COPY package*.json ./
+
+# Simple npm install - works always
+RUN npm install && npm cache clean --force
+
+# Copy all source code
+COPY . .
+
+# Generate Prisma client
+RUN npx prisma generate
+
+# Remove dev dependencies to save space
+RUN npm prune --omit=dev
+
+# Create necessary directories
+RUN mkdir -p content/images uploads logs && \
+    chown -R nodejs:nodejs . content uploads logs
+
+USER nodejs
+
+EXPOSE 3835
+
+ENV NODE_ENV=production \
+    PORT=3835
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=10s --retries=3 \
+    CMD curl -f http://localhost:3835/api/health || exit 1
+
+CMD ["npm", "start"]
