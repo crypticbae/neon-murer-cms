@@ -1,19 +1,17 @@
 version: '3.8'
 
 # =====================================
-# NEON MURER CMS - STANDALONE DEPLOYMENT
+# NEON MURER CMS - GITHUB DEPLOYMENT
 # =====================================
-# Komplettes System mit ALLEM in Docker
-# Port 3835, keine externen Abhängigkeiten
+# Komplettes System direkt von GitHub
+# Port 3835, keine lokalen Builds nötig
 
 services:
   # =====================================
   # MAIN APPLICATION
   # =====================================
   app:
-    build: 
-      context: .
-      dockerfile: Dockerfile
+    image: ghcr.io/crypticbae/neon-murer-cms:latest
     container_name: neon-murer-cms
     ports:
       - "3835:3835"
@@ -252,9 +250,7 @@ services:
   # DATABASE INITIALIZATION
   # =====================================
   db-init:
-    build: 
-      context: .
-      dockerfile: Dockerfile
+    image: ghcr.io/crypticbae/neon-murer-cms:latest
     container_name: neon-murer-init
     environment:
       - NODE_ENV=production
