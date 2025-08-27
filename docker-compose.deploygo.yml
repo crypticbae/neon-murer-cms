@@ -105,7 +105,7 @@ services:
     ports:
       - "3835:3835"
     environment:
-      - NODE_ENV=production
+      - NODE_ENV=staging
       - PORT=3835
       - DATABASE_URL=postgresql://neon_user:neon_secure_password_2024@db:5432/neon_murer_cms
       - REDIS_URL=redis://redis:6379
