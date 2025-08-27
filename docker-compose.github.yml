@@ -13,7 +13,7 @@ services:
     app:
     build:
       context: https://github.com/crypticbae/neon-murer-cms.git#main
-      dockerfile: Dockerfile.github
+      dockerfile: Dockerfile.actions
     container_name: neon-murer-cms
     ports:
       - "3835:3835"
@@ -254,7 +254,7 @@ services:
     db-init:
     build:
       context: https://github.com/crypticbae/neon-murer-cms.git#main
-      dockerfile: Dockerfile.github
+      dockerfile: Dockerfile.actions
     container_name: neon-murer-init
     environment:
       - NODE_ENV=production
