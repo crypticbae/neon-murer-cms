@@ -42,13 +42,15 @@ WORKDIR /app
 RUN addgroup --system --gid 1001 nodejs && \
     adduser --system --uid 1001 nodejs
 
-# Copy package files and install production dependencies
+# Copy package files and source code first
 COPY package*.json ./
+COPY . .
+
+# Install production dependencies (schema is now available)
 RUN npm ci --omit=dev && npm cache clean --force
 
-# Copy built application from dependencies stage
+# Copy built Prisma client from dependencies stage
 COPY --from=dependencies --chown=nodejs:nodejs /app/node_modules/.prisma ./node_modules/.prisma
-COPY --chown=nodejs:nodejs . .
 
 # Create necessary directories
 RUN mkdir -p content/images uploads logs && \
