@@ -130,18 +130,19 @@ services:
     networks:
       - neon-network
     restart: "no"
-    command: >
-      /bin/sh -c "
-      echo 'Waiting for database to be ready...'
-      sleep 30
-      echo 'Running Prisma migrations...'
-      npx prisma migrate deploy
-      echo 'Generating Prisma client...'
-      npx prisma generate
-      echo 'Seeding database...'
-      npm run seed
-      echo 'Database initialization completed!'
-      "
+    command: 
+      - /bin/sh
+      - -c
+      - |
+        echo 'Waiting for database to be ready...'
+        sleep 30
+        echo 'Running Prisma migrations...'
+        npx prisma migrate deploy
+        echo 'Generating Prisma client...'
+        npx prisma generate
+        echo 'Seeding database...'
+        npm run seed
+        echo 'Database initialization completed!'
 
   # =====================================
   # AUTOMATED BACKUP SERVICE
