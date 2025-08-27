@@ -184,7 +184,7 @@ const agbSections = [
     }
 ];
 
-async function main() {
+async function seedAgb() {
     console.log('🌱 Seeding AGB sections...');
 
     try {
@@ -207,13 +207,20 @@ async function main() {
     }
 }
 
-main()
-    .catch((e) => {
-        console.error('❌ Seeding failed:', e);
-        process.exit(1);
-    })
-    .finally(async () => {
-        await prisma.$disconnect();
-    });
+async function main() {
+    await seedAgb();
+}
 
-module.exports = { agbSections };
+// Only run if called directly
+if (require.main === module) {
+    main()
+        .catch((e) => {
+            console.error('❌ Seeding failed:', e);
+            process.exit(1);
+        })
+        .finally(async () => {
+            await prisma.$disconnect();
+        });
+}
+
+module.exports = { seedAgb, agbSections };

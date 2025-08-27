@@ -2,6 +2,15 @@ const { PrismaClient } = require('@prisma/client');
 const bcrypt = require('bcryptjs');
 const { seedSettings } = require('./seed-settings');
 const { seedDienstleistungen } = require('./seed-dienstleistungen');
+const { seedCompanyHistory } = require('./seed-company-history');
+const { seedFachKompetenzen } = require('./seed-fachkompetenzen');
+const { seedTeamMembers } = require('./seed-team-members');
+const { seedCustomers } = require('./seed-customers');
+const { seedAgb } = require('./seed-agb');
+const { seedDatenschutz } = require('./seed-datenschutz');
+const { seedJobsAndNews } = require('./seed-jobs-news');
+const { seedCategoryCards } = require('./seed-category-cards');
+const seedNewsletterData = require('./seed-newsletter');
 
 const prisma = new PrismaClient();
 
@@ -547,13 +556,43 @@ async function main() {
     console.log(`✅ Page created: ${page.title}`);
   }
 
-  // Seed settings
+  // Seed all modules
+  console.log('📋 Running comprehensive seeding...');
+  
   await seedSettings();
-
-  // Seed dienstleistungen
+  console.log('✅ Settings seeded');
+  
   await seedDienstleistungen();
+  console.log('✅ Dienstleistungen seeded');
+  
+  await seedCompanyHistory();
+  console.log('✅ Company History seeded');
+  
+  await seedFachKompetenzen();
+  console.log('✅ Fachkompetenzen seeded');
+  
+  await seedTeamMembers();
+  console.log('✅ Team Members seeded');
+  
+  await seedCustomers();
+  console.log('✅ Customers seeded');
+  
+  await seedAgb();
+  console.log('✅ AGB seeded');
+  
+  await seedDatenschutz();
+  console.log('✅ Datenschutz seeded');
+  
+  await seedJobsAndNews();
+  console.log('✅ Jobs & News seeded');
+  
+  await seedCategoryCards();
+  console.log('✅ Category Cards seeded');
+  
+  await seedNewsletterData();
+  console.log('✅ Newsletter system seeded');
 
-  console.log('🎉 Seeding completed successfully!');
+  console.log('🎉 Complete seeding finished successfully!');
 }
 
 main()
