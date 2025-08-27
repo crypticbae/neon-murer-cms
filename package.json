@@ -35,8 +35,8 @@
     "build": "echo 'Production build complete'",
     "production": "NODE_ENV=production npm start",
     "staging": "NODE_ENV=staging npm start",
-    "health": "curl -s http://localhost:3001/api/health | cat",
-    "health:detailed": "curl -s http://localhost:3001/api/health/detailed | cat",
+    "health": "curl -s http://localhost:3835/api/health | cat",
+    "health:detailed": "curl -s http://localhost:3835/api/health/detailed | cat",
     "logs": "tail -f logs/combined-$(date +%Y-%m-%d).log",
     "backup": "npm run env:backup",
     "create-admin": "node scripts/create-admin-user.js"

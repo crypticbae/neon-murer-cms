@@ -35,7 +35,7 @@ monitorGracefulShutdown();
 
 const app = express();
 const prisma = new PrismaClient();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3835;
 
 // Create logger for server events
 const serverLogger = createContextLogger('SERVER');

@@ -27,7 +27,7 @@ const ENV_DEFINITIONS = {
   PORT: {
     required: true,
     type: 'number',
-    default: 3001,
+    default: 3835,
     min: 1000,
     max: 65535,
     description: 'Server port number'
