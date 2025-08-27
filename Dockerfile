@@ -1,33 +1,35 @@
-# Multi-stage build for optimized production image
+# Production optimized build
 FROM node:18-alpine AS base
 
-# Install dependencies only when needed
-FROM base AS deps
-RUN apk add --no-cache libc6-compat
-WORKDIR /app
+# Install system dependencies
+RUN apk add --no-cache \
+    libc6-compat \
+    openssl \
+    curl \
+    && rm -rf /var/cache/apk/*
 
-# Copy package files
-COPY package.json package-lock.json* ./
-RUN npm ci --only=production && npm cache clean --force
-
-# Production image
-FROM base AS runner
 WORKDIR /app
 
 # Create app user
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nodejs
 
-# Copy built application
-COPY --from=deps --chown=nodejs:nodejs /app/node_modules ./node_modules
-COPY --chown=nodejs:nodejs . .
+# Copy package files and install ALL dependencies (needed for Prisma)
+COPY package.json package-lock.json* ./
+RUN npm ci && npm cache clean --force
+
+# Copy application code
+COPY . .
+
+# Generate Prisma client (needs to be done before removing dev dependencies)
+RUN npx prisma generate
+
+# Remove dev dependencies to reduce image size
+RUN npm prune --omit=dev
 
 # Create necessary directories
 RUN mkdir -p content/images uploads logs
-RUN chown -R nodejs:nodejs content uploads logs
-
-# Generate Prisma client
-RUN npx prisma generate
+RUN chown -R nodejs:nodejs . content uploads logs
 
 USER nodejs
 
