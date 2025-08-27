@@ -105,7 +105,7 @@ services:
     ports:
       - "3835:3835"
     environment:
-      - NODE_ENV=staging
+      - NODE_ENV=production
       - PORT=3835
       - DATABASE_URL=postgresql://neon_user:neon_secure_password_2024@db:5432/neon_murer_cms
       - REDIS_URL=redis://redis:6379
@@ -113,8 +113,8 @@ services:
       - ADMIN_EMAIL=admin@neonmurer.ch
       - ADMIN_PASSWORD=admin123
       - ADMIN_NAME=Administrator
-      - FRONTEND_URL=http://localhost:3835
-      - ALLOWED_ORIGINS=http://localhost:3835,http://127.0.0.1:3835
+      - FRONTEND_URL=http://51.77.68.64:3835
+      - ALLOWED_ORIGINS=http://51.77.68.64:3835,http://localhost:3835,http://127.0.0.1:3835
       - BCRYPT_ROUNDS=12
       - MAX_FILE_SIZE=50mb
       - ANALYTICS_ENABLED=true
