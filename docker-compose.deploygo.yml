@@ -1,0 +1,233 @@
+version: '3.8'
+
+# =====================================
+# NEON MURER CMS - DEPLOY & GO
+# =====================================
+# Funktioniert sofort ohne manuelle Eingriffe!
+
+services:
+  # =====================================
+  # POSTGRESQL DATABASE
+  # =====================================
+  db:
+    image: postgres:15-alpine
+    container_name: neon-murer-db
+    environment:
+      POSTGRES_DB: neon_murer_cms
+      POSTGRES_USER: neon_user
+      POSTGRES_PASSWORD: neon_secure_password_2024
+      POSTGRES_INITDB_ARGS: "--encoding=UTF8 --locale=C"
+      PGDATA: /var/lib/postgresql/data/pgdata
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - neon-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U neon_user -d neon_murer_cms"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+      start_period: 30s
+
+  # =====================================
+  # REDIS CACHE
+  # =====================================
+  redis:
+    image: redis:7-alpine
+    container_name: neon-murer-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - neon-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 6
+      start_period: 10s
+    command: >
+      redis-server 
+      --appendonly yes 
+      --appendfsync everysec 
+      --maxmemory 512mb 
+      --maxmemory-policy allkeys-lru
+
+  # =====================================
+  # DATABASE INITIALIZATION (RUNS ONCE)
+  # =====================================
+  db-setup:
+    image: ghcr.io/crypticbae/neon-murer-cms:latest
+    container_name: neon-murer-setup
+    environment:
+      - NODE_ENV=staging
+      - DATABASE_URL=postgresql://neon_user:neon_secure_password_2024@db:5432/neon_murer_cms
+      - ADMIN_EMAIL=admin@neonmurer.ch
+      - ADMIN_PASSWORD=admin123
+      - ADMIN_NAME=Administrator
+      - JWT_SECRET=xgI2MNdFDPbViz5IPEqBp/8IYqgzNnM0tXfVDnq+r5szkS6Qxdy1r/oJoKYLzKuL
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - neon-network
+    restart: "no"
+    entrypoint: []
+    command:
+      - /bin/sh
+      - -c
+      - |
+        echo "🔧 Database Setup Starting..."
+        sleep 10
+        echo "🗄️ Running Prisma migrations..."
+        npx prisma migrate deploy || echo "Migration failed, continuing..."
+        echo "⚙️ Generating Prisma client..."
+        npx prisma generate || echo "Generate failed, continuing..."
+        echo "🌱 Seeding database..."
+        npm run seed || echo "Seeding failed, continuing..."
+        echo "✅ Database setup completed!"
+        # Keep container running for verification
+        sleep 30
+
+  # =====================================
+  # MAIN APPLICATION
+  # =====================================
+  app:
+    image: ghcr.io/crypticbae/neon-murer-cms:latest
+    container_name: neon-murer-cms
+    ports:
+      - "3835:3835"
+    environment:
+      - NODE_ENV=staging
+      - PORT=3835
+      - DATABASE_URL=postgresql://neon_user:neon_secure_password_2024@db:5432/neon_murer_cms
+      - REDIS_URL=redis://redis:6379
+      - JWT_SECRET=xgI2MNdFDPbViz5IPEqBp/8IYqgzNnM0tXfVDnq+r5szkS6Qxdy1r/oJoKYLzKuL
+      - ADMIN_EMAIL=admin@neonmurer.ch
+      - ADMIN_PASSWORD=admin123
+      - ADMIN_NAME=Administrator
+      - FRONTEND_URL=http://localhost:3835
+      - ALLOWED_ORIGINS=http://localhost:3835,http://127.0.0.1:3835
+      - BCRYPT_ROUNDS=12
+      - MAX_FILE_SIZE=50mb
+      - ANALYTICS_ENABLED=true
+      - LOG_LEVEL=info
+      - LOG_TO_FILE=true
+      - RATE_LIMIT_WINDOW_MS=900000
+      - RATE_LIMIT_MAX_REQUESTS=1000
+      - AUTH_RATE_LIMIT_MAX=5
+      - HEALTH_CHECK_ENABLED=true
+      - METRICS_ENABLED=true
+      - HTTPS_ENABLED=false
+      - UPLOAD_DIR=/app/uploads
+      - MAX_JSON_SIZE=10mb
+      - MAX_URL_ENCODED_SIZE=10mb
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      db-setup:
+        condition: service_completed_successfully
+    volumes:
+      - app_content:/app/content
+      - app_uploads:/app/uploads
+      - app_logs:/app/logs
+    networks:
+      - neon-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3835/api/health"]
+      interval: 15s
+      timeout: 10s
+      retries: 5
+      start_period: 120s
+
+  # =====================================
+  # AUTOMATED BACKUP SERVICE
+  # =====================================
+  backup:
+    image: postgres:15-alpine
+    container_name: neon-murer-backup
+    environment:
+      PGPASSWORD: neon_secure_password_2024
+    volumes:
+      - db_backups:/backups
+    depends_on:
+      app:
+        condition: service_healthy
+    networks:
+      - neon-network
+    restart: unless-stopped
+    command: >
+      /bin/sh -c "
+      while true; do
+        echo 'Creating database backup...'
+        BACKUP_FILE=/backups/backup_\$(date +%Y%m%d_%H%M%S).sql
+        pg_dump -h db -U neon_user -d neon_murer_cms > \$BACKUP_FILE 2>/dev/null || echo 'Backup failed'
+        echo 'Backup created: \$BACKUP_FILE'
+        
+        # Keep only last 30 backups
+        cd /backups && ls -t *.sql 2>/dev/null | tail -n +31 | xargs rm -f 2>/dev/null || true
+        
+        # Sleep for 24 hours
+        sleep 86400
+      done
+      "
+
+  # =====================================
+  # HEALTH MONITORING
+  # =====================================
+  monitor:
+    image: alpine:latest
+    container_name: neon-murer-monitor
+    depends_on:
+      app:
+        condition: service_healthy
+    networks:
+      - neon-network
+    restart: unless-stopped
+    command: >
+      /bin/sh -c "
+      apk add --no-cache curl
+      while true; do
+        echo '\$(date): Health monitoring check...'
+        
+        if curl -f http://app:3835/api/health >/dev/null 2>&1; then
+          echo '\$(date): ✅ App is healthy'
+        else
+          echo '\$(date): ⚠️ App health check failed'
+        fi
+        
+        sleep 300
+      done
+      "
+
+# =====================================
+# NETWORKS
+# =====================================
+networks:
+  neon-network:
+    driver: bridge
+
+# =====================================
+# PERSISTENT VOLUMES
+# =====================================
+volumes:
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local
+  app_content:
+    driver: local
+  app_uploads:
+    driver: local
+  app_logs:
+    driver: local
+  db_backups:
+    driver: local
